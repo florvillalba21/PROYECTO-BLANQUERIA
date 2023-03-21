@@ -3,11 +3,11 @@ const { model, Schema } = require('mongoose');
 
 const SalesSchema = Schema({ 
     serialNumber :{
-        type: Number,
+        type: String,
         required : true
     },
     products: {
-        type: [],
+        type: Array,
         required: true
     },
     details: {
@@ -19,7 +19,7 @@ const SalesSchema = Schema({
         required:true
     },
     totalAmount: {
-        type: String,
+        type: Number,
         required:true
     }
 }, {

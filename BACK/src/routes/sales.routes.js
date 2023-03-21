@@ -3,7 +3,7 @@ const router = require("express").Router();
 const {
   newSale,
   getSales,
-} = require("../controllers/products.controller");
+} = require("../controllers/sales.controller");
 
 
 //Rutas de los productos

@@ -17,7 +17,7 @@ app.use(cors())
 app.use(morgan('dev'))
 
 app.use(require('./routes/products.routes'))
-
+app.use(require('./routes/sales.routes'))
 
 
 app.listen(3000)
