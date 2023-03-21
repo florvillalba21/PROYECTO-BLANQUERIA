@@ -14,6 +14,10 @@ const ProductSchema = Schema({
         type: Number,
         required:true
     },
+    stock:{
+        type:Number,
+        required:true
+    },
     imgURL: {
         type: String,
         required:true

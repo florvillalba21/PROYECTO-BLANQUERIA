@@ -1,32 +1,54 @@
-const Product = require('../models/Product')
+const Product = require("../models/Product");
 
+//Objeto que contendra cada funcion
 ctrlProducts = {};
 
+//Funcion post para crear un nuevo producto y guardarlo en la bd
+
 ctrlProducts.createProduct = async (req, res) => {
-    const {name, category, price, imgURL} = req.body 
+  const { name, category, price, stock, imgURL } = req.body;
 
-    const newProduct = new Product ({name, category, price, imgURL})
+  const newProduct = new Product({ name, category, price, stock, imgURL });
 
-    const productSaved = await newProduct.save()
+  const productSaved = await newProduct.save();
 
-    //el codigo de status 201 especifica q un nuevo recurso se ha creado 
-    res.status(201).json(productSaved)
+  res.status(201).json(productSaved);
 };
 
-ctrlProducts.getProducts = (req, res) => {
+//Funcion para obtener la lista de todos los productos guardados
+ctrlProducts.getProducts = async (req, res) => {
+  const products = await Product.find();
 
+  res.status(200).json(products);
 };
 
-ctrlProducts.getProductById = (req, res) => {
+//Funcion para obtener un producto en base al id
+ctrlProducts.getProductById = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.productId);
 
+    res.status(200).json(product);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-ctrlProducts.updateProductById = (req, res) => {
-
+//Funcion para actualizar un producto en base al id
+ctrlProducts.updateProductById = async (req, res) => {
+  /*FindUpdate recibe el id, lo que se va a reemplazar del producto en este caso req.body 
+  y new:true para que devuelva el producto nuevo y no el que se borra*/
+  const updatedProduct = await Product.findByIdAndUpdate(
+    req.params.productId,
+    req.body,
+    { new: true }
+  );
+  res.status(200).json(updatedProduct);
 };
 
-ctrlProducts.deleteProductById = (req, res) => {
-
+//Funcion para borrar un elemento en base al id
+ctrlProducts.deleteProductById = async (req, res) => {
+  const deleteProduct = await Product.findByIdAndDelete(req.params.productId);
+  res.status(200).json(deleteProduct);
 };
 
 module.exports = ctrlProducts;
