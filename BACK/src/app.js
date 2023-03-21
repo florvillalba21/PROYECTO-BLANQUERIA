@@ -19,11 +19,6 @@ app.use(morgan('dev'))
 app.use(require('./routes/products.routes'))
 
 
-app.get('/', (req, res)=>{
-    res.json('welcome')
-})
-
-
 
 app.listen(3000)
 

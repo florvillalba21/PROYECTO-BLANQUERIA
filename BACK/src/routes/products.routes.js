@@ -10,7 +10,7 @@ const {
 
 
 //Rutas de los productos
-router.get("/Products", getProducts);
+router.get("/", getProducts);
 
 router.get("/Products/:productId", getProductById);
 
