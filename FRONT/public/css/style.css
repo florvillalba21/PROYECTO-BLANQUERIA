@@ -1,0 +1,42 @@
+body{
+    background: #e7e7d9;
+}
+div{
+    padding: 20px;
+    
+}
+div.container-fluid {
+    background-color:  #cea9ca;
+    
+    text-align: center;
+    margin-top: 15%;
+    border-radius: 15px;
+    width: 20%;
+   
+}
+#headLogin{
+    padding: 10px;
+    background-color: #cea9ca;
+}
+#h2Login {
+    padding-top: 5px;
+}
+
+#inpLogin{
+    padding: 5px;
+    border-radius: 5px;
+    border: 0;
+    
+    
+}
+
+#btnLogin{
+    background-color: #f9f9f9;
+    width: 100%;
+    border: 0;
+    border-radius: 3px;
+    color: #55889e;
+    padding-bottom: 10px;
+
+}
+
