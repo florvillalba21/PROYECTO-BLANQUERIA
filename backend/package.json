@@ -16,6 +16,10 @@
     "helmet": "^6.0.1",
     "mongoose": "^7.0.2",
     "morgan": "^1.10.0",
+<<<<<<< HEAD
+=======
+    "multer": "^1.4.5-lts.1",
+>>>>>>> c1232e326dba399603a8c73b141aad45e60a5414
     "node": "^19.6.1"
   },
   "devDependencies": {
