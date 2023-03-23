@@ -1,11 +1,12 @@
 import React from "react";
 import { CardHome } from "../components/CardHome";
+import { Footer } from "../components/layout/Footer";
 import { Navbar } from "../components/layout/Navbar";
 
 export const Home = () => {
   return (
     
-    <body>
+    <div id="body">
       <Navbar/>
       <div className="card-group">
         <CardHome
@@ -32,6 +33,7 @@ export const Home = () => {
           action={"Ir"}
         />
       </div>
-    </body>
+      <Footer/>
+    </div>
   );
 };
