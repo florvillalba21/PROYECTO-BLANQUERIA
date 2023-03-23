@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const CardHome = ({ tittle, description, action }) => {
+export const CardHome = ({ tittle, description, action, url }) => {
   return (
     <div id="cardHome" className="shadow rounded">
       <div className="card-body">
@@ -9,7 +9,7 @@ export const CardHome = ({ tittle, description, action }) => {
         <p className="card-text">{description}</p>
       </div>
       <div id="divbtn">
-        <Link id="btn" to="">
+        <Link id="btn" to={url}>
           {action}
         </Link>
       </div>

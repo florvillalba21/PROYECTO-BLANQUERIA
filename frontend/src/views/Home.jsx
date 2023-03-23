@@ -19,6 +19,7 @@ export const Home = () => {
           tittle={"Ver stock"}
           description={"¿Quieres ver tu inventario? Ingresa aquí."}
           action={"Abrir inventario"}
+          url ={"/inventory"}
         />
 
         <CardHome

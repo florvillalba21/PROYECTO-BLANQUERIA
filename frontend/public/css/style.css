@@ -1,8 +1,5 @@
 
-div{
-    padding: 20px;
-    
-}
+/* estilos para el login */
 div.login{
     background-color:  #dceff0;
     text-align: center;
@@ -40,16 +37,21 @@ div.login{
 
 }
 
+/* fin estilos login */
 
 
+/* estilos para el contenedor de las card de home */
 div#cardHome{
     width: 18rem;
     color: #55889e;
     margin: 30px;
     height: 13rem;
+    padding: 20px;
     
 
 }
+
+
 .card-body{
     height: 5rem;
 }
@@ -79,3 +81,20 @@ div#cardHome{
 }
 
 
+/* estilos para las card de inventario */
+div#cardInventory{
+    width: 18rem;
+    color: #55889e;
+    margin: 30px;
+    height: 13rem;
+    
+
+}
+
+#card-body-inventory{
+    height: 15rem;
+}
+
+.container-inventory{
+    width: 50%;
+}
