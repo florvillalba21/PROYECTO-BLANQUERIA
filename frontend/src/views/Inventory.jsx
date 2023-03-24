@@ -5,7 +5,7 @@ import { Navbar } from "../components/layout/Navbar";
 
 export const Inventory = () => {
   return (
-    <div className="container">
+    <div>
       <Navbar />
       <div className="container container-intentory card-group">
         <CardInventory
@@ -16,20 +16,20 @@ export const Inventory = () => {
 
         <CardInventory
           tittle={"Almohadas"}
-          description={"Controla tu stock de toallas aqui"}
+          description={"Controla tu stock de almohadas aqui"}
           image={"./public/images/almohada.jpg"}
         />
 
         <CardInventory
           tittle={"Sabanas"}
-          description={"Controla tu stock de toallas aqui"}
-          image={""}
+          description={"Controla tu stock de sabanas aqui"}
+          image={"./public/images/sabana.png"}
         />
 
         <CardInventory
           tittle={"Manteles"}
-          description={"Controla tu stock de toallas aqui"}
-          image={""}
+          description={"Controla tu stock de manteles aqui"}
+          image={"./public/images/mantel.jpg"}
         />
       </div>
      

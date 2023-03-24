@@ -26,6 +26,7 @@ export const Home = () => {
           tittle={"Cargar nuevos productos"}
           description={"Puedes agregar nuevos productos"}
           action={"Ir"}
+          url={"/addProducto"}
         />
 
         <CardHome

@@ -1,7 +1,6 @@
-.navbar{
+#navbar{
     background-color: #cea9ca;
     height: 5rem;
-    margin-bottom: 30px;
     color: white; 
     width: auto;
 }

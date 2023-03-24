@@ -21,6 +21,7 @@ div.login{
     padding: 5px;
     border-radius: 5px;
     border: 0;
+    margin: 30px;
     text-decoration-color: #55889e;
   
     
@@ -29,11 +30,12 @@ div.login{
 
 #btnLogin{
     background-color: #cea9ca;
-    width: 100%;
+    width: 450px;
     border: 0;
     border-radius: 3px;
     color: white;
     padding-bottom: 10px;
+    margin: 30px;
 
 }
 
@@ -56,7 +58,7 @@ div#cardHome{
     height: 5rem;
 }
 .card-group{
-    margin-left: 250px;
+    margin-left: 300px;
     width: 800px;
 }
 
@@ -75,6 +77,8 @@ div#cardHome{
     font-style: initial;
     color: white;
     text-decoration: none;
+    background-color: #cea9ca;
+    border: 0;
 }
 #body{
     margin: 0;
@@ -92,9 +96,20 @@ div#cardInventory{
 }
 
 #card-body-inventory{
-    height: 15rem;
+    height: 13rem;
 }
 
 .container-inventory{
+    margin-top: 80px;
     width: 50%;
+}
+
+#cardFormProduct{
+    width: 30%;
+    position: relative;
+    margin-left: 450px;
+}
+
+#divForm{
+    margin-top: 30px;
 }
