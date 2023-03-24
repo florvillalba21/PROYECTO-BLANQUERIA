@@ -10,10 +10,6 @@ dbConnect()
 
 app.use(express.json());
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c1232e326dba399603a8c73b141aad45e60a5414
 app.use(express.urlencoded({extended: true}));
 
 app.use(cors())
