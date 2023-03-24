@@ -10,8 +10,12 @@ const ProductSchema = Schema({
         type: String,
         required: true
     },
-    price:{
+    costPrice:{
         type: Number,
+        required:true
+    },
+    sellPrice:{
+        type:Number,
         required:true
     },
     stock:{

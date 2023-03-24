@@ -1,6 +1,10 @@
 const router = require("express").Router();
 
-router.post('/signin')
-router.post('/signup')
+const { signIn, signUp } = require("../controllers/auth.controllers");
+const checkDuplicatedUser = require("../middlewares/checkDuplicateUser");
+const checkRolesExisted = require("../middlewares/checkRolesExisted");
 
-module.exports = router
+router.post("/signup", [checkRolesExisted, checkDuplicatedUser], signUp);
+router.post("/signin", signIn);
+
+module.exports = router;

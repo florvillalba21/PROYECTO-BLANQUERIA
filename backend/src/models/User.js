@@ -6,7 +6,11 @@ const UserSchema = Schema({
         unique: true,
         required:true
     },
-    roles:[]
+    roles:[{
+        //referencia el id del rol en el usuario
+        ref: "Role",
+        type: Schema.Types.ObjectId
+    }]
 }, {
  timestamps: true,
  versionKey: false

@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 
+
 //Llamando a la dependencia multer
 const multer = require('multer')
 const path = require('path')
@@ -17,6 +18,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
+const verifyToken = require('../middlewares/authjwt')
+const isAdmin = require('../middlewares/isAdmin')
+
+
 
 const {
   createProduct,
@@ -28,17 +33,17 @@ const {
 
 
 //Rutas de los productos
-router.get("/", getProducts);
+router.get("/Products", getProducts);
 
 router.get("/Products/:productId", getProductById);
 
 
-router.post("/Products",upload.single('image'), createProduct);
+router.post("/Products",verifyToken,isAdmin,upload.single('image'), createProduct);
 
 
-router.put("/Products/:productId", updateProductById);
+router.put("/Products/:productId",verifyToken,isAdmin, updateProductById);
 
-router.delete("/Products/:productId", deleteProductById);
+router.delete("/Products/:productId",verifyToken,isAdmin, deleteProductById);
 
 
 module.exports = router;

@@ -9,16 +9,17 @@ ctrlProducts = {};
 ctrlProducts.createProduct =  async (req, res) => {
   
 
-  const { name, category, price, stock } = req.body;
+  const { name, category, costPrice, sellPrice, stock } = req.body;
 
   imgURL = `C:\\Users\\david\\Desktop\\PROYECTO-BLANQUERIA\\backend\\src\\uploads\\${req.file.originalname}`
 
-  const newProduct = new Product({ name, category, price, stock, imgURL });
+  const newProduct = new Product({ name, category, costPrice, sellPrice, stock, imgURL });
 
   const productSaved = await newProduct.save();
 
   res.status(201).json(productSaved);
 }
+
 
 //Funcion para obtener la lista de todos los productos guardados
 ctrlProducts.getProducts = async (req, res) => {
