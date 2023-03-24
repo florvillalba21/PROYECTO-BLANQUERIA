@@ -11,7 +11,7 @@ ctrlProducts.createProduct =  async (req, res) => {
 
   const { name, category, price, stock } = req.body;
 
-  imgURL = `C:\\Users\\AFIP\\Desktop\\PROYECTO-BLANQUERIA\\backend\\src\\uploads\\${req.file.originalname}`
+  imgURL = `C:\\Users\\david\\Desktop\\PROYECTO-BLANQUERIA\\backend\\src\\uploads\\${req.file.originalname}`
 
   const newProduct = new Product({ name, category, price, stock, imgURL });
 
