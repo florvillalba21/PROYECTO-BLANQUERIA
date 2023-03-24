@@ -1,36 +1,24 @@
 const Product = require("../models/Product");
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c1232e326dba399603a8c73b141aad45e60a5414
 //Objeto que contendra cada funcion
 ctrlProducts = {};
 
 //Funcion post para crear un nuevo producto y guardarlo en la bd
 
-<<<<<<< HEAD
-ctrlProducts.createProduct = async (req, res) => {
-  const { name, category, price, stock, imgURL } = req.body;
-=======
+
 ctrlProducts.createProduct =  async (req, res) => {
   
 
   const { name, category, price, stock } = req.body;
 
   imgURL = `C:\\Users\\AFIP\\Desktop\\PROYECTO-BLANQUERIA\\backend\\src\\uploads\\${req.file.originalname}`
->>>>>>> c1232e326dba399603a8c73b141aad45e60a5414
 
   const newProduct = new Product({ name, category, price, stock, imgURL });
 
   const productSaved = await newProduct.save();
 
   res.status(201).json(productSaved);
-<<<<<<< HEAD
-=======
-
->>>>>>> c1232e326dba399603a8c73b141aad45e60a5414
-};
+}
 
 //Funcion para obtener la lista de todos los productos guardados
 ctrlProducts.getProducts = async (req, res) => {
