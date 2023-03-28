@@ -1,6 +1,29 @@
-import React from "react";
+import React, { useRef } from "react";
+import axios from "axios";
+import {useNavigate } from "react-router-dom";
 
 export const Login = () => {
+  const navigate = useNavigate();
+  const inpUsername = useRef();
+
+  const loguear = async (e) => {
+    e.preventDefault;
+    const url = "http://localhost:3000/signin";
+    const data = {
+      username: inpUsername.current.value,
+    };
+
+    try {
+      const userT = await axios.post(url, data);
+      if (!userT) {
+        console.log("no existe tal usuario")
+      }
+      navigate("/home");
+    } catch (error) {
+      console.log("mensaje de error", error);
+    }
+  };
+
   return (
     <>
       <div className="container-fluid shadow bg-body rounded login">
@@ -9,18 +32,23 @@ export const Login = () => {
         </div>
         <div id="bodyLogin">
           <input
+            ref={inpUsername}
             id="inpLogin"
             type="text"
             placeholder="Ingresa tu nombre de usuario..."
             className="form-control"
           />
           <div id="endLogin">
-          <button id="btnLogin" className="btn btn-primary" type="submit">
-            Ingresar
-          </button>
+            <button
+              id="btnLogin"
+              onClick={loguear}
+              className="btn btn-primary"
+              type="submit"
+            >
+              Ingresar
+            </button>
+          </div>
         </div>
-        </div>
-        
       </div>
     </>
   );
