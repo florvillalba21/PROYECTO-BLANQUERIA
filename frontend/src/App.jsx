@@ -1,13 +1,18 @@
-import { useState } from 'react'
-import {AppRouter} from './routes/AppRoutes'
-
+import { useContext, useEffect, useState } from "react";
+import { ContextAuth } from "./context/AuthContext";
+import { AppRouter } from "./routes/AppRoutes";
 
 function App() {
-  const [count, setCount] = useState(0)
+  let [user , setUser] = useState();
+
+    
+  
 
   return (
-    <AppRouter/>
-  )
+    <ContextAuth.Provider value={{ user }}>
+      <AppRouter />
+    </ContextAuth.Provider>
+  );
 }
 
-export default App
+export default App;

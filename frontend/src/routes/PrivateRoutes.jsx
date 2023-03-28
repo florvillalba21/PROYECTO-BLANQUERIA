@@ -1,11 +1,13 @@
-// import React ,{ useContext } from "react";
-// import {Navigate} from 'react-router-dom'
-// import { AuthContext } from "../context/AuthContext";
+import React ,{ useContext } from "react";
+import {Navigate} from 'react-router-dom'
+import {ContextAuth } from "../context/AuthContext";
 
-// export const PrivateRoutes = ({children})=>{
-//     const {admin}= useContext(AuthContext)
+export const PrivateRoutes = ({children})=>{
+    const {user}= useContext(ContextAuth)
+    console.log(user)
   
 
-//     return !admin.token
-//     ?<Navigate to='/'/> : children; 
-// }
+    return !user
+    ?<Navigate to='/'/> 
+    : children; 
+}

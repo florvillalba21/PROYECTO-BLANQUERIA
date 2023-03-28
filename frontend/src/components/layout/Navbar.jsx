@@ -3,10 +3,15 @@ import { Link } from "react-router-dom";
 import { Login } from "../../views/Login";
 
 export const Navbar = () => {
+  const Logout = () => {
+    localStorage.clear();
+  };
   return (
     <nav className="navbar" id="navbar">
       <div className="container-fluid">
-        <Link to="/home" style={{textDecoration: "none", color:"white"}}>Blanqueria Cacatua </Link>
+        <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
+          Blanqueria Cacatua{" "}
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -95,7 +100,9 @@ export const Navbar = () => {
               </li> */}
               <li>
                 <div>
-                  <Link to="/login"> Salir
+                  <Link to="/" onClick={Logout()}>
+                    {" "}
+                    Salir
                   </Link>
                 </div>
               </li>
@@ -111,7 +118,6 @@ export const Navbar = () => {
                 Search
               </button>
             </form> */}
-
           </div>
         </div>
       </div>

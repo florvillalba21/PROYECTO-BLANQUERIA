@@ -14,11 +14,14 @@ export const Login = () => {
     };
 
     try {
-      const userT = await axios.post(url, data);
+      const res = await axios.post(url, data);
+      const userT = res.data.token
+      
       if (!userT) {
         console.log("no existe tal usuario")
       }
       navigate("/home");
+      localStorage.setItem('user',userT);
     } catch (error) {
       console.log("mensaje de error", error);
     }

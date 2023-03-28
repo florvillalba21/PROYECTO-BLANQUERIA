@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { CardHome } from "../components/CardHome";
 import { Footer } from "../components/layout/Footer";
 import { Navbar } from "../components/layout/Navbar";
+import { ContextAuth } from "../context/AuthContext";
 
 export const Home = () => {
+  const {user} = useContext(ContextAuth)
+  console.log(user)
   return (
     
     <div id="body">
