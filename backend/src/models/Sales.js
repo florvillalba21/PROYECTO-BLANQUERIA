@@ -21,6 +21,9 @@ const SalesSchema = Schema({
     totalAmount: {
         type: Number,
         required:true
+    },
+    userVenta:{
+        type: String
     }
 }, {
  timestamps: true,
