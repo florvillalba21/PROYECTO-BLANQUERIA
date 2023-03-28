@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Login } from "../../views/Login";
 
 export const Navbar = () => {
   return (
@@ -60,6 +61,7 @@ export const Navbar = () => {
                   Agregar nuevos productos
                 </Link>
               </li>
+
               {/* <li className="nav-item dropdown">
                 <Link 
                   className="nav-link dropdown-toggle"
@@ -91,6 +93,12 @@ export const Navbar = () => {
                   </li>
                 </ul>
               </li> */}
+              <li>
+                <div>
+                  <Link to="/login"> Salir
+                  </Link>
+                </div>
+              </li>
             </ul>
             {/* <form className="d-flex mt-3" role="search">
               <input
@@ -103,6 +111,7 @@ export const Navbar = () => {
                 Search
               </button>
             </form> */}
+
           </div>
         </div>
       </div>

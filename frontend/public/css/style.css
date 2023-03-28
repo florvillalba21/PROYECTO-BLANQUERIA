@@ -1,115 +1,102 @@
-
 /* estilos para el login */
-div.login{
-    background-color:  #dceff0;
-    text-align: center;
-    margin-top: 15%;
-    border-radius: 30px;
-    width: 40%;
-   
+div.login {
+  background-color: #dceff0;
+  text-align: center;
+  margin-top: 15%;
+  border-radius: 30px;
+  width: 40%;
 }
-#headLogin{
-    padding: 10px;
-    
-    color: #cea9ca;
+#headLogin {
+  padding: 10px;
+
+  color: #cea9ca;
 }
 #h2Login {
-    padding-top: 5px;
+  padding-top: 5px;
 }
 
-#inpLogin{
-    padding: 5px;
-    border-radius: 5px;
-    border: 0;
-    margin: 30px;
-    text-decoration-color: #55889e;
-  
-    
-    
+#inpLogin {
+  padding: 5px;
+  border-radius: 5px;
+  border: 0;
+  margin: 30px;
+  text-decoration-color: #55889e;
+
+  width: 90%;
 }
 
-#btnLogin{
-    background-color: #cea9ca;
-    width: 450px;
-    border: 0;
-    border-radius: 3px;
-    color: white;
-    padding-bottom: 10px;
-    margin: 30px;
-
+#btnLogin {
+  background-color: #cea9ca;
+  width: 450px;
+  border: 0;
+  border-radius: 3px;
+  color: white;
+  padding-bottom: 10px;
+  margin: 30px;
 }
 
 /* fin estilos login */
 
-
 /* estilos para el contenedor de las card de home */
-div#cardHome{
-    width: 18rem;
-    color: #55889e;
-    margin: 30px;
-    height: 13rem;
-    padding: 20px;
-    
-
+div#cardHome {
+  width: 18rem;
+  color: #55889e;
+  margin: 30px;
+  height: 13rem;
+  padding: 20px;
 }
 
-
-.card-body{
-    height: 5rem;
+.card-body {
+  height: 5rem;
 }
-.card-group{
-    margin-left: 300px;
-    width: 800px;
-}
-
-#divbtn{
-    background-color: #cea9ca;
-    border: 0;
-    border-radius: 3px;
-    color: #e7e7d9;
-    padding: 10px;
-    text-align: center ;
-    margin-top: 40px;
-    
+.card-group {
+  margin-left: 400px;
+  width: 800px;
 }
 
-#btn{
-    font-style: initial;
-    color: white;
-    text-decoration: none;
-    background-color: #cea9ca;
-    border: 0;
-}
-#body{
-    margin: 0;
+#divbtn {
+  background-color: #cea9ca;
+  border: 0;
+  border-radius: 3px;
+  color: #e7e7d9;
+  padding: 10px;
+  text-align: center;
+  margin-top: 40px;
 }
 
+#btn {
+  font-style: initial;
+  color: white;
+  text-decoration: none;
+  background-color: #cea9ca;
+  border: 0;
+}
+#body {
+  margin: 0;
+}
 
 /* estilos para las card de inventario */
-div#cardInventory{
-    width: 18rem;
-    color: #55889e;
-    margin: 30px;
-    height: 13rem;
-    
-
+div#cardInventory {
+  width: 18rem;
+  color: #55889e;
+  margin: 30px;
+  padding: 10px;
 }
 
-#card-body-inventory{
-    height: 13rem;
+#card-body-inventory {
+  height: 5rem;
 }
 
-.container-inventory{
-    margin-top: 80px;
-    width: 50%;
+.container-inventory {
+  width: 50%;
 }
 
-#cardFormProduct{
-    width: 30%;
-    position: relative;
-    margin-left: 450px;
+#cardFormProduct {
+  width: 30%;
+  position: relative;
+  margin-left: 450px;
 }
 
-#divForm{
-    margin-top: 30px;
+#divForm {
+  margin-top: 30px;
 }
