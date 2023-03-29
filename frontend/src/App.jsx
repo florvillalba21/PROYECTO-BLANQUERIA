@@ -3,7 +3,8 @@ import { ContextAuth } from "./context/AuthContext";
 import { AppRouter } from "./routes/AppRoutes";
 
 function App() {
-  let [user , setUser] = useState();
+  
+  const user = localStorage.getItem('user')
 
     
   

@@ -4,7 +4,10 @@ import { Login } from "../../views/Login";
 
 export const Navbar = () => {
   const Logout = () => {
-    localStorage.clear();
+    
+    if(localStorage.getItem('user')){
+      localStorage.clear()
+    }
   };
   return (
     <nav className="navbar" id="navbar">
@@ -100,8 +103,8 @@ export const Navbar = () => {
               </li> */}
               <li>
                 <div>
-                  <Link to="/" onClick={Logout()}>
-                    {" "}
+                  <Link to="/" onClick={Logout}>
+                    
                     Salir
                   </Link>
                 </div>
