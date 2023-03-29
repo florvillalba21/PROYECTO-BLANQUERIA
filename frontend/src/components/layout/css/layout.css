@@ -1,6 +1,11 @@
-#navbar{
-    background-color: #cea9ca;
-    height: 5rem;
-    color: white; 
-    width: auto;
+#navbar {
+  background-color: #cea9ca;
+  height: 5rem;
+  color: white;
+  width: auto;
 }
+
+.nav-tabs {
+  background-color:  #f9f9f9;
+}
+

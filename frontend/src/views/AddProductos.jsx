@@ -1,11 +1,12 @@
 import React from "react";
+import { Footer } from "../components/layout/Footer";
 import { Navbar } from "../components/layout/Navbar";
 
 export const AddProductos = () => {
   return (
-    <div>
+    <>
       <Navbar />
-      <div id="cardFormProduct">
+      <div id="cardFormProduct" >
         <div id="tittleFormProduct">
           <h2>Detalla tu nuevo producto</h2>
         </div>
@@ -57,6 +58,9 @@ export const AddProductos = () => {
           </div>
         </form>
       </div>
-    </div>
+      <div>
+        <Footer/>
+      </div>
+    </>
   );
 };

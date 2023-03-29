@@ -22,14 +22,14 @@ export const Home = () => {
           tittle={"Ver stock"}
           description={"¿Quieres ver tu inventario? Ingresa aquí."}
           action={"Abrir inventario"}
-          url ={"/inventory"}
+          url ={"inventory/"}
         />
 
         <CardHome
           tittle={"Cargar nuevos productos"}
           description={"Puedes agregar nuevos productos"}
           action={"Ir"}
-          url={"/addProducto"}
+          url={"addProducto/"}
         />
 
         <CardHome

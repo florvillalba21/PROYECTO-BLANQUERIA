@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const CardInventory = ({ tittle, description, image }) => {
+export const CardInventory = ({ tittle, description, image, url }) => {
   return (
     <div className="card shadow rounded" id="cardInventory">
       <img src={image} className="card-img-top" alt="..." />
@@ -10,7 +10,7 @@ export const CardInventory = ({ tittle, description, image }) => {
         <p className="card-text">{description}</p>
       </div>
       <div id="divbtn">
-        <Link id="btn" to="">
+        <Link id="btn" to={url}>
           Ver
         </Link>
       </div>
