@@ -1,21 +1,40 @@
 const Product = require("../models/Product");
+const path = require('path')
+const cloudinary = require('cloudinary')
 
 //Objeto que contendra cada funcion
 ctrlProducts = {};
 
+//configuracion del cloudinary
+cloudinary.config({
+  cloud_name:'dhkfu9w3i',
+  api_key:'219851515994576',
+  api_secret:'F8ciqQEd-u9C4bqQJqhI4ztomPg'
+})
+
+const fs = require('fs-extra')
 //Funcion post para crear un nuevo producto y guardarlo en la bd
+
+
 
 
 ctrlProducts.createProduct =  async (req, res) => {
   
 
   const { name, category, costPrice, sellPrice, stock } = req.body;
+  const fileName = req.file
+  console.log(req.file)
 
-  imgURL = `C:\\Users\\david\\Desktop\\PROYECTO-BLANQUERIA\\backend\\src\\uploads\\${req.file.originalname}`
+  const result = await cloudinary.v2.uploader.upload(req.file.path)
+
+  imgURL = result.url 
 
   const newProduct = new Product({ name, category, costPrice, sellPrice, stock, imgURL });
 
   const productSaved = await newProduct.save();
+
+    //borra el archivo ya que ha sido subido a la nube
+  await fs.unlink(req.file.path)
 
   res.status(201).json(productSaved);
 }

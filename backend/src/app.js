@@ -5,7 +5,27 @@ const cors = require('cors')
 const createRoles = require('./libs/initialSetup')
 
 
+//Llamando a la dependencia multer
+const multer = require('multer')
+const path = require('path')
+
+//Configuracion del multer, diciendole donde se guardara 
+const storage = multer.diskStorage({
+  destination: path.join(__dirname, '/uploads')
+  ,
+  filename: function (req, file, cb) {
+    cb(null, new Date().getTime() + path.extname(file.originalname))
+  }
+})
+
+const upload = multer({ storage: storage })
+
+
+
 const app = express()
+app.use(upload.single('image'))
+
+
 
 dbConnect()
 createRoles()
