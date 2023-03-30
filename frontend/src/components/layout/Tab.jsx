@@ -5,24 +5,24 @@ export const Tab = ({toalla="nav-link", almohada="nav-link", sabana="nav-link", 
 
   return (
     <div>
-      <ul className="nav nav-tabs">
+      <ul className="nav nav-tabs" style={{color: "black"}}>
         <li className="nav-item">
-          <Link className={toalla} aria-current="page" to="/home/inventory/towels">
+          <Link className={toalla} aria-current="page" to="/home/inventory/towels" style={{color:"#cea9ca"}}>
             Toallas
           </Link>
         </li>
         <li className="nav-item">
-          <Link className={almohada} aria-current="page" to="/home/inventory/pillows">
+          <Link className={almohada} aria-current="page" to="/home/inventory/pillows" style={{color:"#cea9ca"}}>
             Almohadas
           </Link>
         </li>
         <li className="nav-item">
-          <Link className={mantel} aria-current="page" to="/home/inventory/tablecloths">
+          <Link className={mantel} aria-current="page" to="/home/inventory/tablecloths" style={{color:"#cea9ca"}}>
             Manteles
           </Link>
         </li>
         <li className="nav-item">
-          <Link className={sabana} aria-current="page" to="/home/inventory/bedsheets">
+          <Link className={sabana} aria-current="page" to="/home/inventory/bedsheets" style={{color:"#cea9ca"}}>
             Sabanas
           </Link>
         </li>

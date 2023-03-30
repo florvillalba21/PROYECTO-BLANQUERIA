@@ -40,7 +40,7 @@ div.login {
 /* estilos para el contenedor de las card de home */
 div#cardHome {
   width: 18rem;
-  color: #55889e;
+  color: #2f3559;
   margin: 30px;
   height: 13rem;
   padding: 20px;
@@ -50,8 +50,8 @@ div#cardHome {
   height: 5rem;
 }
 .card-group {
-  margin-left: 400px;
-  width: 800px;
+  width: 50%;
+  margin: 0 auto;
 }
 
 #divbtn {
@@ -78,7 +78,7 @@ div#cardHome {
 /* estilos para las card de inventario */
 div#cardInventory {
   width: 18rem;
-  color: #55889e;
+  color: #2f3559;
   margin: 30px;
   padding: 10px;
   margin-top: 100px;
@@ -90,12 +90,13 @@ div#cardInventory {
 
 .container-inventory {
   width: 50%;
+  margin: 0 auto;
 }
 
 #cardFormProduct {
-  width: 30%;
+  width: 40%;
+  margin: 0 auto;
   color:#55889e ;
-  margin-left: 500px;
   padding: 30px;
   height: 50rem;
 }
@@ -104,4 +105,9 @@ div#cardInventory {
   margin-top: 30px;
   text-decoration: #55889e;
   padding: 10px;
+}
+
+.toallas{
+  width: auto;
+  margin: 0 auto;
 }

@@ -8,7 +8,7 @@ export const TowelInterface=()=>{
         <>
         <Navbar/>
         <Tab toalla="nav-link active"/>
-        <div>
+        <div className="container toallas">
             
         </div>
         <Footer/>

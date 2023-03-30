@@ -9,7 +9,7 @@ export const Home = () => {
   console.log(user)
   return (
     
-    <div id="body">
+    <>
       <Navbar/>
       <div className="card-group">
         <CardHome
@@ -39,6 +39,6 @@ export const Home = () => {
         />
       </div>
       <Footer/>
-    </div>
+    </>
   );
 };
