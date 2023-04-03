@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { AddProductos } from "../views/AddProductos";
+import { AddProducts } from "../views/AddProducts";
 import { BedsheetsInterface } from "../views/BedsheetsInterface";
 import { Home } from "../views/Home";
 import { Inventory } from "../views/Inventory";
@@ -14,7 +14,8 @@ export const Dashboard = () => {
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="home/inventory" element={<Inventory />} />
-        <Route path="home/addProducto" element={<AddProductos />} />
+        <Route path="home/addProducto" element={<AddProducts />} />
+        
         <Route path="home/inventory/towels" element={<TowelInterface/>}/>
         <Route path="home/inventory/pillows" element={<PillowInterface/>}/>
         <Route path="home/inventory/bedsheets" element={<BedsheetsInterface/>}/>

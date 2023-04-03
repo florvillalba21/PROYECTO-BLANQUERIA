@@ -5,12 +5,11 @@ import { Navbar } from "../components/layout/Navbar";
 import { ContextAuth } from "../context/AuthContext";
 
 export const Home = () => {
-  const {user} = useContext(ContextAuth)
-  console.log(user)
+  const { user } = useContext(ContextAuth);
+  console.log(user);
   return (
-    
     <>
-      <Navbar/>
+      <Navbar />
       <div className="card-group">
         <CardHome
           tittle={"Realizar una venta"}
@@ -22,7 +21,7 @@ export const Home = () => {
           tittle={"Ver stock"}
           description={"¿Quieres ver tu inventario? Ingresa aquí."}
           action={"Abrir inventario"}
-          url ={"inventory/"}
+          url={"inventory/"}
         />
 
         <CardHome
@@ -33,12 +32,19 @@ export const Home = () => {
         />
 
         <CardHome
+          tittle={"Cargar nuevas categorias"}
+          description={"Las categorias definen el ambiente o tipo de producto que estás vendiendo"}
+          action={"Ir"}
+          url={"addCategory/"}
+        />
+
+        <CardHome
           tittle={"Ver ventas"}
           description={"Aqui podrás ver las ventas realizadas de este mes."}
           action={"Ir"}
         />
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

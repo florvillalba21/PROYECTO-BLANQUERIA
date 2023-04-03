@@ -4,7 +4,7 @@ import {ContextAuth } from "../context/AuthContext";
 
 export const PrivateRoutes = ({children})=>{
     const {user}= useContext(ContextAuth)
-    console.log(user)
+ 
   
 
     return !user

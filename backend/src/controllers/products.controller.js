@@ -22,8 +22,7 @@ ctrlProducts.createProduct =  async (req, res) => {
   
 
   const { name, category, costPrice, sellPrice, stock } = req.body;
-  const fileName = req.file
-  console.log(req.file)
+
 
   const result = await cloudinary.v2.uploader.upload(req.file.path)
 

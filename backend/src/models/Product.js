@@ -7,8 +7,9 @@ const ProductSchema = Schema({
         required: true
     },
     category: {
-        ref: "Categories",
-        type: Schema.Types.ObjectId
+        type: String
+        // ref: "Categories",
+        // type: Schema.Types.ObjectId
     },
     costPrice:{
         type: Number,
