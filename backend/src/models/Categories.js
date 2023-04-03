@@ -7,6 +7,9 @@ const CategoriesSchema =
       type: String,
       required: true,
     },
+    description: {
+      type: String,
+    },
     subcategories: {
       type: Array,
       required: true,
