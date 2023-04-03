@@ -9,6 +9,7 @@ const CategoriesSchema = new Schema
     },
     description: {
       type: String,
+      required: false
     },
     subCategories: [{
       type:String

@@ -5,19 +5,17 @@ import { Footer } from "../components/layout/Footer";
 import { Navbar } from "../components/layout/Navbar";
 import { ContextAuth } from "../context/AuthContext";
 
-export const AddProducts = () => {
-  const [image, setImage] = useState(null)
+export const AddCategory = () => {
+  const [image, setImage] = useState(null);
   const { user } = useContext(ContextAuth);
   const inpName = useRef();
   const inpDescription = useRef();
   const inpSubcategories = useRef();
 
-  
-
   const upload = async (e) => {
     e.preventDefault();
 
-    const url = "http://localhost:3000/newCategory";
+    const url = "http://localhost:3000/Categories";
     const config = {
       headers: {
         "content-type": "multipart/form-data",
@@ -28,10 +26,10 @@ export const AddProducts = () => {
 
     formData.append("name", inpName.current.value); //append the values with key, value pair
     formData.append("description", inpDescription.current.value);
-    formData.append("subcategories", inpSubcategories.current.value);
+    formData.append("subCategories", inpSubcategories.current.value);
     formData.append("image", image[0]);
 
- console.log(formData)
+    console.log(formData);
 
     const res = await axios.post(url, formData, config);
     console.log(res);
@@ -42,8 +40,9 @@ export const AddProducts = () => {
       <Navbar />
       <div id="cardFormProduct">
         <div id="tittleFormProduct">
-          <h2>Detalla tu nuevo producto</h2>
+          <h2>Detalla la nueva categoria</h2>
         </div>
+       
 
         <form action="">
           <div id="divForm">
@@ -52,54 +51,40 @@ export const AddProducts = () => {
               className="form-control"
               type="text"
               id="nameProduct"
-              placeholder="Nombre del producto."
+              placeholder="Nombre de la categoría. Ej: Toallas"
             />
           </div>
-          <div id="divForm">
-            <select
-              ref={selectCategory}
-              className="form-select"
-              aria-label="Default select example"
-            >
-              <option selected>Seleccione a qué categoria pertenece</option>
-              <option value="1">Toallas</option>
-              <option value="2">Sabanas</option>
-              <option value="3">Manteles</option>
-            </select>
-          </div>
+
           <div id="divForm">
             <input
-              ref={inpCostPrice}
-              type="number"
+              ref={inpDescription}
               className="form-control"
-              placeholder="Ingresa el precio de costo"
+              type="text"
+              placeholder="Aqui puede describir la categoria..."
             />
           </div>
+
           <div id="divForm">
             <input
-              ref={inpSellPrice}
-              type="number"
+              ref={inpSubcategories}
               className="form-control"
-              placeholder="Ingresa el precio de venta"
+              type="text"
+              id="nameProduct"
+              placeholder="Ej:De baño, etc..."
             />
           </div>
+          
           <div id="divForm">
             <input
-             
               type="file"
               className="form-control"
               name="image"
-              onChange={(e)=>{setImage(e.target.files)}}
+              onChange={(e) => {
+                setImage(e.target.files);
+              }}
             />
           </div>
-          <div id="divForm">
-            <input
-              ref={inpStock}
-              type="number"
-              className="form-control"
-              placeholder="Ingresa las cantidades que han ingresado"
-            />
-          </div>
+          
           <div id="divbtn">
             <button id="btn" type="submit" onClick={upload}>
               Cargar

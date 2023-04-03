@@ -49,7 +49,7 @@ ctrlProducts.getProducts = async (req, res) => {
 //Funcion para obtener un producto en base al id
 ctrlProducts.getProductById = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.productId);
+    const product = await Product.find({category:req.params.filter });
 
     res.status(200).json(product);
   } catch (error) {

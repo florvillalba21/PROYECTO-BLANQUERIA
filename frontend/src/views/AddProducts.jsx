@@ -1,20 +1,19 @@
 import axios from "axios";
-import path from "path";
 
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Footer } from "../components/layout/Footer";
 import { Navbar } from "../components/layout/Navbar";
 import { ContextAuth } from "../context/AuthContext";
 
 export const AddProducts = () => {
-  const [image, setImage] = useState(null)
+  const [data, setData] = useState([]);
+  const [image, setImage] = useState(null);
   const { user } = useContext(ContextAuth);
   const inpName = useRef();
   const selectCategory = useRef();
   const inpCostPrice = useRef();
   const inpSellPrice = useRef();
   const inpStock = useRef();
-  
 
   const upload = async (e) => {
     e.preventDefault();
@@ -35,12 +34,19 @@ export const AddProducts = () => {
     formData.append("stock", inpStock.current.value);
     formData.append("image", image[0]);
 
- console.log(formData)
-
     const res = await axios.post(url, formData, config);
-    console.log(res);
   };
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/Categories")
+      .then((result) => {
+        setData(result.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <>
       <Navbar />
@@ -65,10 +71,14 @@ export const AddProducts = () => {
               className="form-select"
               aria-label="Default select example"
             >
-              <option selected>Seleccione a qué categoria pertenece</option>
-              <option value="1">Toallas</option>
-              <option value="2">Sabanas</option>
-              <option value="3">Manteles</option>
+           
+              {data.map((value, index) => {
+                return (
+                  <option key={index} value={value.name}>
+                    {value.name}
+                  </option>
+                );
+              })}
             </select>
           </div>
           <div id="divForm">
@@ -89,11 +99,12 @@ export const AddProducts = () => {
           </div>
           <div id="divForm">
             <input
-             
               type="file"
               className="form-control"
               name="image"
-              onChange={(e)=>{setImage(e.target.files)}}
+              onChange={(e) => {
+                setImage(e.target.files);
+              }}
             />
           </div>
           <div id="divForm">

@@ -33,5 +33,12 @@ ctrlCategories.createCategory = async (req, res) => {
   res.status(201).json(categorySaved);
 };
 
+ctrlCategories.getCategories =async(req, res)=>{
+  const categories = await Categories.find();
+
+  res.status(200).json(categories);
+
+} 
+
 
 module.exports = ctrlCategories
