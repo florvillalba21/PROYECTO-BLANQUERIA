@@ -1,7 +1,7 @@
 const { model, Schema } = require("mongoose");
-const { type } = require("os");
 
-const CategoriesSchema =
+
+const CategoriesSchema = new Schema
   ({
     name: {
       type: String,
@@ -10,10 +10,12 @@ const CategoriesSchema =
     description: {
       type: String,
     },
-    subcategories: {
-      type: Array,
-      required: true,
-    },
+    subCategories: [{
+      type:String
+    }],
+    imgURL:{
+      type: String
+    }
   },
   { versionKey: false });
 
