@@ -20,11 +20,11 @@ export const Login = () => {
     //se intenta la peticion, y si sale todo ok y devuelve el token del usuario, nos redirigimos a la pag principal, y sino, ocurre un error
     try {
       const res = await axios.post(url, data);
-      const userT = res.data.token;
+      const token = res.data.token;
 
-      if (userT) {
+      if (token) {
         navigate("/home");
-        localStorage.setItem("user", userT);
+        localStorage.setItem("token", token);
       }
 
     } catch (error) {

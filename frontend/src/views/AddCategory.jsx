@@ -8,7 +8,7 @@ import { ContextAuth } from "../context/AuthContext";
 export const AddCategory = () => {
   //instanciamos lasvariables donde almacenaremos los datos del formulario
   const [image, setImage] = useState(null);
-  const { user } = useContext(ContextAuth);
+  const { token } = useContext(ContextAuth);
   const inpName = useRef();
   const inpDescription = useRef();
   const inpSubcategories = useRef();
@@ -22,7 +22,7 @@ export const AddCategory = () => {
     const config = {
       headers: {
         "content-type": "multipart/form-data",
-        "x-access-token": user,
+        "x-access-token": token,
       },
     };
 

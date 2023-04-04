@@ -8,32 +8,35 @@ import { Products } from "./Products";
 export const Inventory = () => {
   //se traen todas las categorias para mostrarlas en el inventario
   const [data, setData] = useState([]);
+  const [category, setCategory]= useState('')
   useEffect(() => {
     axios
       .get("http://localhost:3000/Categories")
       .then((result) => {
         setData(result.data);
+        setCategory(data.name)
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+<Products category={category}/>
   
   return (
     <>
       <Navbar />
-      <div className="container container-intentory card-group">
+      <div className="container container-intentory card-group" style={{width: "auto",margin: "0 auto"}}>
         {data.map((value, index) => {
           return (
-            <div style={{width: "30%", margin: "0 auto"}}>
+            <div key={index} style={{width: "30%"}}>
               <CardInventory
-                key={index}
+                
                 title={value.name}
                 description={value.description}
                 image={value.imgURL}
                 
               />
-              {<Products category={value.name} />}
+              
             </div>
           );
         })}

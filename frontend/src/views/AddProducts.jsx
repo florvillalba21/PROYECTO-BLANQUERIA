@@ -7,7 +7,7 @@ import { ContextAuth } from "../context/AuthContext";
 export const AddProducts = () => {
   const [data, setData] = useState([]);
   const [image, setImage] = useState(null);
-  const { user } = useContext(ContextAuth);
+  const { token } = useContext(ContextAuth);
   const inpName = useRef();
   const selectCategory = useRef();
   const inpCostPrice = useRef();
@@ -22,7 +22,7 @@ export const AddProducts = () => {
     const config = {
       headers: {
         "content-type": "multipart/form-data",
-        "x-access-token": user,
+        "x-access-token": token,
       },
     };
 
@@ -38,6 +38,7 @@ export const AddProducts = () => {
 
     try {
       const res = await axios.post(url, formData, config);
+      console.log(res)
 
     } catch (error) {
       console.log(error)
