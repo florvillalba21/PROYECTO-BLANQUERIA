@@ -8,6 +8,7 @@ export const AppRouter = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
+        {/* se define que todo lo q se escriba despues de la barra en la url va a ser una ruta privada, en este caso el dashboard */}
         <Route
           path="/*"
           element={

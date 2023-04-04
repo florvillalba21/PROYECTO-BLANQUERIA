@@ -3,11 +3,12 @@ import {Navigate} from 'react-router-dom'
 import {ContextAuth } from "../context/AuthContext";
 
 export const PrivateRoutes = ({children})=>{
-    const {user}= useContext(ContextAuth)
+    //requerimos el contexto que contiene el token del usuario
+    const {token}= useContext(ContextAuth)
  
   
-
-    return !user
+    //si no existe el token, nos redirige al login, de lo contrario podemos acceder a las otras rutas
+    return !token
     ?<Navigate to='/'/> 
     : children; 
 }
