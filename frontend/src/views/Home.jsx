@@ -5,8 +5,7 @@ import { Navbar } from "../components/layout/Navbar";
 import { ContextAuth } from "../context/AuthContext";
 
 export const Home = () => {
-  const { user } = useContext(ContextAuth);
-  console.log(user);
+
   return (
     <>
       <Navbar />

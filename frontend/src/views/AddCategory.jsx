@@ -6,15 +6,18 @@ import { Navbar } from "../components/layout/Navbar";
 import { ContextAuth } from "../context/AuthContext";
 
 export const AddCategory = () => {
+  //instanciamos lasvariables donde almacenaremos los datos del formulario
   const [image, setImage] = useState(null);
   const { user } = useContext(ContextAuth);
   const inpName = useRef();
   const inpDescription = useRef();
   const inpSubcategories = useRef();
 
+  //funcion para subir una nueva categoria
   const upload = async (e) => {
     e.preventDefault();
 
+    //config de la peticion
     const url = "http://localhost:3000/Categories";
     const config = {
       headers: {
@@ -22,6 +25,8 @@ export const AddCategory = () => {
         "x-access-token": user,
       },
     };
+
+    //data de la peticion que enviaremos
     let formData = new FormData(); //formdata object
 
     formData.append("name", inpName.current.value); //append the values with key, value pair
@@ -31,8 +36,12 @@ export const AddCategory = () => {
 
     console.log(formData);
 
-    const res = await axios.post(url, formData, config);
-    console.log(res);
+    try {
+      const res = await axios.post(url, formData, config);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -42,7 +51,6 @@ export const AddCategory = () => {
         <div id="tittleFormProduct">
           <h2>Detalla la nueva categoria</h2>
         </div>
-       
 
         <form action="">
           <div id="divForm">
@@ -73,7 +81,7 @@ export const AddCategory = () => {
               placeholder="Ej:De baño, etc..."
             />
           </div>
-          
+
           <div id="divForm">
             <input
               type="file"
@@ -84,7 +92,7 @@ export const AddCategory = () => {
               }}
             />
           </div>
-          
+
           <div id="divbtn">
             <button id="btn" type="submit" onClick={upload}>
               Cargar

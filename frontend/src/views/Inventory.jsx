@@ -6,6 +6,7 @@ import axios from "axios";
 import { Products } from "./Products";
 
 export const Inventory = () => {
+  //se traen todas las categorias para mostrarlas en el inventario
   const [data, setData] = useState([]);
   useEffect(() => {
     axios

@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Footer } from "../components/layout/Footer";
 import { Navbar } from "../components/layout/Navbar";
@@ -18,6 +17,7 @@ export const AddProducts = () => {
   const upload = async (e) => {
     e.preventDefault();
 
+    //configuracion para la peticion
     const url = "http://localhost:3000/Products";
     const config = {
       headers: {
@@ -25,6 +25,8 @@ export const AddProducts = () => {
         "x-access-token": user,
       },
     };
+
+    //se define los campos y su valores q se enviarán en la peticion con el FormData
     let formData = new FormData(); //formdata object
 
     formData.append("name", inpName.current.value); //append the values with key, value pair
@@ -34,9 +36,17 @@ export const AddProducts = () => {
     formData.append("stock", inpStock.current.value);
     formData.append("image", image[0]);
 
-    const res = await axios.post(url, formData, config);
+    try {
+      const res = await axios.post(url, formData, config);
+
+    } catch (error) {
+      console.log(error)
+    }
+
+    
   };
 
+  //realizamos una peticion solicitando todas las catregorias para el select
   useEffect(() => {
     axios
       .get("http://localhost:3000/Categories")

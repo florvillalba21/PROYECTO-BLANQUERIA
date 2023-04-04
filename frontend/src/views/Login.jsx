@@ -1,27 +1,32 @@
 import React, { useRef } from "react";
 import axios from "axios";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const navigate = useNavigate();
   const inpUsername = useRef();
 
+  //Funcion para loguear
   const loguear = async (e) => {
     e.preventDefault;
+
+    //instanciamos los datos que utilizaremos en la peticion con axios
     const url = "http://localhost:3000/signin";
     const data = {
       username: inpUsername.current.value,
     };
+    
 
+    //se intenta la peticion, y si sale todo ok y devuelve el token del usuario, nos redirigimos a la pag principal, y sino, ocurre un error
     try {
       const res = await axios.post(url, data);
-      const userT = res.data.token
-      
-      if (!userT) {
-        console.log("no existe tal usuario")
+      const userT = res.data.token;
+
+      if (userT) {
+        navigate("/home");
+        localStorage.setItem("user", userT);
       }
-      navigate("/home");
-      localStorage.setItem('user',userT);
+
     } catch (error) {
       console.log("mensaje de error", error);
     }
