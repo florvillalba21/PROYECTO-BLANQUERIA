@@ -24,7 +24,7 @@ export const Login = () => {
 
       if (token) {
         navigate("/home");
-        localStorage.setItem("token", token);
+        sessionStorage.setItem("token", token);
       }
 
     } catch (error) {

@@ -4,7 +4,8 @@ import { AppRouter } from "./routes/AppRoutes";
 
 function App() {
   //instanciando una variable donde se almacena el token del user, trayendolo desde el local storage
-  const token = localStorage.getItem('token')
+  const token = sessionStorage.getItem('token')
+  console.log(token)
 
   return (
     //proveyendo la informacion de la variable user a toda nuestra app con el contexto

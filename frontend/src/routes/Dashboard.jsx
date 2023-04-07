@@ -15,7 +15,7 @@ export const Dashboard = () => {
         <Route path="home/inventory" element={<Inventory />} />
         <Route path="home/addProducto" element={<AddProducts />} />
         <Route path="home/addCategory" element={<AddCategory/>} />
-        <Route path="home/inventory/Products" element={<Products/>} />
+        <Route path="home/inventory/Products/:filter" element={<Products/>}/>
         
         
 

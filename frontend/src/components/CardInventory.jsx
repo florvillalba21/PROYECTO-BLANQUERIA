@@ -10,7 +10,8 @@ export const CardInventory = ({ title, description, image, url }) => {
         <p className="card-text">{description}</p>
       </div>
       <div id="divbtn">
-        <Link id="btn" to="Products/">
+        <Link id="btn" to={"Products/"+url}>
+
           Ver
         </Link>
       </div>

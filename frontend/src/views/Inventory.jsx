@@ -8,19 +8,22 @@ import { Products } from "./Products";
 export const Inventory = () => {
   //se traen todas las categorias para mostrarlas en el inventario
   const [data, setData] = useState([]);
-  const [category, setCategory]= useState('')
+
+  
   useEffect(() => {
     axios
       .get("http://localhost:3000/Categories")
       .then((result) => {
-        setData(result.data);
-        setCategory(data.name)
+        setData(result.data)
+        
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-<Products category={category}/>
+  
+  
+
   
   return (
     <>
@@ -34,6 +37,8 @@ export const Inventory = () => {
                 title={value.name}
                 description={value.description}
                 image={value.imgURL}
+                url = {value.name}
+                
                 
               />
               

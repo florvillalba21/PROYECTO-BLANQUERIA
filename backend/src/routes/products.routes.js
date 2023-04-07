@@ -21,7 +21,7 @@ const {
 //Rutas de los productos
 router.get("/Products", getProducts);
 
-router.get("/Products/:productId", getProductById);
+router.get("/ProductsF/:filter", getProductById);
 
 
 router.post("/Products",verifyToken,isAdmin, createProduct);

@@ -4,8 +4,8 @@ import { Login } from "../../views/Login";
 
 export const Navbar = () => {
   const Logout = () => {
-    if (localStorage.getItem("user")) {
-      localStorage.clear();
+    if (sessionStorage.getItem("user")) {
+      sessionStorage.clear();
     }
   };
   return (
