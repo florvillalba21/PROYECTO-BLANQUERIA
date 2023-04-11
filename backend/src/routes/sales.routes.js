@@ -5,17 +5,19 @@ const {
   getSales,
   deleteSaleById,
   updateSaleById,
+  getSalesForUserId,
 } = require("../controllers/sales.controller");
+const verifyToken = require("../middlewares/authjwt");
 
 
 //Rutas de los productos
-router.get("/sales", getSales);
+router.get("/sales",verifyToken, getSalesForUserId);
 
-router.post("/newSale/:userId", newSale);
+router.post("/newSale",verifyToken, newSale);
 
-router.put("/updateSale/:saleId", updateSaleById);
+//router.put("/updateSale/:saleId",verifyToken, updateSaleById);
 
-router.delete("/deleteSale/:saleId", deleteSaleById)
+//router.delete("/deleteSale/:saleId",verifyToken, deleteSaleById)
 
 
 module.exports = router;

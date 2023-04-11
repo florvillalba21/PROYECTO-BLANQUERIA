@@ -6,4 +6,8 @@ router.get('/Categories', getCategories)
 
 router.post('/Categories', createCategory)
 
+router.delete('/Categories:categoryId', createCategory)
+
+router.put('/Categories:categoryId', createCategory)
+
 module.exports = router

@@ -31,4 +31,4 @@ const SalesSchema = Schema({
 });
 
 
-module.exports = model('Sales', SalesSchema);
+module.exports = model('Sale', SalesSchema);

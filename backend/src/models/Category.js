@@ -20,4 +20,4 @@ const CategoriesSchema = new Schema
   },
   { versionKey: false });
 
-module.exports = model("Categories", CategoriesSchema);
+module.exports = model("Category", CategoriesSchema);

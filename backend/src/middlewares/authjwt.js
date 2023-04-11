@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken')
 const config = require('../config')
 const User = require('../models/User')
-const Role = require('../models/Role')
 
 
 //funcion para verificar el token
@@ -27,6 +26,8 @@ try {
 
     //Si no existe el usuario
     if(!user) return res.json({msg:"User not found"})
+
+    req.user = user
 
     next()
 

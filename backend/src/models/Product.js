@@ -26,6 +26,10 @@ const ProductSchema = Schema({
     imgURL: {
         type: String,
         required:true
+    },
+    userVenta:{
+        type:Schema.Types.ObjectId,
+        ref:"User"
     }
 }, {
  timestamps: true,

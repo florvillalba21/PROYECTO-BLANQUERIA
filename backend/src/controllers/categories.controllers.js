@@ -1,4 +1,4 @@
-const Categories = require("../models/Categories");
+const Category = require("../models/Category");
 const path = require("path");
 const cloudinary = require("cloudinary");
 
@@ -18,11 +18,11 @@ ctrlCategories.createCategory = async (req, res) => {
   const result = await cloudinary.v2.uploader.upload(req.file.path);
 
   imgURL = result.url;
-  const newCategory = new Categories({
+  const newCategory = new Category({
     name,
     description,
     subCategories,
-    imgURL
+    imgURL,
   });
 
   const categorySaved = await newCategory.save();
@@ -33,12 +33,26 @@ ctrlCategories.createCategory = async (req, res) => {
   res.status(201).json(categorySaved);
 };
 
-ctrlCategories.getCategories =async(req, res)=>{
-  const categories = await Categories.find();
+ctrlCategories.getCategories = async (req, res) => {
+  const categories = await Category.find();
 
   res.status(200).json(categories);
+};
 
-} 
+ctrlCategories.updateCategoryById = async (req, res) => {
+  
+  const updatedCategory = await Category.findByIdAndUpdate(
+    req.params.categoryId,
+    req.body,
+    { new: true }
+  );
+  res.status(200).json(updatedCategory);
+};
 
+//Funcion para borrar un elemento en base al id
+ctrlCategories.deleteCategoryById = async (req, res) => {
+  const deleteCategory = await Category.findByIdAndDelete(req.params.categoryId);
+  res.status(200).json(deleteCategory);
+};
 
-module.exports = ctrlCategories
+module.exports = ctrlCategories;
