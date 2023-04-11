@@ -25,7 +25,7 @@ export const Products = () => {
 
   return <>
   <Navbar/>
-  <div className="card-group" style={{margin: "50px", width: "auto"}}>
+  <div className="card-group" >
     {products.map((value,index)=>{
       return(
       <div key={index} style={{padding: "10px"}}>

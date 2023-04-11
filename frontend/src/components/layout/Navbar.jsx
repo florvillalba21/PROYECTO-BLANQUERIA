@@ -1,11 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Login } from "../../views/Login";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+
 
 export const Navbar = () => {
+  const navigate = useNavigate();
   const Logout = () => {
-    if (sessionStorage.getItem("user")) {
-      sessionStorage.clear();
+    if (localStorage.getItem("token")) {
+      localStorage.clear();
+      
     }
   };
   return (
@@ -105,7 +107,7 @@ export const Navbar = () => {
               </li> */}
               <li>
                 <div>
-                  <Link to="/" onClick={Logout}>
+                  <Link to = '/'  onClick={Logout}>
                     Salir
                   </Link>
                 </div>

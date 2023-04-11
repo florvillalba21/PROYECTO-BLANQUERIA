@@ -4,9 +4,8 @@ import { AppRouter } from "./routes/AppRoutes";
 
 function App() {
   //instanciando una variable donde se almacena el token del user, trayendolo desde el local storage
-  const token = sessionStorage.getItem('token')
-  console.log(token)
-
+  const token = localStorage.getItem('token')
+ 
   return (
     //proveyendo la informacion de la variable user a toda nuestra app con el contexto
     <ContextAuth.Provider value={{ token }}>

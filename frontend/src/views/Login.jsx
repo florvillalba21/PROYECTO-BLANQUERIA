@@ -10,6 +10,7 @@ export const Login = () => {
   const loguear = async (e) => {
     e.preventDefault;
 
+
     //instanciamos los datos que utilizaremos en la peticion con axios
     const url = "http://localhost:3000/signin";
     const data = {
@@ -23,8 +24,11 @@ export const Login = () => {
       const token = res.data.token;
 
       if (token) {
-        navigate("/home");
-        sessionStorage.setItem("token", token);
+        localStorage.setItem("token", token);
+        if(localStorage.getItem("token")){
+          navigate("/home");
+        }
+        
       }
 
     } catch (error) {
