@@ -41,17 +41,13 @@ div.login {
 div#cardHome {
   width: 18rem;
   color: #2f3559;
-  margin: 30px;
+  margin: 40px;
   height: 13rem;
   padding: 20px;
 }
 
 .card-body {
   height: 5rem;
-}
-.card-group {
-  width:75%;
-  margin: 0 auto;
 }
 
 #divbtn {
@@ -88,10 +84,7 @@ div#cardInventory {
   height: 5rem;
 }
 
-.container-inventory {
-  width: 50%;
-  margin: 0 auto;
-}
+
 
 
 #cardFormProduct {
@@ -108,7 +101,4 @@ div#cardInventory {
   padding: 10px;
 }
 
-.toallas{
-  width: auto;
-  margin: 0 auto;
-}
+
