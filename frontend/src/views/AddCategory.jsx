@@ -34,7 +34,7 @@ export const AddCategory = () => {
     formData.append("subCategories", inpSubcategories.current.value);
     formData.append("image", image[0]);
 
-    console.log(formData);
+  
 
     try {
       const res = await axios.post(url, formData, config);
