@@ -3,7 +3,6 @@ import { CardInventory } from "../components/CardInventory";
 import { Footer } from "../components/layout/Footer";
 import { Navbar } from "../components/layout/Navbar";
 import axios from "axios";
-import { Products } from "./Products";
 import { InventoryContext } from "../context/InventoryContext";
 
 export const Inventory = () => {

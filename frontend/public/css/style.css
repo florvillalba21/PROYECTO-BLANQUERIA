@@ -46,7 +46,7 @@ div#cardHome {
   padding: 20px;
 }
 
-.card-body {
+div#cardHome.card-body {
   height: 5rem;
 }
 
@@ -73,17 +73,17 @@ div#cardHome {
 
 /* estilos para las card de inventario */
 div#cardInventory {
-  width: 18rem;
+
   color: #2f3559;
-  margin: 30px;
   padding: 10px;
   margin-top: 100px;
 }
 
-#card-body-inventory {
+
+
+.card-body{
   height: 5rem;
 }
-
 
 
 
@@ -102,3 +102,10 @@ div#cardInventory {
 }
 
 
+.prod{
+  height: 6rem;
+}
+
+.card{
+  padding: 10px;
+}
