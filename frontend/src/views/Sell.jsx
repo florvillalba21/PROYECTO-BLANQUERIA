@@ -9,7 +9,8 @@ export const Sell = () => {
   const [filter, setFilter] = useState();
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
-  const [detCart, setDet] = useState([])
+  const [detCart, setDet] = useState([]);
+  const [fact, setFact] = useState([]);
 
   useEffect(() => {
     axios
@@ -31,30 +32,25 @@ export const Sell = () => {
 
   const addToCart = (product) => {
     setCart((items) => [...items, product]);
-
   };
 
-  useEffect(()=>{
-    setDet(cart.reduce((prev, cur) => {
-      prev[cur.name] = (prev[cur.name] || 0) + 1;
-      return prev;
-    }, {}));
-    
-  },[cart])
+  useEffect(() => {
+    setDet(
+      cart.reduce((prev, cur) => {
+        prev[cur.name] = (prev[cur.name] || 0) + 1;
+        return prev;
+      }, {})
+    );
+  }, [cart]);
 
-  useEffect(()=>{
-    console.log(detCart)
-    // Object.entries(resultado).forEach(([key, value]) => {
-    //   let obj = {}
-    //   obj.prod= key
-    //   obj.cant = value
-    //   let array =[]
-    //   array.push(obj)
-      
-    //   console.log(obj)
-    //   array
-    // });
-  },[detCart])
+
+
+
+//   useEffect(() => {
+//     for(let i = 0; );
+//   }, [detCart]);
+
+
   return (
     <div>
       <Navbar />
@@ -124,8 +120,12 @@ export const Sell = () => {
             <br />
             <div className="d-grid gap-2">
               <br />
-              <button className="btn btn-primary" type="button" style={{backgroundColor: "#cea9ca", border: "0"}}>
-                Button
+              <button
+                className="btn btn-primary"
+                type="button"
+                style={{ backgroundColor: "#cea9ca", border: "0" }}
+              >
+                Registrar la venta
               </button>
             </div>
           </div>
