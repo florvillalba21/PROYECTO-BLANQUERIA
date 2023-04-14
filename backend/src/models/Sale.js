@@ -22,6 +22,11 @@ const SalesSchema = Schema({
         type: Number,
         required:true
     },
+    paymentMethod:{
+        type: String,
+        required: true
+    }
+    ,
     userVenta:{
         type: String
     }

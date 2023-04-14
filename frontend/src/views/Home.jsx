@@ -15,6 +15,7 @@ export const Home = () => {
           tittle={"Realizar una venta"}
           description={"Si tienes que realizar una venta, ingresa aqui."}
           action={"Registrar venta"}
+          url={"sell/"}
         />
 
         <CardHome
