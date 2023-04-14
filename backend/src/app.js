@@ -43,6 +43,7 @@ app.use(require('./routes/products.routes'))
 app.use(require('./routes/auth.routes'))
 app.use(require('./routes/sales.routes'))
 app.use(require('./routes/categories.routes'))
+app.use(require('./routes/funds.routes'))
 
 
 app.listen(3000)
