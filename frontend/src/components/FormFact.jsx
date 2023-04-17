@@ -48,7 +48,6 @@ export const FormFact = () => {
 
     useEffect(() => {
         detCart.map(value => {
-            console.log(value)
             setMount(mount + value.sellPrice)
         })
        
