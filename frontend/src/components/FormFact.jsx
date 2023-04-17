@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { ContextAuth } from "../context/AuthContext";
 
 export const FormFact = () => {
   const [categories, setCategories] = useState([]);
@@ -7,7 +8,11 @@ export const FormFact = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [detCart, setDet] = useState([]);
-  let [mount, setMount] = useState(0);
+  let [amount, setAmount] = useState(0);
+  const {token} = useContext(ContextAuth)
+
+  const inpDetails = useRef();
+  const selectMethod = useRef();
 
   useEffect(() => {
     axios
@@ -46,14 +51,37 @@ export const FormFact = () => {
     );
   }, [cart]);
 
-    useEffect(() => {
-        detCart.map(value => {
-            setMount(mount + value.sellPrice)
-        })
-       
+  useEffect(() => {
+    detCart.map((value) => {
+      setAmount(amount + value.sellPrice);
+    });
+  }, [detCart]);
 
-    }, [detCart]);
-
+  const addSell = () => {
+    
+    const url = "http://localhost:3000/newSale";
+    const config = {
+      headers: {
+        "content-type": "application/json",
+        "x-access-token": token,
+      },
+    };
+    const data = {
+      products: detCart,
+      details: inpDetails.current.value,
+      date: new Date().toLocaleDateString("es-es", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }),
+      paymentMethod: selectMethod.current.value,
+      totalAmount: amount,
+    };
+    axios.post(url, data, config)
+      .then((res) => console.log(res))
+      .catch(err => console.log(err))
+  };
   return (
     <div className="row" style={{ margin: "20px", color: "#2f3559" }}>
       <div className="col">
@@ -96,6 +124,7 @@ export const FormFact = () => {
         <div>
           <b>Detalla la venta:</b>
           <textarea
+            ref={inpDetails}
             className="form-control"
             placeholder="Si desea, puede escribir detalles puntuales de la venta para tenerlo registrado"
           />
@@ -105,11 +134,17 @@ export const FormFact = () => {
         <div className="row">
           <div className="col">
             <b>Monto total:</b>
-            <input type="number" disabled placeholder="total" value={mount} className="form-control" />
+            <input
+              type="number"
+              disabled
+              placeholder="total"
+              value={amount}
+              className="form-control"
+            />
           </div>
           <div className="col">
             <b>Medio de Pago:</b>
-            <select className="form-select">
+            <select className="form-select" ref={selectMethod}>
               <option value="Efectivo">Efectivo</option>
               <option value="Transferencia">Transferencia</option>
             </select>
@@ -118,6 +153,7 @@ export const FormFact = () => {
           <div className="d-grid gap-2">
             <br />
             <button
+              onClick={addSell}
               className="btn btn-primary"
               type="button"
               style={{ backgroundColor: "#cea9ca", border: "0" }}
@@ -137,10 +173,9 @@ export const FormFact = () => {
                 <th className="col">Cantidad</th>
                 <th className="col">Presupuesto</th>
               </tr>
-            </thead>    
+            </thead>
 
             {detCart.map((value, index) => {
-              
               return (
                 <tbody key={index}>
                   <td>
@@ -156,7 +191,7 @@ export const FormFact = () => {
               );
             })}
           </table>
-          total : {mount}
+          total : {amount}
         </div>
       </div>
     </div>

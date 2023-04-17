@@ -5,10 +5,9 @@ ctrlSales = {};
 
 //metodo para agregar una nueva venta
 ctrlSales.newSale = async (req, res) => {
+  const { products, details, date, paymentMethod, totalAmount } = req.body;
 
-  const { products, details, date, totalAmount } = req.body;
-  
-  const userVenta = req.user._id
+  const userVenta = req.user._id;
 
   const serial = await Sale.find();
 
@@ -19,28 +18,30 @@ ctrlSales.newSale = async (req, res) => {
     products,
     details,
     date,
+    paymentMethod,
     totalAmount,
-    userVenta
-    
+    userVenta,
   });
 
-  const saleSaved = await newSale.save();
+  try {
+    const saleSaved = await newSale.save();
 
-  res.status(201).json(saleSaved);
+    res.status(201).json(saleSaved);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
+ctrlSales.getSalesForUserId = async (req, res) => {
+  const userVenta = req.user._id; //toma el id del usuario ingresado
 
-ctrlSales.getSalesForUserId = async (req,res)=>{
-  const userVenta = req.user._id //toma el id del usuario ingresado
-  
-  const filterSales = await Sale.find({userVenta})
-  
+  const filterSales = await Sale.find({ userVenta });
 
   return res.json({
-      message:`Ventas del usuario ${req.user.username}`,
-      filterSales
-  })
-}
+    message: `Ventas del usuario ${req.user.username}`,
+    filterSales,
+  });
+};
 
 // //Funcion para obtener la lista de todos los productos guardados
 ctrlSales.getSales = async (req, res) => {
@@ -49,7 +50,7 @@ ctrlSales.getSales = async (req, res) => {
 
     const sales = await Sale.find();
 
-    res.status(200).json(sales)
+    res.status(200).json(sales);
   } catch (error) {
     console.log(error);
   }

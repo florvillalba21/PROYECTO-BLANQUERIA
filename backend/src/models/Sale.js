@@ -15,7 +15,7 @@ const SalesSchema = Schema({
         required: false
     },
     date:{
-        type:Date,
+        type: String,
         required:true
     },
     totalAmount: {
