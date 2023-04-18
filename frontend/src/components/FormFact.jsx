@@ -9,7 +9,7 @@ export const FormFact = () => {
   const [cart, setCart] = useState([]);
   const [detCart, setDet] = useState([]);
   let [amount, setAmount] = useState(0);
-  const {token} = useContext(ContextAuth)
+  const { token } = useContext(ContextAuth);
 
   const inpDetails = useRef();
   const selectMethod = useRef();
@@ -58,7 +58,6 @@ export const FormFact = () => {
   }, [detCart]);
 
   const addSell = () => {
-    
     const url = "http://localhost:3000/newSale";
     const config = {
       headers: {
@@ -78,9 +77,10 @@ export const FormFact = () => {
       paymentMethod: selectMethod.current.value,
       totalAmount: amount,
     };
-    axios.post(url, data, config)
+    axios
+      .post(url, data, config)
       .then((res) => console.log(res))
-      .catch(err => console.log(err))
+      .catch((err) => console.log(err));
   };
   return (
     <div className="row" style={{ margin: "20px", color: "#2f3559" }}>
@@ -174,24 +174,24 @@ export const FormFact = () => {
                 <th className="col">Presupuesto</th>
               </tr>
             </thead>
-
-            {detCart.map((value, index) => {
-              return (
-                <tbody key={index}>
-                  <td>
-                    <p>{value.name}</p>
-                  </td>
-                  <td>
-                    <p>{value.quantity}</p>
-                  </td>
-                  <td>
-                    <p>{value.quantity * value.sellPrice}</p>
-                  </td>
-                </tbody>
-              );
-            })}
+            <tbody>
+              {detCart.map((value, index) => {
+                return (
+                  <tr key={index}>
+                    <td>
+                      <p>{value.name}</p>
+                    </td>
+                    <td>
+                      <p>{value.quantity}</p>
+                    </td>
+                    <td>
+                      <p>{value.quantity * value.sellPrice}</p>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
           </table>
-          total : {amount}
         </div>
       </div>
     </div>

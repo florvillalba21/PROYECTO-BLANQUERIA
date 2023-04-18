@@ -12,6 +12,7 @@ const verifyToken = require("../middlewares/authjwt");
 
 //Rutas de los productos
 router.get("/sales",verifyToken, getSalesForUserId);
+router.get("/allSales", getSales);
 
 router.post("/newSale",verifyToken, newSale);
 
