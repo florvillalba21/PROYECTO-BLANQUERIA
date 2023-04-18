@@ -45,6 +45,7 @@ export const Home = () => {
           tittle={"Ver ventas"}
           description={"Aqui podrás ver las ventas realizadas de este mes."}
           action={"Ir"}
+          url={"summary/"}
         />
 
         <CardHome
