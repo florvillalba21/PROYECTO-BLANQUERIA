@@ -22,9 +22,6 @@ export const Searcher = () => {
               placeholder="Buscar por fecha"
               aria-label="Search"
             />
-            <button className="btn" id="btn">
-              Buscar
-            </button>
           </form>
         </div>
       </nav>
