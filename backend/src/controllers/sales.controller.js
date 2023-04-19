@@ -59,6 +59,7 @@ ctrlSales.getSales = async (req, res) => {
   ])
     .then((result) => {
       const salesTotalAmount = result[0].salesTotalAmount;
+      console.log(sales)
       res.json({
         allSales: sales,
         salesAmount: salesTotalAmount,
