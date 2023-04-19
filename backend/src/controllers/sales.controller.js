@@ -1,4 +1,5 @@
 const Sale = require("../models/Sale");
+const Product = require("../models/Product")
 
 //se inicializa un objeto vacio para luego agregar sus metodos
 ctrlSales = {};
@@ -6,6 +7,25 @@ ctrlSales = {};
 //metodo para agregar una nueva venta
 ctrlSales.newSale = async (req, res) => {
   const { products, details, date, paymentMethod, totalAmount } = req.body;
+
+  const updateQuantity = async (productId, quant) => {
+    try {
+      const product = await Product.findById(productId); // Busca el producto por su ID
+      product.stock= product.stock - quant; // Actualiza la cantidad del producto
+      await product.save(); // Guarda el producto actualizado en la base de datos
+      console.log(
+        `La cantidad de ${product.name} se actualizó a ${product.quantity}.`
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  for (let i = 0; i < products.length; i++) {
+    let prodId = products[i]._id;
+    let quant = products[i].quantity;
+    await updateQuantity(prodId, quant)
+  }
 
   const userVenta = req.user._id;
 
@@ -59,7 +79,7 @@ ctrlSales.getSales = async (req, res) => {
   ])
     .then((result) => {
       const salesTotalAmount = result[0].salesTotalAmount;
-      console.log(sales)
+      console.log(sales);
       res.json({
         allSales: sales,
         salesAmount: salesTotalAmount,
