@@ -45,15 +45,30 @@ ctrlSales.getSalesForUserId = async (req, res) => {
 
 // //Funcion para obtener la lista de todos los productos guardados
 ctrlSales.getSales = async (req, res) => {
-  try {
-    // const serial = await Sale.find().limit(1).sort({ $natural: -1 });
+  // const serial = await Sale.find().limit(1).sort({ $natural: -1 });
 
-    const sales = await Sale.find();
+  const sales = await Sale.find();
 
-    res.status(200).json(sales);
-  } catch (error) {
-    console.log(error);
-  }
+  Sale.aggregate([
+    {
+      $group: {
+        _id: null,
+        salesTotalAmount: { $sum: "$totalAmount" },
+      },
+    },
+  ])
+    .then((result) => {
+      const salesTotalAmount = result[0].salesTotalAmount;
+      res.json({
+        allSales: sales,
+        salesAmount: salesTotalAmount,
+      });
+    })
+    .catch((err) => {
+      res.json({
+        err,
+      });
+    });
 };
 
 module.exports = ctrlSales;
