@@ -65,6 +65,9 @@ export const Summary = () => {
             })}
           </tbody>
         </table>
+        <div id="monto">
+          <h2>Monto de ventas: {total}</h2>
+        </div>
         <Footer />
       </>
     );
