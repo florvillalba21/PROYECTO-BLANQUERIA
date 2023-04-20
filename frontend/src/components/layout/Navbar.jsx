@@ -11,10 +11,10 @@ export const Navbar = () => {
     }
   };
   return (
-    <nav className="navbar" id="navbar">
-      <div className="container-fluid">
-        <Link to="/home" style={{ textDecoration: "none", color: "#2f3559", fontSize:"30px" }} >
-          Blanqueria
+    <nav className="navbar text-center" id="navbar">
+      <div className="container-fluid" >
+        <Link to="/home" style={{ textDecoration: "none", color: "#2f3559", fontSize:"40px", fontFamily: 'Lobster, cursive'}} >
+          Blanqueria Cacatúa
         </Link>
         <button
           className="navbar-toggler"

@@ -132,6 +132,7 @@ export const AddProducts = () => {
             </button>
           </div>
         </form>
+        
       </div>
       <div>
         <Footer />
