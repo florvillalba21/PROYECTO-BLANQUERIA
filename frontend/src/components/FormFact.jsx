@@ -53,6 +53,7 @@ export const FormFact = () => {
 
   useEffect(() => {
     detCart.map((value) => {
+      console.log(detCart)
       setAmount(amount + value.sellPrice);
     });
   }, [detCart]);
@@ -103,7 +104,7 @@ export const FormFact = () => {
         <br />
         <div className="list-group">
           <b>Elige el producto a vender:</b>
-          {products
+          {products.length< 0
             ? products.map((value, index) => {
                 return (
                   <li

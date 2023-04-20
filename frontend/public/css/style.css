@@ -109,9 +109,9 @@ div#cardInventory {
   padding: 10px;
 }
 
-
+/* card prod */
 .prod{
-  height: 6rem;
+  height: 4rem
 }
 
 .card{
@@ -137,6 +137,13 @@ table{
 footer{
   position: absolute;
   bottom: 0;
+  width: 100%;
+  height: 40px;
+}
+
+#monto{
+  position: absolute;
+
   width: 100%;
   height: 40px;
 }
