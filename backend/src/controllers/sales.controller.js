@@ -43,6 +43,37 @@ ctrlSales.getSalesForUserId = async (req, res) => {
   });
 };
 
+ctrlSales.getSalesForDate = async (req, res) => {
+  const { mes, año } = req.body;
+
+  const regex = new RegExp(`\\b${mes}\\b.*\\b${año}\\b`, "i");
+
+  // Hacer la consulta con Mongoose
+
+ // Hacer la consulta con Mongoose
+Sale.find({ date: { $regex: regex } })
+
+  .then((resultados) => {
+    if(resultados.length > 0){
+      const totalAmount = resultados.reduce((total, sale) => total + sale.totalAmount, 0)
+
+      res.json({
+        filterSales:resultados,
+        amount:totalAmount
+      })
+    }
+    else{
+      res.json("No hay archivos con esa fecha")
+    }
+    
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+    
+};
+
 // //Funcion para obtener la lista de todos los productos guardados
 ctrlSales.getSales = async (req, res) => {
   // const serial = await Sale.find().limit(1).sort({ $natural: -1 });

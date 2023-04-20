@@ -6,6 +6,7 @@ const {
   deleteSaleById,
   updateSaleById,
   getSalesForUserId,
+  getSalesForDate,
 } = require("../controllers/sales.controller");
 const verifyToken = require("../middlewares/authjwt");
 
@@ -16,6 +17,8 @@ router.get("/sales",verifyToken, getSalesForUserId);
 router.get("/allSales",verifyToken, getSales);
 
 router.post("/newSale",verifyToken, newSale);
+
+router.get("/salesForDate",  getSalesForDate)
 
 //router.put("/updateSale/:saleId",verifyToken, updateSaleById);
 
