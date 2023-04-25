@@ -64,9 +64,9 @@ ctrlSales.getSalesForUserId = async (req, res) => {
 };
 
 ctrlSales.getSalesForDate = async (req, res) => {
-  const { mes, año } = req.body;
+  const { month, year } = req.query
 
-  const regex = new RegExp(`\\b${mes}\\b.*\\b${año}\\b`, "i");
+  const regex = new RegExp(`\\b${month}\\b.*\\b${year}\\b`, "i");
 
   // Hacer la consulta con Mongoose
 
@@ -78,12 +78,15 @@ Sale.find({ date: { $regex: regex } })
       const totalAmount = resultados.reduce((total, sale) => total + sale.totalAmount, 0)
 
       res.json({
+        ok: true,
         filterSales:resultados,
         amount:totalAmount
       })
     }
     else{
-      res.json("No hay archivos con esa fecha")
+      res.json({
+        ok: false,
+        msg: "No hay archivos con esa fecha"})
     }
     
   })

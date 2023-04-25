@@ -9,34 +9,32 @@ import { useContext } from "react";
 import { ContextAuth } from "../context/AuthContext";
 
 export const Summary = () => {
-  const {token} = useContext(ContextAuth);
+  const { token } = useContext(ContextAuth);
   const [sales, setSales] = useState([]);
-  const [total, setTotal] = useState({})
+  const [total, setTotal] = useState({});
   const [search, setSearch] = useState("");
-  const [res, setRes] = useState([]);
+  const [res, setRes] = useState({});
 
   const config = {
-    headers :{
-      'content-type': 'application/json',
-      'x-access-token': token
-    }
-  }
+    headers: {
+      "content-type": "application/json",
+      "x-access-token": token,
+    },
+  };
 
   useEffect(() => {
     axios
       .get("http://localhost:3000/allSales", config)
-      .then((res) => {setSales(res.data.allSales)
-      setTotal(res.data.salesAmount)})
+      .then((res) => {
+        setSales(res.data.allSales);
+        setTotal(res.data.salesAmount);
+      })
       .catch((err) => console.log(err));
   }, []);
 
-  useEffect(() => {
-    if (search == "") {
-      setRes([]);
-    }
-  }, [search]);
 
-  if (res.length > 0) {
+  
+  if (res.filterSales) {
     return (
       <>
         <Navbar />
@@ -54,24 +52,33 @@ export const Summary = () => {
             </tr>
           </thead>
           <tbody className="table-group-divider">
-            {res.map((value, index) => {
-              return (
-                <tr key={index}>
-                  <td> {value.serialNumber}</td>
-                  <td> {value.date}</td>
-                  <td> {value.totalAmount}</td>
-                </tr>
-              );
-            })}
+            {res.filterSales.length === 0 ? (
+              <tr>
+                <td colSpan="3">
+                  No se encuentran coincidencias con la fecha solicitada
+                </td>
+              </tr>
+            ) : (
+              res.filterSales.map((value, index) => {
+                return (
+                  <tr key={index}>
+                    <td> {value.serialNumber}</td>
+                    <td> {value.date}</td>
+                    <td> {value.totalAmount}</td>
+                  </tr>
+                );
+              })
+            )}
           </tbody>
         </table>
         <div id="monto">
-          <h2>Monto de ventas: {total}</h2>
+          <h4>Monto de ventas: {res.amount}</h4>
         </div>
         <Footer />
       </>
     );
-  } else if (sales.length > 0) {
+  }
+  if (sales.length > 0) {
     return (
       <>
         <Navbar />
@@ -82,9 +89,11 @@ export const Summary = () => {
         </SearchContext.Provider>
         <table id="tableSales" className="table">
           <thead>
-            <th>Numero de serie</th>
-            <th>Fecha</th>
-            <th>Monto total</th>
+            <tr>
+              <th>Numero de serie</th>
+              <th>Fecha</th>
+              <th>Monto total</th>
+            </tr>
           </thead>
           <tbody className="table-group-divider">
             {sales.map((value, index) => {
@@ -99,12 +108,13 @@ export const Summary = () => {
           </tbody>
         </table>
         <div id="monto">
-          <h2>Monto de ventas: {total}</h2>
+          <h4>Monto de ventas: {total}</h4>
         </div>
         <Footer />
       </>
     );
   }
+
   return (
     <>
       <Navbar />

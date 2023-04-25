@@ -52,7 +52,9 @@ ctrlProducts.getProductById = async (req, res) => {
     const product = await Product.find({category:req.params.filter });
 
     res.status(200).json(product);
+    console.log(product)
   } catch (error) {
+    res.json(error)
     console.log(error);
   }
 };

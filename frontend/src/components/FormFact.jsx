@@ -36,6 +36,11 @@ export const FormFact = () => {
     setCart((items) => [...items, product]);
   };
 
+
+  useEffect(()=>{
+    console.log(products)
+  }, [products])
+
   useEffect(() => {
     setDet(
       cart.reduce((products, product) => {
@@ -104,7 +109,7 @@ export const FormFact = () => {
         <br />
         <div className="list-group">
           <b>Elige el producto a vender:</b>
-          {products.length< 0
+          {products
             ? products.map((value, index) => {
                 return (
                   <li
