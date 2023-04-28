@@ -23,8 +23,6 @@ export const Searcher = () => {
   };
 
   const handleSelect = (event) => {
-    console.log(event.target.name);
-    console.log(event.target.value);
     setSelect({
       ...select,
       [event.target.name]: event.target.value,
@@ -57,15 +55,12 @@ export const Searcher = () => {
   return (
     <>
       <nav className="navbar">
-        <div className="container-fluid d-flex">
+        <div className="container-fluid d-flex flex-row-reverse">
           <form className="d-flex" role="search">
-
-            <label>Mostrar ventas del año: </label>
             <select name="year" style={{ border: 0 }} onChange={handleSelect}>
               {renderSelects("Years")}
             </select>
 
-            <label> del mes: </label>
             <select name="month" style={{ border: 0 }} onChange={handleSelect}>
               {renderSelects("Months")}
             </select>

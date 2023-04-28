@@ -7,6 +7,7 @@ import { Searcher } from "../components/layout/Searcher";
 import { SearchContext } from "../context/SearchContext";
 import { useContext } from "react";
 import { ContextAuth } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 export const Summary = () => {
   const { token } = useContext(ContextAuth);
@@ -26,14 +27,16 @@ export const Summary = () => {
     axios
       .get("http://localhost:3000/allSales", config)
       .then((res) => {
-        setSales(res.data.allSales);
-        setTotal(res.data.salesAmount);
+        if (res.data.allSales) {
+          setSales(res.data.allSales);
+          setTotal(res.data.salesAmount);
+        }
       })
       .catch((err) => console.log(err));
   }, []);
 
+  const clear = () => setRes({});
 
-  
   if (res.filterSales) {
     return (
       <>
@@ -43,6 +46,9 @@ export const Summary = () => {
         >
           <Searcher />
         </SearchContext.Provider>
+        <div>
+          <Link style={{textDecoration: 'none', color: "#2f3559"}} onClick={clear}>Ver todas las ventas</Link>
+        </div>
         <table id="tableSales" className="table">
           <thead>
             <tr>
@@ -74,11 +80,9 @@ export const Summary = () => {
         <div id="monto">
           <h4>Monto de ventas: {res.amount}</h4>
         </div>
-        <Footer />
       </>
     );
-  }
-  if (sales.length > 0) {
+  } else if (sales.length > 0) {
     return (
       <>
         <Navbar />
@@ -87,6 +91,9 @@ export const Summary = () => {
         >
           <Searcher />
         </SearchContext.Provider>
+        <div>
+          <Link style={{textDecoration: 'none', color: "#2f3559", margin: 15}} onClick={clear}>Ver todas las ventas</Link>
+        </div>
         <table id="tableSales" className="table">
           <thead>
             <tr>
@@ -110,7 +117,6 @@ export const Summary = () => {
         <div id="monto">
           <h4>Monto de ventas: {total}</h4>
         </div>
-        <Footer />
       </>
     );
   }
@@ -119,7 +125,6 @@ export const Summary = () => {
     <>
       <Navbar />
       <Message />
-      <Footer />
     </>
   );
 };
