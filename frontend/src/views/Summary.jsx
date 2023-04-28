@@ -15,6 +15,7 @@ export const Summary = () => {
   const [total, setTotal] = useState({});
   const [search, setSearch] = useState("");
   const [res, setRes] = useState({});
+  const [mySales, setMySales] = useState([]);
 
   const config = {
     headers: {
@@ -35,7 +36,25 @@ export const Summary = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const clear = () => setRes({});
+  const clear = () => {
+    setRes({});
+    setMySales([]);
+  };
+
+  const getMySales = () => {
+    axios
+      .get("http://localhost:3000/sales", config)
+      .then((res) => {
+        if (res.data.filterSales) {
+          setMySales(res.data.filterSales);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    console.log(mySales);
+  }, [mySales]);
 
   if (res.filterSales) {
     return (
@@ -47,7 +66,18 @@ export const Summary = () => {
           <Searcher />
         </SearchContext.Provider>
         <div>
-          <Link style={{textDecoration: 'none', color: "#2f3559"}} onClick={clear}>Ver todas las ventas</Link>
+          <Link
+            style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
+            onClick={clear}
+          >
+            Ver todas las ventas
+          </Link>
+          <Link
+            style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
+            onClick={getMySales}
+          >
+            Ver mis ventas
+          </Link>
         </div>
         <table id="tableSales" className="table">
           <thead>
@@ -92,7 +122,18 @@ export const Summary = () => {
           <Searcher />
         </SearchContext.Provider>
         <div>
-          <Link style={{textDecoration: 'none', color: "#2f3559", margin: 15}} onClick={clear}>Ver todas las ventas</Link>
+          <Link
+            style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
+            onClick={clear}
+          >
+            Ver todas las ventas
+          </Link>
+          <Link
+            style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
+            onClick={getMySales}
+          >
+            Ver mis ventas
+          </Link>
         </div>
         <table id="tableSales" className="table">
           <thead>
@@ -103,15 +144,25 @@ export const Summary = () => {
             </tr>
           </thead>
           <tbody className="table-group-divider">
-            {sales.map((value, index) => {
-              return (
-                <tr key={index}>
-                  <td> {value.serialNumber}</td>
-                  <td> {value.date}</td>
-                  <td> {value.totalAmount}</td>
-                </tr>
-              );
-            })}
+            {mySales.length > 0
+              ? mySales.map((value, index) => {
+                  return (
+                    <tr key={index}>
+                      <td> {value.serialNumber}</td>
+                      <td> {value.date}</td>
+                      <td> {value.totalAmount}</td>
+                    </tr>
+                  );
+                })
+              : sales.map((value, index) => {
+                  return (
+                    <tr key={index}>
+                      <td> {value.serialNumber}</td>
+                      <td> {value.date}</td>
+                      <td> {value.totalAmount}</td>
+                    </tr>
+                  );
+                })}
           </tbody>
         </table>
         <div id="monto">
