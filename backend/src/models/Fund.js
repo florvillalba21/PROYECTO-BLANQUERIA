@@ -5,11 +5,11 @@ const FundsSchema = new Schema({
         ref:"User",
         type:Schema.Types.ObjectId
     },
-    mount:{
+    amount:{
         type:Number
     },
     date:{
-        type:Date
+        type:String
     }
 },{
     timestamps:true,

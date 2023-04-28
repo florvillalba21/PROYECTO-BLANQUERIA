@@ -52,6 +52,7 @@ export const Home = () => {
           tittle={"Retiro de fondos"}
           description={"¿Quieres retirar dinero del local? Registralo aqui para tenerlo en cuenta en el resumen mensual."}
           action={"Ir"}
+          url={'withdrawals/'}
         />
       </div>
       <Footer />

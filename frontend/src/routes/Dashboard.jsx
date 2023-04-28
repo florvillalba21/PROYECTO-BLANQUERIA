@@ -7,6 +7,7 @@ import { Inventory } from "../views/Inventory";
 import { Products } from "../views/Products";
 import { Sell } from "../views/Sell";
 import { Summary } from "../views/Summary";
+import { Withdrawals } from "../views/Withdrawals";
 
 
 export const Dashboard = () => {
@@ -17,6 +18,7 @@ export const Dashboard = () => {
         <Route path="home/inventory" element={<Inventory />} />
         <Route path="home/sell" element={<Sell />} />
         <Route path="home/summary" element={<Summary />} />
+        <Route path="home/withdrawals" element={<Withdrawals/>} />
         <Route path="home/addProducto" element={<AddProducts />} />
         <Route path="home/addCategory" element={<AddCategory/>} />
         <Route path="home/inventory/Products/:filter" element={<Products/>}/>
