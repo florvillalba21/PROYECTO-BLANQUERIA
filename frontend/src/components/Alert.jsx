@@ -14,7 +14,7 @@ function Alert(props) {
 
   return (
     showAlert && (
-      <div className={`${props.type}`}>
+      <div className={`${props.type}`} role="alert">
         <span className="close-btn" onClick={handleClick}>
           ×
         </span>

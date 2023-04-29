@@ -149,3 +149,8 @@ footer{
   width: 100%;
   height: 40px;
 }
+
+#card-fund{
+  margin: 80px;
+  color:#2f3559;
+}

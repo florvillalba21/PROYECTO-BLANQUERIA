@@ -1,9 +1,12 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ContextAuth } from "../context/AuthContext";
+import Alert from "./Alert";
 
 export const FormCard = () => {
   const { token } = useContext(ContextAuth);
+  const [showAlert, setShowAlert] = useState(false);
+  const [res, setRes] = useState({});
   const [data, setData] = useState({
     amount: null,
     date: new Date().toLocaleDateString("es-es", {
@@ -27,28 +30,61 @@ export const FormCard = () => {
   };
 
   const sendForm = () => {
-    axios.post("http://localhost:3000/sendFund", data, config)
-    .then(res =>console.log(res.data))
+    axios.post("http://localhost:3000/sendFund", data, config).then((res) => {
+      if (res.data) {
+        setRes(res.data.ok);
+        setShowAlert(true);
+      }
+    });
   };
+
   return (
     <div className="row justify-content-md-center">
-      <div className="card col-md-auto">
-        <div className="card-header">Retiro de dinero</div>
-        <div className="card-body" style={{ height: "10rem" }}>
+      <div className="card col-md-auto" id="card-fund">
+        <div className="card-header" style={{backgroundColor: '#ebe7e0', textAlign: 'center'}}>
+            <h5>Retiro de fondos</h5>
+        </div>
+        <div className="card-body" style={{ height: "14rem" }}>
           <p className="card-text">
             Escribe el monto que has de retirar para registrarlo y tenerlo en
             cuenta en el resumen mensual.
           </p>
           <div>
             <form>
-              <div>
-                <input type="number" name="amount" id="" onChange={handleInput}/>
+              <div className="input-group mb-3">
+                <span className="input-group-text" style={{backgroundColor: '#ebe7e0'}}>$</span>
+                <input
+                  type="number"
+                  className="form-control"
+                  aria-label="Amount (to the nearest dollar)"
+                />
+                <span className="input-group-text" style={{backgroundColor: '#ebe7e0'}}>.00</span>
               </div>
+
             </form>
-            <button id="btn" onClick={sendForm}>
-              Registrar retiro
-            </button>
+            <div id="divbtn">
+              <button id="btn" onClick={sendForm}>
+                Registrar retiro
+              </button>
+            </div>
+
+            <br />
           </div>
+        </div>
+        <div>
+          {showAlert && res === true ? (
+            <Alert
+              showAlert={showAlert}
+              type={"alert alert-success"}
+              message={"Se ha registrado correctamente"}
+            />
+          ) : (
+            <Alert
+              showAlert={showAlert}
+              type={"alert alert-danger"}
+              message={"Ha ocurrido un error. Verifique los campos."}
+            />
+          )}
         </div>
       </div>
     </div>

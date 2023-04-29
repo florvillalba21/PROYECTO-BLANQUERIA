@@ -9,25 +9,25 @@ ctrlFunds.newFund = async (req, res) => {
   // const username = await Fund.findOne({user}).populate("user")
 
   // console.log(username)
-
-  const newFund = new Fund({
-    user,
-    amount,
-    date,
-  });
-
-  try {
-    const fundSaved = await newFund.save();
-
-    res.status(201).json({
-      ok: true,
-      fundSaved,
+  if (amount!= null && date) {
+    const newFund = new Fund({
+      user,
+      amount,
+      date,
     });
-  } catch (error) {
-    console.log(error);
+    try {
+      const fundSaved = await newFund.save();
+
+      res.status(201).json({
+        ok: true,
+        fundSaved,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  } else {
     res.json({
       ok: false,
-      error,
     });
   }
 };
