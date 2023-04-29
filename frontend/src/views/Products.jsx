@@ -19,7 +19,7 @@ export const Products = () => {
     axios
       .get(url)
       .then((res) => {
-        setProducts(res.data);
+        setProducts(res.data)
       })
       .catch((err) => {
         console.log(err);
