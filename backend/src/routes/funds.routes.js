@@ -4,7 +4,7 @@ const {newFund, getFunds, getFundsForUserId} = require("../controllers/funds.con
 const verifyToken = require('../middlewares/authjwt')
 
 router.post("/sendFund",verifyToken, newFund)
-router.post("/Fund",verifyToken, getFunds)
-router.post("/Fund",verifyToken, getFundsForUserId)
+router.get("/getTotalFund",verifyToken, getFunds)
+router.get("/getFundUser",verifyToken, getFundsForUserId)
 
 module.exports = router
