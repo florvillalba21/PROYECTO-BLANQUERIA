@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
 import { ContextAuth } from "../context/AuthContext";
+import Alert from "./Alert";
 
 export const FormFact = () => {
+  const [showAlert, setShowAlert] = useState(false);
+  const [res, setRes] = useState({});
   const [categories, setCategories] = useState([]);
   const [filter, setFilter] = useState();
   const [products, setProducts] = useState([]);
@@ -36,10 +39,9 @@ export const FormFact = () => {
     setCart((items) => [...items, product]);
   };
 
-
-  useEffect(()=>{
-    console.log(products)
-  }, [products])
+  useEffect(() => {
+    console.log(products);
+  }, [products]);
 
   useEffect(() => {
     setDet(
@@ -58,7 +60,7 @@ export const FormFact = () => {
 
   useEffect(() => {
     detCart.map((value) => {
-      console.log(detCart)
+      console.log(detCart);
       setAmount(amount + value.sellPrice);
     });
   }, [detCart]);
@@ -71,7 +73,9 @@ export const FormFact = () => {
         "x-access-token": token,
       },
     };
-    const data = {
+
+
+   const data = {
       products: detCart,
       details: inpDetails.current.value,
       date: new Date().toLocaleDateString("es-es", {
@@ -83,10 +87,19 @@ export const FormFact = () => {
       paymentMethod: selectMethod.current.value,
       totalAmount: amount,
     };
+
     axios
       .post(url, data, config)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        if (res.data) {
+          console.log(res.data)
+          setRes(res.data.ok);
+          setShowAlert(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   };
   return (
     <div className="row" style={{ margin: "20px", color: "#2f3559" }}>
@@ -168,7 +181,24 @@ export const FormFact = () => {
             </button>
           </div>
         </div>
+        <br />
+        <div>
+          {showAlert && res === true ? (
+            <Alert
+              showAlert={showAlert}
+              type={"alert alert-success"}
+              message={"Se ha registrado correctamente"}
+            />
+          ) : (
+            <Alert
+              showAlert={showAlert}
+              type={"alert alert-danger"}
+              message={"Ha ocurrido un error. Verifique los campos."}
+            />
+          )}
+        </div>
       </div>
+
       <div className="col border" id="fact">
         <div className="row">
           <b>Detalles de la venta:</b>

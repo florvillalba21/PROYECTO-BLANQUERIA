@@ -1,5 +1,5 @@
 const Sale = require("../models/Sale");
-const Product = require("../models/Product")
+const Product = require("../models/Product");
 
 //se inicializa un objeto vacio para luego agregar sus metodos
 ctrlSales = {};
@@ -8,47 +8,55 @@ ctrlSales = {};
 ctrlSales.newSale = async (req, res) => {
   const { products, details, date, paymentMethod, totalAmount } = req.body;
 
-  const updateQuantity = async (productId, quant) => {
-    try {
-      const product = await Product.findById(productId); // Busca el producto por su ID
-      product.stock= product.stock - quant; // Actualiza la cantidad del producto
-      await product.save(); // Guarda el producto actualizado en la base de datos
-      console.log(
-        `La cantidad de ${product.name} se actualizó a ${product.quantity}.`
-      );
-    } catch (error) {
-      console.error(error);
+  if (products.length > 0) {
+    const updateQuantity = async (productId, quant) => {
+      try {
+        const product = await Product.findById(productId); // Busca el producto por su ID
+        product.stock = product.stock - quant; // Actualiza la cantidad del producto
+        await product.save(); // Guarda el producto actualizado en la base de datos
+        console.log(
+          `La cantidad de ${product.name} se actualizó a ${product.quantity}.`
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    for (let i = 0; i < products.length; i++) {
+      let prodId = products[i]._id;
+      let quant = products[i].quantity;
+      await updateQuantity(prodId, quant);
     }
-  };
 
-  for (let i = 0; i < products.length; i++) {
-    let prodId = products[i]._id;
-    let quant = products[i].quantity;
-    await updateQuantity(prodId, quant)
-  }
+    const userVenta = req.user._id;
 
-  const userVenta = req.user._id;
+    const serial = await Sale.find();
 
-  const serial = await Sale.find();
+    const serialNumber = serial.length.toString();
 
-  const serialNumber = serial.length.toString();
+    const newSale = new Sale({
+      serialNumber,
+      products,
+      details,
+      date,
+      paymentMethod,
+      totalAmount,
+      userVenta,
+    });
 
-  const newSale = new Sale({
-    serialNumber,
-    products,
-    details,
-    date,
-    paymentMethod,
-    totalAmount,
-    userVenta,
-  });
+    try {
+      const saleSaved = await newSale.save();
 
-  try {
-    const saleSaved = await newSale.save();
-
-    res.status(201).json(saleSaved);
-  } catch (error) {
-    console.log(error);
+      res.status(201).json({
+        ok: true,
+        saleSaved,
+      });
+    } catch (error) {
+      console.log(error);
+      res.json({ ok: false });
+    }
+  } else{
+    return res.json({ ok: false });
   }
 };
 
@@ -64,37 +72,37 @@ ctrlSales.getSalesForUserId = async (req, res) => {
 };
 
 ctrlSales.getSalesForDate = async (req, res) => {
-  const { month, year } = req.query
+  const { month, year } = req.query;
 
   const regex = new RegExp(`\\b${month}\\b.*\\b${year}\\b`, "i");
 
   // Hacer la consulta con Mongoose
 
- // Hacer la consulta con Mongoose
-Sale.find({ date: { $regex: regex } })
+  // Hacer la consulta con Mongoose
+  Sale.find({ date: { $regex: regex } })
 
-  .then((resultados) => {
-    if(resultados.length > 0){
-      const totalAmount = resultados.reduce((total, sale) => total + sale.totalAmount, 0)
+    .then((resultados) => {
+      if (resultados.length > 0) {
+        const totalAmount = resultados.reduce(
+          (total, sale) => total + sale.totalAmount,
+          0
+        );
 
-      res.json({
-        ok: true,
-        filterSales:resultados,
-        amount:totalAmount
-      })
-    }
-    else{
-      res.json({
-        ok: false,
-        msg: "No hay archivos con esa fecha"})
-    }
-    
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-
-    
+        res.json({
+          ok: true,
+          filterSales: resultados,
+          amount: totalAmount,
+        });
+      } else {
+        res.json({
+          ok: false,
+          msg: "No hay archivos con esa fecha",
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 // //Funcion para obtener la lista de todos los productos guardados

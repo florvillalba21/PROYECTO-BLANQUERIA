@@ -1,43 +1,51 @@
 const Product = require("../models/Product");
-const path = require('path')
-const cloudinary = require('cloudinary')
+const path = require("path");
+const cloudinary = require("cloudinary");
 
 //Objeto que contendra cada funcion
 ctrlProducts = {};
 
 //configuracion del cloudinary
 cloudinary.config({
-  cloud_name:'dhkfu9w3i',
-  api_key:'219851515994576',
-  api_secret:'F8ciqQEd-u9C4bqQJqhI4ztomPg'
-})
+  cloud_name: "dhkfu9w3i",
+  api_key: "219851515994576",
+  api_secret: "F8ciqQEd-u9C4bqQJqhI4ztomPg",
+});
 
-const fs = require('fs-extra')
+const fs = require("fs-extra");
 //Funcion post para crear un nuevo producto y guardarlo en la bd
 
-
-
-
-ctrlProducts.createProduct =  async (req, res) => {
-  
-
+ctrlProducts.createProduct = async (req, res) => {
   const { name, category, costPrice, sellPrice, stock } = req.body;
 
+  if ((name, category, costPrice, sellPrice, stock)) {
+    const result = await cloudinary.v2.uploader.upload(req.file.path);
 
-  const result = await cloudinary.v2.uploader.upload(req.file.path)
+    imgURL = result.url;
 
-  imgURL = result.url 
+    const newProduct = new Product({
+      name,
+      category,
+      costPrice,
+      sellPrice,
+      stock,
+      imgURL,
+    });
 
-  const newProduct = new Product({ name, category, costPrice, sellPrice, stock, imgURL });
+    try {
+      const productSaved = await newProduct.save();
 
-  const productSaved = await newProduct.save();
+      //borra el archivo ya que ha sido subido a la nube
+      await fs.unlink(req.file.path);
 
-    //borra el archivo ya que ha sido subido a la nube
-  await fs.unlink(req.file.path)
-
-  res.status(201).json(productSaved);
-}
-
+      res.status(201).json({ ok: true, productSaved });
+    } catch (error) {
+      console.log(error);
+    }
+  } else {
+    return res.json({ ok: false });
+  }
+};
 
 //Funcion para obtener la lista de todos los productos guardados
 ctrlProducts.getProducts = async (req, res) => {
@@ -49,12 +57,12 @@ ctrlProducts.getProducts = async (req, res) => {
 //Funcion para obtener un producto en base al id
 ctrlProducts.getProductById = async (req, res) => {
   try {
-    const product = await Product.find({category:req.params.filter });
+    const product = await Product.find({ category: req.params.filter });
 
     res.status(200).json(product);
-    console.log(product)
+    console.log(product);
   } catch (error) {
-    res.json(error)
+    res.json(error);
     console.log(error);
   }
 };

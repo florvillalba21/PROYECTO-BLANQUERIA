@@ -3,16 +3,19 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Footer } from "../components/layout/Footer";
 import { Navbar } from "../components/layout/Navbar";
 import { ContextAuth } from "../context/AuthContext";
+import Alert from "../components/Alert";
 
 export const AddProducts = () => {
   const [data, setData] = useState([]);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState([]);
   const { token } = useContext(ContextAuth);
   const inpName = useRef();
   const selectCategory = useRef();
   const inpCostPrice = useRef();
   const inpSellPrice = useRef();
   const inpStock = useRef();
+  const [showAlert, setShowAlert] = useState(false);
+  const [res, setRes] = useState({});
 
   const upload = async (e) => {
     e.preventDefault();
@@ -34,17 +37,20 @@ export const AddProducts = () => {
     formData.append("costPrice", inpCostPrice.current.value);
     formData.append("sellPrice", inpSellPrice.current.value);
     formData.append("stock", inpStock.current.value);
-    formData.append("image", image[0]);
-
-    try {
-      const res = await axios.post(url, formData, config);
-      console.log(res)
-
-    } catch (error) {
-      console.log(error)
+    if (image.length > 0) {
+      formData.append("image", image[0]);
     }
 
-    
+    axios
+      .post(url, formData, config)
+      .then((res) => {
+        if (res.data) {
+          console.log(res.data);
+          setRes(res.data.ok);
+          setShowAlert(true);
+        }
+      })
+      .catch((error) => console.log(error));
   };
 
   //realizamos una peticion solicitando todas las catregorias para el select
@@ -82,7 +88,6 @@ export const AddProducts = () => {
               className="form-select"
               aria-label="Default select example"
             >
-           
               {data.map((value, index) => {
                 return (
                   <option key={index} value={value.name}>
@@ -132,7 +137,22 @@ export const AddProducts = () => {
             </button>
           </div>
         </form>
-        
+        <br />
+        <div>
+          {showAlert && res === true ? (
+            <Alert
+              showAlert={showAlert}
+              type={"alert alert-success"}
+              message={"Se ha registrado correctamente"}
+            />
+          ) : (
+            <Alert
+              showAlert={showAlert}
+              type={"alert alert-danger"}
+              message={"Ha ocurrido un error. Verifique los campos."}
+            />
+          )}
+        </div>
       </div>
       <div>
         <Footer />
