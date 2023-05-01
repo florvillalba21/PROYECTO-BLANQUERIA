@@ -29,13 +29,16 @@ export const FormCard = () => {
     });
   };
 
+ 
   const sendForm = () => {
-    axios.post("http://localhost:3000/sendFund", data, config).then((res) => {
+    axios.post("http://localhost:3000/sendFund", data, config).
+    then((res) => {
       if (res.data) {
         setRes(res.data.ok);
         setShowAlert(true);
       }
-    });
+    })
+    .catch(err => console.log(err))
   };
 
   return (
@@ -54,9 +57,11 @@ export const FormCard = () => {
               <div className="input-group mb-3">
                 <span className="input-group-text" style={{backgroundColor: '#ebe7e0'}}>$</span>
                 <input
+                name="amount"
                   type="number"
                   className="form-control"
                   aria-label="Amount (to the nearest dollar)"
+                  onChange={handleInput}
                 />
                 <span className="input-group-text" style={{backgroundColor: '#ebe7e0'}}>.00</span>
               </div>

@@ -9,6 +9,7 @@ ctrlFunds.newFund = async (req, res) => {
   // const username = await Fund.findOne({user}).populate("user")
 
   // console.log(username)
+  console.log(amount)
   if (amount!= null && date) {
     const newFund = new Fund({
       user,
