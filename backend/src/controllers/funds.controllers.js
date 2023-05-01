@@ -34,11 +34,13 @@ ctrlFunds.newFund = async (req, res) => {
 
 ctrlFunds.getFundsForUserId = async (req, res) => {
   const user = req.user._id; //toma el id del usuario ingresado
-
+  //busca los fondos del user
   const filterFunds = await Fund.find({ user });
 
   Fund.aggregate([
+    // filtra los documentos de fondo que tienen el id de usuario que se ingresó. 
     {
+      //matchea el id
       $match: { user: user }
     },
     {
