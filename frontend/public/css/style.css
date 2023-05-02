@@ -76,6 +76,8 @@ div#cardHome.card-body {
   text-decoration: none;
   background-color: #cea9ca;
   border: 0;
+  height: 2.4em;
+  border-radius: 5px;
 }
 #body {
   margin: 0;

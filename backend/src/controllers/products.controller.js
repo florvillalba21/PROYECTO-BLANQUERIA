@@ -55,9 +55,21 @@ ctrlProducts.getProducts = async (req, res) => {
 };
 
 //Funcion para obtener un producto en base al id
-ctrlProducts.getProductById = async (req, res) => {
+ctrlProducts.getProductByFilter = async (req, res) => {
   try {
     const product = await Product.find({ category: req.params.filter });
+
+    res.status(200).json(product);
+    console.log(product);
+  } catch (error) {
+    res.json(error);
+    console.log(error);
+  }
+};
+
+ctrlProducts.getProductById = async (req, res) => {
+  try {
+    const product = await Product.find({ _id: req.params.id });
 
     res.status(200).json(product);
     console.log(product);
@@ -71,18 +83,32 @@ ctrlProducts.getProductById = async (req, res) => {
 ctrlProducts.updateProductById = async (req, res) => {
   /*FindUpdate recibe el id, lo que se va a reemplazar del producto en este caso req.body 
   y new:true para que devuelva el producto nuevo y no el que se borra*/
-  const updatedProduct = await Product.findByIdAndUpdate(
-    req.params.productId,
-    req.body,
-    { new: true }
-  );
-  res.status(200).json(updatedProduct);
+
+  if (req.body) {
+    try {
+      const updatedProduct = await Product.findByIdAndUpdate(
+        req.params.productId,
+        req.body,
+        { new: true }
+      );
+      res.status(200).json({ ok: true, updatedProduct });
+    } catch (error) {
+      console.log(error);
+    }
+  } else {
+    return res.json({ ok: false });
+  }
 };
 
 //Funcion para borrar un elemento en base al id
 ctrlProducts.deleteProductById = async (req, res) => {
-  const deleteProduct = await Product.findByIdAndDelete(req.params.productId);
-  res.status(200).json(deleteProduct);
+  try {
+    const deleteProduct = await Product.findByIdAndDelete(req.params.productId);
+    res.status(200).json({ ok: true, deleteProduct });
+  } catch (error) {
+    res.json({ ok: false });
+    console.log(error);
+  }
 };
 
 module.exports = ctrlProducts;

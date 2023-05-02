@@ -15,21 +15,24 @@ const {
   getProductById,
   updateProductById,
   deleteProductById,
+  getProductByFilter,
 } = require("../controllers/products.controller");
 
 
 //Rutas de los productos
 router.get("/Products", getProducts);
 
-router.get("/ProductsF/:filter", getProductById);
+router.get("/ProductsF/:filter", getProductByFilter);
+
+router.get("/getProduct/:id",verifyToken,isAdmin, getProductById);
 
 
 router.post("/Products",verifyToken,isAdmin, createProduct);
 
 
-router.put("/Products/:productId",verifyToken,isAdmin, updateProductById);
+router.put("/updateProduct/:productId",verifyToken,isAdmin, updateProductById);
 
-router.delete("/Products/:productId",verifyToken,isAdmin, deleteProductById);
+router.delete("/deleteProduct/:productId",verifyToken,isAdmin, deleteProductById);
 
 
 module.exports = router;
