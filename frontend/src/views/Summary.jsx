@@ -16,6 +16,7 @@ export const Summary = () => {
   const [search, setSearch] = useState("");
   const [res, setRes] = useState({});
   const [mySales, setMySales] = useState([]);
+ 
 
   const config = {
     headers: {
@@ -52,9 +53,7 @@ export const Summary = () => {
       .catch((err) => console.log(err));
   };
 
-  useEffect(() => {
-    console.log(mySales);
-  }, [mySales]);
+  
 
   if (res.filterSales) {
     return (
@@ -77,6 +76,12 @@ export const Summary = () => {
             onClick={getMySales}
           >
             Ver mis ventas
+          </Link>
+          <Link
+            style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
+            to='funds/'
+          >
+            Ver retiros de fondos
           </Link>
         </div>
         <table id="tableSales" className="table">
@@ -133,6 +138,12 @@ export const Summary = () => {
             onClick={getMySales}
           >
             Ver mis ventas
+          </Link>
+          <Link
+            style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
+            to='funds/'
+          >
+            Ver retiros de fondos
           </Link>
         </div>
         <table id="tableSales" className="table">

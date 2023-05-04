@@ -74,8 +74,7 @@ export const FormFact = () => {
       },
     };
 
-
-   const data = {
+    const data = {
       products: detCart,
       details: inpDetails.current.value,
       date: new Date().toLocaleDateString("es-es", {
@@ -92,15 +91,16 @@ export const FormFact = () => {
       .post(url, data, config)
       .then((res) => {
         if (res.data) {
-          console.log(res.data)
+          console.log(res.data);
           setRes(res.data.ok);
           setShowAlert(true);
         }
       })
       .catch((err) => {
-        console.log(err)
-      })
+        console.log(err);
+      });
   };
+
   return (
     <div className="row" style={{ margin: "20px", color: "#2f3559" }}>
       <div className="col">
@@ -153,6 +153,7 @@ export const FormFact = () => {
         <div className="row">
           <div className="col">
             <b>Monto total:</b>
+            
             <input
               type="number"
               disabled
@@ -201,31 +202,56 @@ export const FormFact = () => {
 
       <div className="col border" id="fact">
         <div className="row">
-          <b>Detalles de la venta:</b>
+          <i className="d-flex flex-row" style={{margin: "10px"}}>
+            <img src="../../public/icons/shopping-cart.svg"></img>
+          </i>
+          
           <table>
             <thead>
               <tr>
-                <th className="col">Producto</th>
+                <th className="col">Productos</th>
                 <th className="col">Cantidad</th>
                 <th className="col">Presupuesto</th>
               </tr>
             </thead>
             <tbody>
-              {detCart.map((value, index) => {
-                return (
-                  <tr key={index}>
-                    <td>
-                      <p>{value.name}</p>
-                    </td>
-                    <td>
-                      <p>{value.quantity}</p>
-                    </td>
-                    <td>
-                      <p>{value.quantity * value.sellPrice}</p>
-                    </td>
-                  </tr>
-                );
-              })}
+              {detCart &&
+                detCart.map((value, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>
+                        <p>{value.name}</p>
+                      </td>
+                      <td>
+                        <p>{value.quantity}</p>
+                      </td>
+                      <td>
+                        <p>{value.quantity * value.sellPrice}</p>
+                      </td>
+                      <td>
+                        <i
+                          onClick={() => {
+                            let nuevoDetCart = detCart.map((objeto) => {
+                              if (objeto._id === value._id) {
+                                objeto.quantity -= 1;
+                              }
+                              return objeto;
+                            });
+
+                            // Eliminar el producto si la cantidad llega a cero
+                            nuevoDetCart = nuevoDetCart.filter(
+                              (objeto) => objeto.quantity > 0
+                            );
+
+                            setDet(nuevoDetCart);
+                          }}
+                        >
+                          <img src="../../public/icons/minus.svg"></img>
+                        </i>
+                      </td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>

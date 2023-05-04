@@ -1,12 +1,5 @@
-/* estilos para el login */
-html {
-  min-height: 100%;
-  position: relative;
-}
-body {
-  margin: 0;
-  margin-bottom: 40px;
-}
+
+
 div.login {
   background-color: #dceff0;
   text-align: center;
@@ -32,7 +25,6 @@ div.login {
   margin-left: 70px;
   text-decoration-color: #55889e;
   width: 75%;
-  
 }
 
 #btnLogin {
@@ -85,24 +77,19 @@ div#cardHome.card-body {
 
 /* estilos para las card de inventario */
 div#cardInventory {
-
   color: #2f3559;
   padding: 10px;
   margin-top: 100px;
 }
 
-
-
-.card-body{
+.card-body {
   height: 5rem;
 }
-
-
 
 #cardFormProduct {
   width: 40%;
   margin: 0 auto;
-  color:#55889e ;
+  color: #55889e;
   padding: 30px;
   height: 50rem;
 }
@@ -114,45 +101,36 @@ div#cardInventory {
 }
 
 /* card prod */
-.prod{
-  height: 4rem
+.prod {
+  height: 4rem;
 }
 
-.card{
+.card {
   padding: 10px;
 }
 
-table{
+table {
   margin: 10px;
 }
 
-#tableSales{
+#tableSales {
   color: #2f3559;
   margin: 20px;
   width: 90%;
-  border-color:#cea9ca;
- 
-
+  border-color: #cea9ca;
 }
- #tableSales td{
+#tableSales td {
   padding: 1.5em;
 }
 
-footer{
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 40px;
-}
-
-#monto{
+#monto {
   position: absolute;
 
   width: 100%;
   height: 40px;
 }
 
-#card-fund{
+#card-fund {
   margin: 80px;
-  color:#2f3559;
+  color: #2f3559;
 }
