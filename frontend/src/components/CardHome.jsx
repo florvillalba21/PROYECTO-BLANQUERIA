@@ -1,18 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const CardHome = ({ tittle, description, action, url }) => {
+export const CardHome = ({ tittle, description, action, url, img }) => {
   return (
-    <div id="cardHome" className="shadow rounded col-md-auto">
-      <div className="card-body">
-        <h5 className="card-title">{tittle}</h5>
-        <p className="card-text">{description}</p>
-      </div>
-      <div id="divbtn">
+    <>
+      <Link
+        to={url}
+        style={{ textDecoration: "none", margin: 15}}
+        className="shadow col-3"
+      >
+        <div id="cardHome">
+          <div className="card-body row justify-content-md-center">
+            <div>
+              <h5 className="card-title">{tittle}</h5>
+            </div>
+
+            <div>
+              <img src={img} />
+            </div>
+  
+            <div>
+              <p className="card-text">{description}</p>
+            </div>
+          </div>
+          {/* <div id="divbtn">
         <Link id="btn" to={url}>
           {action}
         </Link>
-      </div>
-    </div>
+      </div> */}
+        </div>
+      </Link>
+    </>
   );
 };

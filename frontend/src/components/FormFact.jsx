@@ -11,8 +11,8 @@ export const FormFact = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [detCart, setDet] = useState([]);
-  let [amount, setAmount] = useState(0);
   const { token } = useContext(ContextAuth);
+  let [amount, setAmount] = useState(0);
 
   const inpDetails = useRef();
   const selectMethod = useRef();
@@ -38,10 +38,15 @@ export const FormFact = () => {
   const addToCart = (product) => {
     setCart((items) => [...items, product]);
   };
+  
 
   useEffect(() => {
-    console.log(products);
-  }, [products]);
+    let aux = 0;
+    detCart.map((value, index) => {
+      return (aux += value.quantity * value.sellPrice);
+    });
+    setAmount(aux);
+  }, [detCart]);
 
   useEffect(() => {
     setDet(
@@ -57,13 +62,6 @@ export const FormFact = () => {
       }, [])
     );
   }, [cart]);
-
-  useEffect(() => {
-    detCart.map((value) => {
-      console.log(detCart);
-      setAmount(amount + value.sellPrice);
-    });
-  }, [detCart]);
 
   const addSell = () => {
     const url = "http://localhost:3000/newSale";
@@ -124,17 +122,19 @@ export const FormFact = () => {
           <b>Elige el producto a vender:</b>
           {products
             ? products.map((value, index) => {
-                return (
-                  <li
-                    key={index}
-                    className="list-group-item list-group-item-action"
-                    onClick={() => {
-                      addToCart(value);
-                    }}
-                  >
-                    {value.name}
-                  </li>
-                );
+                if (value.stock > 0) {
+                  return (
+                    <li
+                      key={index}
+                      className="list-group-item list-group-item-action"
+                      onClick={() => {
+                        addToCart(value);
+                      }}
+                    >
+                      {value.name}                     {value.stock}
+                    </li>
+                  );
+                }
               })
             : ""}
         </div>
@@ -153,7 +153,7 @@ export const FormFact = () => {
         <div className="row">
           <div className="col">
             <b>Monto total:</b>
-            
+
             <input
               type="number"
               disabled
@@ -202,10 +202,10 @@ export const FormFact = () => {
 
       <div className="col border" id="fact">
         <div className="row">
-          <i className="d-flex flex-row" style={{margin: "10px"}}>
+          <i className="d-flex flex-row" style={{ margin: "10px" }}>
             <img src="../../public/icons/shopping-cart.svg"></img>
           </i>
-          
+
           <table>
             <thead>
               <tr>

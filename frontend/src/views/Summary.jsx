@@ -64,24 +64,27 @@ export const Summary = () => {
         >
           <Searcher />
         </SearchContext.Provider>
-        <div>
+        <div className="row justify-content-md-center">
           <Link
             style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
             onClick={clear}
+            className="col-md-auto"
           >
-            Ver todas las ventas
+            <b>Ver todas las ventas</b>
           </Link>
           <Link
             style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
             onClick={getMySales}
+            className="col-md-auto"
           >
-            Ver mis ventas
+            <b>Ver mis ventas</b>
           </Link>
           <Link
             style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
             to='funds/'
+            className="col-md-auto"
           >
-            Ver retiros de fondos
+            <b>Ver retiros realizados</b>
           </Link>
         </div>
         <table id="tableSales" className="table">
@@ -126,24 +129,27 @@ export const Summary = () => {
         >
           <Searcher />
         </SearchContext.Provider>
-        <div>
+        <div className="row justify-content-md-center">
           <Link
             style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
             onClick={clear}
+            className="col-md-auto"
           >
-            Ver todas las ventas
+            <b>Ver todas las ventas</b>
           </Link>
           <Link
             style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
             onClick={getMySales}
+            className="col-md-auto"
           >
-            Ver mis ventas
+            <b>Ver mis ventas</b>
           </Link>
           <Link
             style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
             to='funds/'
+            className="col-md-auto"
           >
-            Ver retiros de fondos
+            <b>Ver retiros realizados</b>
           </Link>
         </div>
         <table id="tableSales" className="table">

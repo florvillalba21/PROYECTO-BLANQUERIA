@@ -2,7 +2,7 @@ import React from "react";
 
 export const Message = () => {
   return (
-    <div className=" row justify-content-md-center">
+    <div className="col-md-auto">
       <h1>No se han encontrado registros.</h1>
     </div>
   );

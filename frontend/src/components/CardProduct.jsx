@@ -32,6 +32,9 @@ export const CardProduct = () => {
                 className=" row justify-content-md-center"
                 style={{ padding: "4px" }}
               >
+                <div>
+                  <p>Stock: {value.stock}</p>
+                </div>
                 <button
                   onClick={() => setIdEdit(value._id)}
                   className="col"

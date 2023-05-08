@@ -16,6 +16,8 @@ export const Home = () => {
           description={"Si tienes que realizar una venta, ingresa aqui."}
           action={"Registrar venta"}
           url={"sell/"}
+          img='../../public/icons/shopping-cart (1).svg'
+  
         />
 
         <CardHome
@@ -23,6 +25,7 @@ export const Home = () => {
           description={"¿Quieres ver tu inventario? Ingresa aquí."}
           action={"Abrir inventario"}
           url={"inventory/"}
+          img='../../public/icons/shopping-bag.svg'
         />
 
         <CardHome
@@ -30,6 +33,7 @@ export const Home = () => {
           description={"Puedes agregar nuevos productos"}
           action={"Ir"}
           url={"addProducto/"}
+          img='../../public/icons/tag.svg'
         />
 
         <CardHome
@@ -39,6 +43,7 @@ export const Home = () => {
           }
           action={"Ir"}
           url={"addCategory/"}
+          img='../../public/icons/filter.svg'
         />
 
         <CardHome
@@ -46,6 +51,7 @@ export const Home = () => {
           description={"Aqui podrás ver las ventas realizadas de este mes."}
           action={"Ir"}
           url={"summary/"}
+          img='../../public/icons/file-text.svg'
         />
 
         <CardHome
@@ -53,6 +59,7 @@ export const Home = () => {
           description={"¿Quieres retirar dinero del local? Registralo aqui para tenerlo en cuenta en el resumen mensual."}
           action={"Ir"}
           url={'withdrawals/'}
+          img='../../public/icons/dollar-sign (1).svg'
         />
       </div>
       <Footer />
