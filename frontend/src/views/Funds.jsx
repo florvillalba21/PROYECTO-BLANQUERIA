@@ -33,7 +33,7 @@ export const Funds = () => {
 
   if (funds) {
     return (
-      <>
+      <div className="main-content">
         <Navbar />
         
         <div>
@@ -63,7 +63,7 @@ export const Funds = () => {
         <div id="monto">
           <h5>Monto total que se ha retirado: {amountFund}</h5>
         </div>
-      </>
+      </div>
     );
   }
 

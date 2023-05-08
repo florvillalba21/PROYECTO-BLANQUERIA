@@ -27,13 +27,13 @@ export const Products = () => {
   }, [filter]);
 
   return (
-    <>
+    <div className="main-content">
       <Navbar />
       <Tab />
       <ProductsContext.Provider value={{products, setProducts}}>
         <CardProduct />
       </ProductsContext.Provider>
       <Footer />
-    </>
+    </div>
   );
 };

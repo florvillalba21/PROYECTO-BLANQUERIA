@@ -9,7 +9,7 @@ export const CardHome = ({ tittle, description, action, url, img }) => {
         style={{ textDecoration: "none", margin: 15}}
         className="shadow col-3"
       >
-        <div id="cardHome">
+        <div className="container" id="cardHome">
           <div className="card-body row justify-content-md-center">
             <div>
               <h5 className="card-title">{tittle}</h5>

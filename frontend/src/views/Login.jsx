@@ -37,7 +37,7 @@ export const Login = () => {
   };
 
   return (
-    <>
+    <div className="main-content">
       <div
         className="container-fluid shadow bg-body rounded login"
         style={{ padding: "10px" }}
@@ -73,6 +73,6 @@ export const Login = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };

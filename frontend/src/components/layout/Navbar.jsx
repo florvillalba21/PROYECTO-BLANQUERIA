@@ -38,7 +38,7 @@ export const Navbar = () => {
           
         </button>
         <div
-          className="offcanvas offcanvas-end"
+          className="offcanvas offcanvas-end" 
           tabIndex="-1"
           id="offcanvasNavbar"
           aria-labelledby="offcanvasNavbarLabel"
@@ -113,9 +113,9 @@ export const Navbar = () => {
                   </li>
                 </ul>
               </li> */}
-              <li>
+              <li className="nav-item">
                 <div>
-                  <Link to="/" onClick={Logout}>
+                  <Link to="/" className="nav-link" onClick={Logout}>
                     Salir
                   </Link>
                 </div>

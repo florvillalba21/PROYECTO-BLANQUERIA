@@ -8,16 +8,11 @@ function Alert(props) {
     setShowAlert(props.showAlert);
   }, [props.showAlert]);
 
-  const handleClick = () => {
-    setShowAlert(false);
-  };
+
 
   return (
     showAlert && (
       <div className={`${props.type}`} role="alert">
-        <span className="close-btn" onClick={handleClick}>
-          ×
-        </span>
         {props.message}
       </div>
     )

@@ -11,7 +11,7 @@ export const CardInventory = () => {
       <div className="row justify-content-md-center">
         {data.map((value, index) => {
           return (
-            <Link className="card col-md-auto" style={{textDecoration:'none', margin: 10}} to={"Products/" + value.name}>
+            <Link className="shadow col-md-auto" style={{textDecoration:'none', margin: 10, padding: 20}} to={"Products/" + value.name}>
               <div
                 key={index}
                 

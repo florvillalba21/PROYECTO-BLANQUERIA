@@ -203,7 +203,7 @@ export const FormFact = () => {
       <div className="col border" id="fact">
         <div className="row">
           <i className="d-flex flex-row" style={{ margin: "10px" }}>
-            <img src="../../public/icons/shopping-cart.svg"></img>
+            <img src="../../public/icons/shopping-cart (1).svg" width={'30px'}/>
           </i>
 
           <table>

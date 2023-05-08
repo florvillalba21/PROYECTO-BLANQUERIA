@@ -44,8 +44,8 @@ export const FormCard = () => {
   return (
     <div className="row justify-content-md-center">
       <div className="card col-md-auto" id="card-fund">
-        <div className="card-header" style={{backgroundColor: '#ebe7e0', textAlign: 'center'}}>
-            <h5>Retiro de fondos</h5>
+        <div className="" style={{textAlign: 'center'}}>
+            <h4>Retiro de fondos</h4>
         </div>
         <div className="card-body" style={{ height: "14rem" }}>
           <p className="card-text">

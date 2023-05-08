@@ -5,6 +5,7 @@ import { Footer } from "../components/layout/Footer";
 import { Navbar } from "../components/layout/Navbar";
 import { ContextAuth } from "../context/AuthContext";
 import Alert from "../components/Alert";
+import { Description } from "../components/Description";
 
 export const AddCategory = () => {
   //instanciamos lasvariables donde almacenaremos los datos del formulario
@@ -52,11 +53,13 @@ export const AddCategory = () => {
   };
 
   return (
-    <>
+    <div className="main-content">
       <Navbar />
-      <div id="cardFormProduct">
+      <Description text={"En esta sección dispones de un formulario para crear una nueva categoría. Las categorías te permiten organizar tu inventario."}/>
+      <br />
+      <div id="cardFormProduct" className="shadow">
         <div id="tittleFormProduct">
-          <h2>Detalla la nueva categoria</h2>
+          <h2>Detalla la nueva categoria <img src="../../public/icons/filter.svg" width="40px" /></h2>
         </div>
 
         <form action="">
@@ -126,6 +129,6 @@ export const AddCategory = () => {
       <div>
         <Footer />
       </div>
-    </>
+    </div>
   );
 };

@@ -2,9 +2,12 @@
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+ 
 }
+
 .main-content {
   flex: 1;
+  
 }
 .footer {
   bottom: 0;
@@ -108,9 +111,9 @@ div#cardInventory {
 #cardFormProduct {
   width: 40%;
   margin: 0 auto;
-  color: #55889e;
+  color: #2f3559;
   padding: 30px;
-  height: 50rem;
+ height: auto;
 }
 
 #divForm {

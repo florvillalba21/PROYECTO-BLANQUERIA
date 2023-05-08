@@ -4,6 +4,7 @@ import { Footer } from "../components/layout/Footer";
 import { Navbar } from "../components/layout/Navbar";
 import { ContextAuth } from "../context/AuthContext";
 import Alert from "../components/Alert";
+import { Description } from "../components/Description";
 
 export const AddProducts = () => {
   const [data, setData] = useState([]);
@@ -65,11 +66,13 @@ export const AddProducts = () => {
       });
   }, []);
   return (
-    <>
+    <div className="main-content">
       <Navbar />
-      <div id="cardFormProduct">
+      <Description text="En esta sección dispones de un formulario para cargar un nuevo producto."/>
+      <br />
+      <div id="cardFormProduct" className=" shadow">
         <div id="tittleFormProduct">
-          <h2>Detalla tu nuevo producto</h2>
+          <h2>Detalla tu nuevo producto <img src="../../public/icons/tag.svg" width="40px" /></h2>
         </div>
 
         <form action="">
@@ -157,6 +160,6 @@ export const AddProducts = () => {
       <div>
         <Footer />
       </div>
-    </>
+    </div>
   );
 };

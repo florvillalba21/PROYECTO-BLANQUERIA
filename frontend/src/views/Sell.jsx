@@ -6,10 +6,10 @@ import { FormFact } from "../components/FormFact";
 export const Sell = () => {
 
   return (
-    <>
+    <div className="main-content">
       <Navbar />
       <FormFact />
       <Footer />
-    </>
+    </div>
   );
 };

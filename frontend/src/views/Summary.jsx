@@ -192,9 +192,9 @@ export const Summary = () => {
   }
 
   return (
-    <>
+    <div className="main-content">
       <Navbar />
       <Message />
-    </>
+    </div>
   );
 };
