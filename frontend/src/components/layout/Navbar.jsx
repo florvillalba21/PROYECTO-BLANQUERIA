@@ -9,7 +9,7 @@ export const Navbar = () => {
     }
   };
   return (
-    <nav className="navbar text-center" id="navbar">
+    <nav className="navbar" id="navbar">
       <div className="container-fluid">
         <Link
           to="/home"
@@ -17,12 +17,14 @@ export const Navbar = () => {
             textDecoration: "none",
             color: "#2f3559",
             fontSize: "40px",
-            fontFamily: "Lobster, cursive",
-            marginLeft: "35%",
+
           }}
         >
-          Blanqueria Cacatúa
+          <h1>Blanquería Cacatúa</h1>
+
         </Link>
+        
+        
         <button
           className="navbar-toggler"
           type="button"
@@ -32,14 +34,8 @@ export const Navbar = () => {
           aria-label="Toggle navigation"
           style={{ border: 0 }}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 26 26"
-            width="50"
-            height="50"
-          >
-            <path d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"></path>
-          </svg>
+          <img src="../../../public/icons/home.svg" width={'50px'} />
+          
         </button>
         <div
           className="offcanvas offcanvas-end"

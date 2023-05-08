@@ -5,7 +5,7 @@ import { Navbar } from "../components/layout/Navbar";
 
 export const Home = () => {
   return (
-    <>
+    <div className="main-content">
       <Navbar />
       <div
         className="card-group row justify-content-center"
@@ -63,6 +63,6 @@ export const Home = () => {
         />
       </div>
       <Footer />
-    </>
+    </div>
   );
 };

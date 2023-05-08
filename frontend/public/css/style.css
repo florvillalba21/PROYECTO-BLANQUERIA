@@ -1,4 +1,16 @@
-
+#root{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+.main-content {
+  flex: 1;
+}
+.footer {
+  bottom: 0;
+  width: 100%;
+  margin-top: 50px;
+}
 
 div.login {
   background-color: #dceff0;
@@ -87,13 +99,11 @@ div#cardHome.card-body {
 /* estilos para las card de inventario */
 div#cardInventory {
   color: #2f3559;
-  padding: 10px;
-  margin-top: 100px;
 }
 
-.card-body {
+/* .card-body {
   height: 5rem;
-}
+} */
 
 #cardFormProduct {
   width: 40%;
@@ -141,5 +151,12 @@ table {
 
 #card-fund {
   margin: 80px;
+  color: #2f3559;
+}
+
+#description{
+  margin: 10px;
+  font-style:inherit;
+  font-size: 1.1rem;
   color: #2f3559;
 }

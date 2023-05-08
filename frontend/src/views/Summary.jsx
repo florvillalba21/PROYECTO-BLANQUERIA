@@ -57,7 +57,7 @@ export const Summary = () => {
 
   if (res.filterSales) {
     return (
-      <>
+      <div className="main-content">
         <Navbar />
         <SearchContext.Provider
           value={{ search, setSearch, res, setRes, sales }}
@@ -118,11 +118,11 @@ export const Summary = () => {
         <div id="monto">
           <h4>Monto de ventas: {res.amount}</h4>
         </div>
-      </>
+      </div>
     );
   } else if (sales.length > 0) {
     return (
-      <>
+      <div className="main-content">
         <Navbar />
         <SearchContext.Provider
           value={{ search, setSearch, res, setRes, sales }}
@@ -185,7 +185,9 @@ export const Summary = () => {
         <div id="monto">
           <h4>Monto de ventas: {total}</h4>
         </div>
-      </>
+
+        <Footer/>
+      </div>
     );
   }
 
