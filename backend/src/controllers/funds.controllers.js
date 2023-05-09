@@ -33,6 +33,35 @@ ctrlFunds.newFund = async (req, res) => {
   }
 };
 
+ctrlFunds.getFundsOrderDate = async (req, res) => {
+  try {
+    Fund.aggregate([
+      {
+        $group: {
+          _id: { year: { $year: "$date" }, month: { $month: "$date" } },
+          total: { $sum: "$amount" },
+        },
+      },
+      { $sort: { "_id.year": 1, "_id.month": 1 } },
+    ]).then((result) => {
+      if (result.length>0) {
+        res.json({
+          ok: true,
+          result:result
+        });
+      }
+      else{
+        res.json({
+          ok:false,
+          msg:"No existen fondos registrados"
+        })
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 ctrlFunds.getFundsForDate = async (req, res) => {
   const { month, year } = req.body;
 
@@ -126,12 +155,11 @@ ctrlFunds.getFunds = async (req, res) => {
             err,
           });
         });
-    }
-    else{
+    } else {
       res.json({
-        ok:false,
-        msg:"No hay fondos registrados"
-      })
+        ok: false,
+        msg: "No hay fondos registrados",
+      });
     }
   } catch (error) {
     console.log(error);
