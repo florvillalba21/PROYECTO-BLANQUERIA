@@ -9,12 +9,7 @@ export const FormCard = () => {
   const [res, setRes] = useState({});
   const [data, setData] = useState({
     amount: null,
-    date: new Date().toLocaleDateString("es-es", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    }),
+    date: new Date(),
   });
   const config = {
     headers: {
@@ -34,6 +29,7 @@ export const FormCard = () => {
     axios.post("http://localhost:3000/sendFund", data, config).
     then((res) => {
       if (res.data) {
+        console.log(res)
         setRes(res.data.ok);
         setShowAlert(true);
       }

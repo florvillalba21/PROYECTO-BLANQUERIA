@@ -75,12 +75,7 @@ export const FormFact = () => {
     const data = {
       products: detCart,
       details: inpDetails.current.value,
-      date: new Date().toLocaleDateString("es-es", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      }),
+      date: new Date(),
       paymentMethod: selectMethod.current.value,
       totalAmount: amount,
     };
