@@ -6,6 +6,8 @@ import { Navbar } from "../components/layout/Navbar";
 import { Link } from "react-router-dom";
 import { Searcher } from "../components/layout/Searcher";
 import { Message } from "../components/Message";
+import { format } from "date-fns";
+import esLocale from "date-fns/locale/es";
 
 export const Funds = () => {
   const { token } = useContext(ContextAuth);
@@ -35,7 +37,7 @@ export const Funds = () => {
     return (
       <div className="main-content">
         <Navbar />
-        
+
         <div>
           <Link
             to={"/home/summary"}
@@ -48,13 +50,22 @@ export const Funds = () => {
           <thead>
             <tr>
               <th>Fecha</th>
+              <th>Monto</th>
             </tr>
           </thead>
           <tbody className="table-group-divider">
             {funds.map((value, index) => {
+              const date = new Date(value.date);
+              const formatedDate = format(
+                date,
+                "EEEE, dd 'de' MMMM 'de' yyyy",
+                { locale: esLocale }
+              );
+
               return (
                 <tr key={index}>
-                  <td> {value.date}</td>
+                  <td> {formatedDate}</td>
+                  <td> {value.amount}</td>
                 </tr>
               );
             })}
