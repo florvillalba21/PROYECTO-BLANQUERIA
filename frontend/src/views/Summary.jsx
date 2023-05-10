@@ -18,7 +18,6 @@ export const Summary = () => {
   const [search, setSearch] = useState("");
   const [res, setRes] = useState({});
   const [mySales, setMySales] = useState([]);
- 
 
   const config = {
     headers: {
@@ -29,11 +28,12 @@ export const Summary = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/allSales", config)
+      .get("http://localhost:3000/salesOrderDate", config)
       .then((res) => {
-        if (res.data.allSales) {
-          setSales(res.data.allSales);
-          setTotal(res.data.salesAmount);
+        if (res.data.result) {
+          console.log(res.data.result);
+          setSales(res.data.result);
+          // setTotal(res.data.salesAmount);
         }
       })
       .catch((err) => console.log(err));
@@ -43,21 +43,21 @@ export const Summary = () => {
     setRes({});
     setMySales([]);
   };
+useEffect(()=>{
+  console.log(sales);
+}, [sales])
+  // const getMySales = () => {
+  //   axios
+  //     .get("http://localhost:3000/sales", config)
+  //     .then((res) => {
+  //       if (res.data.filterSales) {
+  //         setMySales(res.data.filterSales);
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
-  const getMySales = () => {
-    axios
-      .get("http://localhost:3000/sales", config)
-      .then((res) => {
-        if (res.data.filterSales) {
-          setMySales(res.data.filterSales);
-        }
-      })
-      .catch((err) => console.log(err));
-  };
-
-  
-
-  if (res.filterSales) {
+  if (sales.length > 0) {
     return (
       <div className="main-content">
         <Navbar />
@@ -76,14 +76,14 @@ export const Summary = () => {
           </Link>
           <Link
             style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
-            onClick={getMySales}
+            // onClick={getMySales}
             className="col-md-auto"
           >
             <b>Ver mis ventas</b>
           </Link>
           <Link
             style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
-            to='funds/'
+            to="funds/"
             className="col-md-auto"
           >
             <b>Ver retiros realizados</b>
@@ -92,115 +92,33 @@ export const Summary = () => {
         <table id="tableSales" className="table">
           <thead>
             <tr>
-              <th>Numero de serie</th>
-              <th>Fecha</th>
-              <th>Monto total</th>
+              <th>Año</th>
+              <th>Mes</th>
+              <th>Cantidad de ventas</th>
             </tr>
           </thead>
           <tbody className="table-group-divider">
-            {res.filterSales.length === 0 ? (
-              <tr>
-                <td colSpan="3">
-                  No se encuentran coincidencias con la fecha solicitada
-                </td>
-              </tr>
-            ) : (
-              res.filterSales.map((value, index) => {
-                const date = new Date(value.date);
-                const formatedDate = format(
-                  date,
-                  "EEEE, dd 'de' MMMM 'de' yyyy",
-                  { locale: esLocale }
-                );
-                return (
-                  <tr key={index}>
-                    <td> {value.serialNumber}</td>
-                    <td> {formatedDate}</td>
-                    <td> {value.totalAmount}</td>
-                  </tr>
-                );
-              })
-            )}
-          </tbody>
-        </table>
-        <div id="monto">
-          <h4>Monto de ventas: {res.amount}</h4>
-        </div>
-      </div>
-    );
-  } else if (sales.length > 0) {
-    return (
-      <div className="main-content">
-        <Navbar />
-        <SearchContext.Provider
-          value={{ search, setSearch, res, setRes, sales }}
-        >
-          <Searcher />
-        </SearchContext.Provider>
-        <div className="row justify-content-md-center">
-          <Link
-            style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
-            onClick={clear}
-            className="col-md-auto"
-          >
-            <b>Ver todas las ventas</b>
-          </Link>
-          <Link
-            style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
-            onClick={getMySales}
-            className="col-md-auto"
-          >
-            <b>Ver mis ventas</b>
-          </Link>
-          <Link
-            style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
-            to='funds/'
-            className="col-md-auto"
-          >
-            <b>Ver retiros realizados</b>
-          </Link>
-        </div>
-        <table id="tableSales" className="table">
-          <thead>
-            <tr>
-              <th>Numero de serie</th>
-              <th>Fecha</th>
-              <th>Monto total</th>
-            </tr>
-          </thead>
-          <tbody className="table-group-divider">
-            {mySales.length > 0
-              ? mySales.map((value, index) => {
-                  return (
-                    <tr key={index}>
-                      <td> {value.serialNumber}</td>
-                      <td> {value.date}</td>
-                      <td> {value.totalAmount}</td>
-                    </tr>
-                  );
-                })
-              : sales.map((value, index) => {
-                const date = new Date(value.date);
-                const formatedDate = format(
-                  date,
-                  "EEEE, dd 'de' MMMM 'de' yyyy",
-                  { locale: esLocale }
-                );
-                  return (
-                    <tr key={index}>
-                      <td> {value.serialNumber}</td>
-                      <td> {formatedDate}</td>
-                      <td> {value.totalAmount}</td>
-                    </tr>
-                  );
+            {sales &&
+                sales.map((value, index) => {
+                  // const date = new Date(value.date);
+                  // const formatedDate = format(
+                  //   date,
+                  //   "EEEE, dd 'de' MMMM 'de' yyyy",
+                  //   { locale: esLocale }
+                  // );
+                  return <tr key={index}>
+                    <td>{value._id.year}</td>
+                    <td>{value._id.month}</td>
+                    <td>{value.count}</td>
+                  </tr>;
                 })}
           </tbody>
         </table>
         <div id="monto">
-          <h4>Monto de ventas: {total}</h4>
+          {/* <h4>Monto de ventas: {total}</h4> */}
         </div>
 
-        <Footer/>
+        <Footer />
       </div>
     );
   }
