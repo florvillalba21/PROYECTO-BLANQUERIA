@@ -8,6 +8,7 @@ import { SearchContext } from "../context/SearchContext";
 import { useContext } from "react";
 import { ContextAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import { Diccionary } from "../utils/Diccionary";
 import { format } from "date-fns";
 import esLocale from "date-fns/locale/es";
 
@@ -43,9 +44,9 @@ export const Summary = () => {
     setRes({});
     setMySales([]);
   };
-useEffect(()=>{
-  console.log(sales);
-}, [sales])
+  useEffect(() => {
+    console.log(sales);
+  }, [sales]);
   // const getMySales = () => {
   //   axios
   //     .get("http://localhost:3000/sales", config)
@@ -95,28 +96,26 @@ useEffect(()=>{
               <th>Año</th>
               <th>Mes</th>
               <th>Cantidad de ventas</th>
+              <th>Monto Mensual</th>
+
             </tr>
           </thead>
           <tbody className="table-group-divider">
+            
             {sales &&
-                sales.map((value, index) => {
-                  // const date = new Date(value.date);
-                  // const formatedDate = format(
-                  //   date,
-                  //   "EEEE, dd 'de' MMMM 'de' yyyy",
-                  //   { locale: esLocale }
-                  // );
-                  return <tr key={index}>
-                    <td>{value._id.year}</td>
-                    <td>{value._id.month}</td>
-                    <td>{value.count}</td>
-                  </tr>;
-                })}
+              sales.map((value, index) => (
+              
+                <tr key={index}>
+                  <td>{value._id.year}</td>
+                  <td>{Diccionary.Months.values[value._id.month-1]}</td>
+                  <td>{value.count}</td>
+                  <td>{value.total}</td>
+                  <td><button id="btn">Ver ventas</button></td>
+                </tr>
+              ))}
           </tbody>
         </table>
-        <div id="monto">
-          {/* <h4>Monto de ventas: {total}</h4> */}
-        </div>
+        <div id="monto">{/* <h4>Monto de ventas: {total}</h4> */}</div>
 
         <Footer />
       </div>

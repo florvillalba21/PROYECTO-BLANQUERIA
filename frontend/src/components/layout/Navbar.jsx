@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import { ContextAuth } from "../../context/AuthContext";
 
 export const Navbar = () => {
+  const { logout, user } = useContext(ContextAuth);
   const navigate = useNavigate();
   const Logout = () => {
-    if (localStorage.getItem("token")) {
-      localStorage.clear();
-    }
+    logout();
+    
   };
   return (
     <nav className="navbar shadow" id="navbar">
@@ -23,7 +24,7 @@ export const Navbar = () => {
           >
             <h2 id="titleName">BIenvenida </h2>
           </Link>
-          <h4 id="titleInicio" >Blacia</h4>
+          <h4 id="titleInicio" >{user}</h4>
         </div>
 
         <button

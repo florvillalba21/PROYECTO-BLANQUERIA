@@ -3,9 +3,9 @@ import {Navigate} from 'react-router-dom'
 import {ContextAuth } from "../context/AuthContext";
 
 export const PrivateRoutes = ({ children }) => {
-    const { token } = useContext(ContextAuth);
+    const { token, user } = useContext(ContextAuth);
   
-    return token === null ? (
+    return !token || !user ? (
       <Navigate to="/" />
     ) : (
       children

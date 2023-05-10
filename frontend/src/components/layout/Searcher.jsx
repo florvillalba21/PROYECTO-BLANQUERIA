@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { SearchContext } from "../../context/SearchContext";
-import { Diccionary } from "../Diccionary";
+import { Diccionary } from "../../utils/Diccionary";
 import axios from "axios";
 import { ContextAuth } from "../../context/AuthContext";
 
