@@ -55,7 +55,7 @@ ctrlSales.newSale = async (req, res) => {
       console.log(error);
       res.json({ ok: false });
     }
-  } else{
+  } else {
     return res.json({ ok: false });
   }
 };
@@ -67,22 +67,21 @@ ctrlSales.getSalesOrderDate = async (req, res) => {
         $group: {
           _id: { year: { $year: "$date" }, month: { $month: "$date" } },
           total: { $sum: "$totalAmount" },
-          count:{$sum:1}
+          count: { $sum: 1 },
         },
       },
       { $sort: { "_id.year": 1, "_id.month": 1 } },
     ]).then((result) => {
-      if (result.length>0) {
+      if (result.length > 0) {
         res.json({
           ok: true,
-          result:result
+          result: result,
         });
-      }
-      else{
+      } else {
         res.json({
-          ok:false,
-          msg:"No existen ventas registradas"
-        })
+          ok: false,
+          msg: "No existen ventas registradas",
+        });
       }
     });
   } catch (error) {
@@ -102,14 +101,21 @@ ctrlSales.getSalesForUserId = async (req, res) => {
 };
 
 ctrlSales.getSalesForDate = async (req, res) => {
-  const { month, year } = req.query;
+  const { month, year } = req.body;
 
-  const regex = new RegExp(`\\b${month}\\b.*\\b${year}\\b`, "i");
+  //const regex = new RegExp(`\\b${month}\\b.*\\b${year}\\b`, "i");
+  const startDate = new Date(year, month - 1, 1);
+  const endDate = new Date(year, month, 0);
 
   // Hacer la consulta con Mongoose
 
   // Hacer la consulta con Mongoose
-  Sale.find({ date: { $regex: regex } })
+  Sale.find({
+    date: {
+      $gte: startDate,
+      $lte: endDate,
+    },
+  })
 
     .then((resultados) => {
       if (resultados.length > 0) {

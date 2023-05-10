@@ -40,22 +40,21 @@ ctrlFunds.getFundsOrderDate = async (req, res) => {
         $group: {
           _id: { year: { $year: "$date" }, month: { $month: "$date" } },
           total: { $sum: "$amount" },
-          count:{$sum:1}
+          count: { $sum: 1 },
         },
       },
       { $sort: { "_id.year": 1, "_id.month": 1 } },
     ]).then((result) => {
-      if (result.length>0) {
+      if (result.length > 0) {
         res.json({
           ok: true,
-          result:result
+          result: result,
         });
-      }
-      else{
+      } else {
         res.json({
-          ok:false,
-          msg:"No existen fondos registrados"
-        })
+          ok: false,
+          msg: "No existen fondos registrados",
+        });
       }
     });
   } catch (error) {
@@ -66,12 +65,19 @@ ctrlFunds.getFundsOrderDate = async (req, res) => {
 ctrlFunds.getFundsForDate = async (req, res) => {
   const { month, year } = req.body;
 
-  const regex = new RegExp(`\\b${month}\\b.*\\b${year}\\b`, "i");
+  // regex = new RegExp(`\\b${month}\\b.*\\b${year}\\b`, "i");
 
   // Hacer la consulta con Mongoose
+  const startDate = new Date(year, month - 1, 1);
+  const endDate = new Date(year, month, 0);
 
   // Hacer la consulta con Mongoose
-  Fund.find({ date: { $regex: regex } })
+  Fund.find({
+    date: {
+      $gte: startDate,
+      $lte: endDate,
+    },
+  })
 
     .then((resultados) => {
       if (resultados.length > 0) {
