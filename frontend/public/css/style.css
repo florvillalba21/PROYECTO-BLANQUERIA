@@ -1,13 +1,11 @@
-#root{
+#root {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
- 
 }
 
 .main-content {
   flex: 1;
-  
 }
 .footer {
   bottom: 0;
@@ -22,11 +20,12 @@ div.login {
   margin-top: 15%;
   border-radius: 30px;
   width: 40%;
+  color: #2f3559;
 }
 #headLogin {
   padding: 10px;
 
-  color: #cea9ca;
+  color: #2f3559;
 }
 #h2Login {
   padding-top: 5px;
@@ -43,11 +42,11 @@ div.login {
 }
 
 #btnLogin {
-  background-color: #cea9ca;
+  background-color: #c6e5d9;
   width: 90%;
   border: 0;
   border-radius: 3px;
-  color: white;
+  color: #2f3559;
   padding-bottom: 10px;
   margin: 30px;
 }
@@ -59,15 +58,14 @@ div#cardHome {
   width: 17rem;
   color: #2f3559;
   height: 17rem;
- 
 }
-#cardHome div{
+#cardHome div {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 8px;
 }
-#cardHome div img{
+#cardHome div img {
   max-width: 100%;
   max-height: 100%;
 }
@@ -77,10 +75,10 @@ div#cardHome.card-body {
 }
 
 #divbtn {
-  background-color: #cea9ca;
+  background-color: #c6e5d9;
   border: 0;
   border-radius: 3px;
-  color: #e7e7d9;
+  color: #2f3559;
   padding: 10px;
   text-align: center;
   margin-top: 40px;
@@ -88,9 +86,9 @@ div#cardHome.card-body {
 
 #btn {
   font-style: initial;
-  color: white;
+  color: #2f3559;
   text-decoration: none;
-  background-color: #cea9ca;
+  background-color: #c6e5d9;
   border: 0;
   height: 2.4em;
   border-radius: 5px;
@@ -113,10 +111,11 @@ div#cardInventory {
   margin: 0 auto;
   color: #2f3559;
   padding: 30px;
- height: auto;
+  height: auto;
 }
 
 #divForm {
+
   margin-top: 30px;
   text-decoration: #55889e;
   padding: 10px;
@@ -139,7 +138,7 @@ table {
   color: #2f3559;
   margin: 20px;
   width: 90%;
-  border-color: #cea9ca;
+  border-color: #c6e5d9;
 }
 #tableSales td {
   padding: 1.5em;
@@ -147,7 +146,7 @@ table {
 
 #monto {
   position: absolute;
-
+  color: #2f3559;
   width: 100%;
   height: 40px;
 }
@@ -157,9 +156,26 @@ table {
   color: #2f3559;
 }
 
-#description{
+#description {
   margin: 10px;
-  font-style:inherit;
+  font-style: inherit;
   font-size: 1.1rem;
   color: #2f3559;
 }
+
+#titleName {
+  font-family: "Cinzel", serif;
+  font-weight: 700;
+  bottom: 0;
+  color: #2f3559;
+  /* font-family: "Lobster Two", cursive; */
+}
+
+#titleInicio{
+  font-family: "Cinzel", serif;
+  margin-top: 7px;
+  margin-left: 10px;
+  color: #2f3559;
+
+}
+

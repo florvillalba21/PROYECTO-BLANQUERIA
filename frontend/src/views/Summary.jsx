@@ -8,6 +8,8 @@ import { SearchContext } from "../context/SearchContext";
 import { useContext } from "react";
 import { ContextAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
+import esLocale from "date-fns/locale/es";
 
 export const Summary = () => {
   const { token } = useContext(ContextAuth);
@@ -104,10 +106,16 @@ export const Summary = () => {
               </tr>
             ) : (
               res.filterSales.map((value, index) => {
+                const date = new Date(value.date);
+                const formatedDate = format(
+                  date,
+                  "EEEE, dd 'de' MMMM 'de' yyyy",
+                  { locale: esLocale }
+                );
                 return (
                   <tr key={index}>
                     <td> {value.serialNumber}</td>
-                    <td> {value.date}</td>
+                    <td> {formatedDate}</td>
                     <td> {value.totalAmount}</td>
                   </tr>
                 );
@@ -172,10 +180,16 @@ export const Summary = () => {
                   );
                 })
               : sales.map((value, index) => {
+                const date = new Date(value.date);
+                const formatedDate = format(
+                  date,
+                  "EEEE, dd 'de' MMMM 'de' yyyy",
+                  { locale: esLocale }
+                );
                   return (
                     <tr key={index}>
                       <td> {value.serialNumber}</td>
-                      <td> {value.date}</td>
+                      <td> {formatedDate}</td>
                       <td> {value.totalAmount}</td>
                     </tr>
                   );

@@ -171,7 +171,7 @@ export const FormFact = () => {
               onClick={addSell}
               className="btn btn-primary"
               type="button"
-              style={{ backgroundColor: "#cea9ca", border: "0" }}
+              style={{ backgroundColor: "#c6e5d9", border: "0", color: '#2f3559' }}
             >
               Registrar la venta
             </button>
