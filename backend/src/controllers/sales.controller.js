@@ -60,6 +60,36 @@ ctrlSales.newSale = async (req, res) => {
   }
 };
 
+ctrlSales.getSalesOrderDate = async (req, res) => {
+  try {
+    Sale.aggregate([
+      {
+        $group: {
+          _id: { year: { $year: "$date" }, month: { $month: "$date" } },
+          total: { $sum: "$totalAmount" },
+          count:{$sum:1}
+        },
+      },
+      { $sort: { "_id.year": 1, "_id.month": 1 } },
+    ]).then((result) => {
+      if (result.length>0) {
+        res.json({
+          ok: true,
+          result:result
+        });
+      }
+      else{
+        res.json({
+          ok:false,
+          msg:"No existen ventas registradas"
+        })
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 ctrlSales.getSalesForUserId = async (req, res) => {
   const userVenta = req.user._id; //toma el id del usuario ingresado
 
