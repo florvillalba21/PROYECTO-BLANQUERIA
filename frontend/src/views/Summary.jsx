@@ -4,13 +4,9 @@ import { Navbar } from "../components/layout/Navbar";
 import axios from "axios";
 import { Message } from "../components/Message";
 import { Searcher } from "../components/layout/Searcher";
-import { SearchContext } from "../context/SearchContext";
 import { useContext } from "react";
 import { ContextAuth } from "../context/AuthContext";
-import { Link } from "react-router-dom";
 import { Diccionary } from "../utils/Diccionary";
-import { format } from "date-fns";
-import esLocale from "date-fns/locale/es";
 
 export const Summary = () => {
   const { token } = useContext(ContextAuth);
@@ -40,56 +36,21 @@ export const Summary = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const clear = () => {
-    setRes({});
-    setMySales([]);
-  };
+ 
   useEffect(() => {
     console.log(sales);
   }, [sales]);
-  // const getMySales = () => {
-  //   axios
-  //     .get("http://localhost:3000/sales", config)
-  //     .then((res) => {
-  //       if (res.data.filterSales) {
-  //         setMySales(res.data.filterSales);
-  //       }
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
 
+
+  // listaVentas.sort((venta1, venta2) => {
+  //   return venta2.fecha - venta1.fecha;
+  // });
+  
   if (sales.length > 0) {
     return (
       <div className="main-content">
         <Navbar />
-        <SearchContext.Provider
-          value={{ search, setSearch, res, setRes, sales }}
-        >
-          <Searcher />
-        </SearchContext.Provider>
-        <div className="row justify-content-md-center">
-          <Link
-            style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
-            onClick={clear}
-            className="col-md-auto"
-          >
-            <b>Ver todas las ventas</b>
-          </Link>
-          <Link
-            style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
-            // onClick={getMySales}
-            className="col-md-auto"
-          >
-            <b>Ver mis ventas</b>
-          </Link>
-          <Link
-            style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
-            to="funds/"
-            className="col-md-auto"
-          >
-            <b>Ver retiros realizados</b>
-          </Link>
-        </div>
+        <Searcher/>
         <table id="tableSales" className="table">
           <thead>
             <tr>

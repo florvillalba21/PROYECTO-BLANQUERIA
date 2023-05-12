@@ -63,23 +63,33 @@ export const Navbar = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="#">
+                <Link className="nav-link" to="/home/sell">
                   Realizar una venta
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="#">
+                <Link className="nav-link" to="/home/inventory">
                   Ver inventario
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="#">
+                <Link className="nav-link" to="/home/summary">
                   Ver ventas
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="#">
+                <Link className="nav-link" to="/home/addProduct">
                   Agregar nuevos productos
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/home/addCategory">
+                  Agregar nueva categoría
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/home/withdrawals">
+                  Retirar dinero
                 </Link>
               </li>
 

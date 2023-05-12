@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Suma de matrices de 3x3</title>
+  </head>
+  <body>
+    <h1>Suma de matrices de 3x3</h1>
+    <table>
+      <tr>
+        <th>Matriz 1</th>
+        <th></th>
+        <th>Matriz 2</th>
+        <th></th>
+        <th>Matriz Resultado</th>
+      </tr>
+      <tr>
+        <td><input type="number" name= "input" id="m1_1_1" /></td>
+        <td>+</td>
+        <td><input type="number" name= "input"  id="m2_1_1" /></td>
+        <td>=</td>
+        <td><input type="number" name= "input"  id="mr_1_1" disabled /></td>
+      </tr>
+      <tr>
+        <td><input type="number" name= "input"  id="m1_1_2" /></td>
+        <td>+</td>
+        <td><input type="number" name= "input"  id="m2_1_2" /></td>
+        <td>=</td>
+        <td><input type="number" name= "input"  id="mr_1_2" disabled /></td>
+      </tr>
+      <tr>
+        <td><input type="number" name= "input"  id="m1_1_3" /></td>
+        <td>+</td>
+        <td><input type="number" name= "input"  id="m2_1_3" /></td>
+        <td>=</td>
+        <td><input type="number" name= "input"  id="mr_1_3" disabled /></td>
+      </tr>
+      <tr>
+        <td><input type="number" name= "input"  id="m1_2_1" /></td>
+        <td>+</td>
+        <td><input type="number" name= "input"  id="m2_2_1" /></td>
+        <td>=</td>
+        <td><input type="number" name= "input"  id="mr_2_1" disabled /></td>
+      </tr>
+      <tr>
+        <td><input type="number" name= "input"  id="m1_2_2" /></td>
+        <td>+</td>
+        <td><input type="number" name= "input"  id="m2_2_2" /></td>
+        <td>=</td>
+        <td><input type="number" name= "input"  id="mr_2_2" disabled /></td>
+      </tr>
+      <tr>
+        <td><input type="number" name= "input"  id="m1_2_3" /></td>
+        <td>+</td>
+        <td><input type="number" name= "input"  id="m2_2_3" /></td>
+        <td>=</td>
+        <td><input type="number" name= "input"  id="mr_2_3" disabled /></td>
+      </tr>
+      <tr>
+        <td><input type="number" name= "input"  id="m1_3_1" /></td>
+        <td>+</td>
+        <td><input type="number" id="m2_3_1" /></td>
+        <td>=</td>
+        <td><input type="number" id="mr_3_1" disabled /></td>
+      </tr>
+      <tr>
+        <td><input type="number" id="m1_3_2" /></td>
+        <td>+</td>
+        <td><input type="number" id="m2_3_2"/> </td>
+        <td>=</td>
+        <td><input type="number" id="mr_3_2" disabled /></td>
+      </tr>
+      <tr>
+        <td><input type="number" id="m1_3_3" /></td>
+        <td>+</td>
+        <td><input type="number" id="m2_3_3" /></td>
+        <td>=</td>
+        <td><input type="number" id="mr_3_3" disabled /></td>
+      </tr>
+    </table>
+    <br />
+    <button onclick="sumarMatrices()">Sumar matrices</button>
+
+    <script>
+      function sumarMatrices() {
+        
+        // Obtener los valores de la matriz 1
+        let m1_1_1 = parseFloat(document.getElementById("m1_1_1").value);
+        let m1_1_2 = parseFloat(document.getElementById("m1_1_2").value);
+        let m1_1_3 = parseFloat(document.getElementById("m1_1_3").value);
+        let m1_2_1 = parseFloat(document.getElementById("m1_2_1").value);
+        let m1_2_2 = parseFloat(document.getElementById("m1_2_2").value);
+        let m1_2_3 = parseFloat(document.getElementById("m1_2_3").value);
+        let m1_3_1 = parseFloat(document.getElementById("m1_3_1").value);
+        let m1_3_2 = parseFloat(document.getElementById("m1_3_2").value);
+        let m1_3_3 = parseFloat(document.getElementById("m1_3_3").value);
+
+        // Obtener los valores de la matriz 2
+        let m2_1_1 = parseFloat(document.getElementById("m2_1_1").value);
+        let m2_1_2 = parseFloat(document.getElementById("m2_1_2").value);
+        let m2_1_3 = parseFloat(document.getElementById("m2_1_3").value);
+        let m2_2_1 = parseFloat(document.getElementById("m2_2_1").value);
+        let m2_2_2 = parseFloat(document.getElementById("m2_2_2").value);
+        let m2_2_3 = parseFloat(document.getElementById("m2_2_3").value);
+        let m2_3_1 = parseFloat(document.getElementById("m2_3_1").value);
+        let m2_3_2 = parseFloat(document.getElementById("m2_3_2").value);
+        let m2_3_3 = parseFloat(document.getElementById("m2_3_3").value);
+
+        // Calcular los valores de la matriz resultado
+        let mr_1_1 = m1_1_1 + m2_1_1;
+        let mr_1_2 = m1_1_2 + m2_1_2;
+        let mr_1_3 = m1_1_3 + m2_1_3;
+        let mr_2_1 = m1_2_1 + m2_2_1;
+        let mr_2_2 = m1_2_2 + m2_2_2;
+        let mr_2_3 = m1_2_3 + m2_2_3;
+        let mr_3_1 = m1_3_1 + m2_3_1;
+        let mr_3_2 = m1_3_2 + m2_3_2;
+        let mr_3_3 = m1_3_3 + m2_3_3;
+
+        // Mostrar los valores en la matriz resultado
+        document.getElementById("mr_1_1").value = mr_1_1;
+        document.getElementById("mr_1_2").value = mr_1_2;
+        document.getElementById("mr_1_3").value = mr_1_3;
+        document.getElementById("mr_2_1").value = mr_2_1;
+        document.getElementById("mr_2_2").value = mr_2_2;
+        document.getElementById("mr_2_3").value = mr_2_3;
+        document.getElementById("mr_3_1").value = mr_3_1;
+        document.getElementById("mr_3_2").value = mr_3_2;
+        document.getElementById("mr_3_3").value = mr_3_3;
+      }
+    </script>
+  </body>
+</html>

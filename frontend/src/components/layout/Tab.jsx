@@ -20,7 +20,7 @@ export const Tab = () => {
 
   return (
     <div>
-      <ul className="nav nav-tabs" style={{ color: "black" }}>
+      <ul className="nav nav-tabs" >
         {categories.map((category, index) => {
           return(
           <li className="nav-item" key={index}>
@@ -28,7 +28,7 @@ export const Tab = () => {
               className="nav-link"
               aria-current="page"
               to={"/home/inventory/Products/"+ category.name}
-              style={{ color: "#cea9ca" }}
+              style={{ color: "#2f3559" }}
             >
               {category.name}
             </Link>

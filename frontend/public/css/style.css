@@ -93,9 +93,7 @@ div#cardHome.card-body {
   height: 2.4em;
   border-radius: 5px;
 }
-#body {
-  margin: 0;
-}
+
 
 /* estilos para las card de inventario */
 div#cardInventory {
@@ -130,14 +128,11 @@ div#cardInventory {
   padding: 10px;
 }
 
-table {
-  margin: 10px;
-}
+
 
 #tableSales {
   color: #2f3559;
-  margin: 20px;
-  width: 90%;
+  width: 100%;
   border-color: #c6e5d9;
 }
 #tableSales td {
@@ -179,3 +174,12 @@ table {
 
 }
 
+.card-title{
+  margin-top: 5px;
+}
+
+.message{
+  margin: 20px;
+  text-align: center;
+  color: #2f3559;
+}
