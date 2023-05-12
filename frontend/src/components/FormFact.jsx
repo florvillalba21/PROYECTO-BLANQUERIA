@@ -16,10 +16,16 @@ export const FormFact = () => {
 
   const inpDetails = useRef();
   const selectMethod = useRef();
+  const config = {
+    headers: {
+      "content-type": "multipart/form-data",
+      "x-access-token": token,
+    },
+  };
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/Categories")
+      .get("http://localhost:3000/Categories", config)
       .then((res) => {
         if (res.data[0]) {
           setCategories(res.data);
@@ -32,7 +38,7 @@ export const FormFact = () => {
   useEffect(() => {
     if (filter != "") {
       axios
-        .get(`http://localhost:3000/ProductsF/${filter}`)
+        .get(`http://localhost:3000/ProductsF/${filter}`, config)
         .then((res) => setProducts(res.data));
     }
   }, [filter]);
