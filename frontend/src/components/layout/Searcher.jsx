@@ -22,20 +22,6 @@ export const Searcher = () => {
         <div className="row justify-content-md-center">
           <Link
             style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
-        
-            className="col-md-auto"
-          >
-            <b>Ver todas las ventas</b>
-          </Link>
-          <Link
-            style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
-            // onClick={getMySales}
-            className="col-md-auto"
-          >
-            <b>Ver mis ventas</b>
-          </Link>
-          <Link
-            style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
             to="funds/"
             className="col-md-auto"
           >

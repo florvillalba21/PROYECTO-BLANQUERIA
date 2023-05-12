@@ -57,7 +57,7 @@ export const DetailsSummary = () => {
                     <td>{value.serialNumber}</td>
                     <td>
                       {value.products.map((value, key) => (
-                        <tr key={key}>
+                        <tr key={key} style={{margin: '0'}}>
                           <td>{value.name}</td>
                           <td>{value.quantity}</td>
                         </tr>

@@ -100,9 +100,9 @@ div#cardInventory {
   color: #2f3559;
 }
 
-/* .card-body {
-  height: 5rem;
-} */
+.card-body {
+  height: 3rem;
+}
 
 #cardFormProduct {
   width: 40%;
@@ -183,3 +183,5 @@ div#cardInventory {
   text-align: center;
   color: #2f3559;
 }
+
+

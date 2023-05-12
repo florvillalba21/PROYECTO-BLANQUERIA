@@ -1,13 +1,16 @@
 const router = require('express').Router()
 
-const {createCategory, getCategories} = require('../controllers/categories.controllers')
+const {createCategory, getCategories, deleteCategoryById, updateCategoryById, getCategoryForId} = require('../controllers/categories.controllers')
+const verifyToken = require('../middlewares/authjwt')
 
-router.get('/Categories', getCategories)
+router.get('/Categories',verifyToken, getCategories)
 
-router.post('/Categories', createCategory)
+router.get('/getCategoryForId/:categoryId',verifyToken, getCategoryForId)
 
-router.delete('/Categories:categoryId', createCategory)
+router.post('/Categories',verifyToken, createCategory)
 
-router.put('/Categories:categoryId', createCategory)
+router.delete('/delCategory/:categoryId',verifyToken, deleteCategoryById )
+
+router.put('/updateCategory/:categoryId',verifyToken, updateCategoryById)
 
 module.exports = router

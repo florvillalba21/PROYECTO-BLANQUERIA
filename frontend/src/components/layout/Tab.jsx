@@ -21,7 +21,8 @@ export const Tab = () => {
   return (
     <div>
       <ul className="nav nav-tabs" >
-        {categories.map((category, index) => {
+        {categories.length >0 &&
+        categories.map((category, index) => {
           return(
           <li className="nav-item" key={index}>
             <Link

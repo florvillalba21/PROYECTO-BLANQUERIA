@@ -21,8 +21,10 @@ export const FormFact = () => {
     axios
       .get("http://localhost:3000/Categories")
       .then((res) => {
-        setCategories(res.data);
-        setFilter(res.data[0].name);
+        if (res.data[0]) {
+          setCategories(res.data);
+          setFilter(res.data[0].name);
+        }
       })
       .catch((err) => console.log(err));
   }, []);
@@ -38,7 +40,6 @@ export const FormFact = () => {
   const addToCart = (product) => {
     setCart((items) => [...items, product]);
   };
-  
 
   useEffect(() => {
     let aux = 0;
@@ -104,7 +105,7 @@ export const FormFact = () => {
             setFilter(e.target.value);
           }}
         >
-          {categories.map((value, index) => {
+          {categories.length >0 &&categories.map((value, index) => {
             return (
               <option key={index} value={value.name}>
                 {value.name}
@@ -126,7 +127,7 @@ export const FormFact = () => {
                         addToCart(value);
                       }}
                     >
-                      {value.name}                     {value.stock}
+                      {value.name} {value.stock}
                     </li>
                   );
                 }
@@ -171,7 +172,11 @@ export const FormFact = () => {
               onClick={addSell}
               className="btn btn-primary"
               type="button"
-              style={{ backgroundColor: "#c6e5d9", border: "0", color: '#2f3559' }}
+              style={{
+                backgroundColor: "#c6e5d9",
+                border: "0",
+                color: "#2f3559",
+              }}
             >
               Registrar la venta
             </button>
@@ -198,7 +203,10 @@ export const FormFact = () => {
       <div className="col border" id="fact">
         <div className="row">
           <i className="d-flex flex-row" style={{ margin: "10px" }}>
-            <img src="../../public/icons/shopping-cart (1).svg" width={'30px'}/>
+            <img
+              src="../../public/icons/shopping-cart (1).svg"
+              width={"30px"}
+            />
           </i>
 
           <table>

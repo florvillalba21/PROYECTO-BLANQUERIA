@@ -2,13 +2,6 @@ const router = require("express").Router();
 
 const verifyToken = require('../middlewares/authjwt')
 const isAdmin = require('../middlewares/isAdmin')
-
-
-
-
-
-
-
 const {
   createProduct,
   getProducts,
