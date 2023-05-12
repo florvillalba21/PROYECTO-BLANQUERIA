@@ -101,9 +101,10 @@ ctrlSales.getSalesForUserId = async (req, res) => {
 };
 
 ctrlSales.getSalesForDate = async (req, res) => {
-  const { month, year } = req.body;
+  const { month, year } = req.query;
 
-  //const regex = new RegExp(`\\b${month}\\b.*\\b${year}\\b`, "i");
+
+  const regex = new RegExp(`\\b${month}\\b.*\\b${year}\\b`, "i");
   const startDate = new Date(year, month - 1, 1);
   const endDate = new Date(year, month, 0);
 
@@ -139,7 +140,7 @@ ctrlSales.getSalesForDate = async (req, res) => {
     .catch((error) => {
       console.log(error);
     });
-};
+ };
 
 // //Funcion para obtener la lista de todos los productos guardados
 ctrlSales.getSales = async (req, res) => {

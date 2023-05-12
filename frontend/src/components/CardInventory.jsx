@@ -9,7 +9,7 @@ export const CardInventory = () => {
   return (
     <div className="container">
       <div className="row justify-content-md-center">
-        {data ? (
+        {data.length >0 ? (
           data.map((value, index) => {
             return (
               <Link

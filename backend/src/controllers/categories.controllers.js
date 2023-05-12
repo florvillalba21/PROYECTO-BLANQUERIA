@@ -13,16 +13,15 @@ cloudinary.config({
 const fs = require("fs-extra");
 
 ctrlCategories.createCategory = async (req, res) => {
-  const { name, description, subCategories } = req.body;
+  const { name, description} = req.body;
 
-  if(name && description && subCategories){
+  if(name){
     const result = await cloudinary.v2.uploader.upload(req.file.path);
 
     imgURL = result.url;
     const newCategory = new Category({
       name,
       description,
-      subCategories,
       imgURL,
     });
   

@@ -19,9 +19,9 @@ router.get("/allSales",verifyToken, getSales);
 
 router.post("/newSale",verifyToken, newSale);
 
-router.get("/salesForDate",  getSalesForDate)
+router.get("/salesForDate", verifyToken, getSalesForDate)
 
-router.get("/salesOrderDate", getSalesOrderDate)
+router.get("/salesOrderDate",verifyToken, getSalesOrderDate)
 
 //router.put("/updateSale/:saleId",verifyToken, updateSaleById);
 

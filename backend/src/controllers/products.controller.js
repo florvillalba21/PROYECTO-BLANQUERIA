@@ -17,6 +17,7 @@ const fs = require("fs-extra");
 
 ctrlProducts.createProduct = async (req, res) => {
   const { name, category, costPrice, sellPrice, stock } = req.body;
+  console.log(sellPrice);
 
   if ((name, category, costPrice, sellPrice, stock)) {
     const result = await cloudinary.v2.uploader.upload(req.file.path);

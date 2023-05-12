@@ -11,9 +11,6 @@ const CategoriesSchema = new Schema
       type: String,
       required: false
     },
-    subCategories: [{
-      type:String
-    }],
     imgURL:{
       type: String
     }

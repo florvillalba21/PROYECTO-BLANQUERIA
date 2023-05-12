@@ -7,14 +7,15 @@ import { Searcher } from "../components/layout/Searcher";
 import { useContext } from "react";
 import { ContextAuth } from "../context/AuthContext";
 import { Diccionary } from "../utils/Diccionary";
+import { DetailsSummary } from "./DetailsSummary";
+import { useNavigate } from "react-router-dom";
 
 export const Summary = () => {
   const { token } = useContext(ContextAuth);
+  const navigate = useNavigate();
   const [sales, setSales] = useState([]);
-  const [total, setTotal] = useState({});
-  const [search, setSearch] = useState("");
-  const [res, setRes] = useState({});
-  const [mySales, setMySales] = useState([]);
+  const [year, setYear] = useState("");
+  const [month, setMonth] = useState("");
 
   const config = {
     headers: {
@@ -28,29 +29,24 @@ export const Summary = () => {
       .get("http://localhost:3000/salesOrderDate", config)
       .then((res) => {
         if (res.data.result) {
-          console.log(res.data.result);
-          setSales(res.data.result);
+          let result = res.data.result;
+          setSales(
+            result.sort((venta1, venta2) => {
+              return venta2.date - venta1.date;
+            })
+          );
+          console.log(result);
           // setTotal(res.data.salesAmount);
         }
       })
       .catch((err) => console.log(err));
   }, []);
 
- 
-  useEffect(() => {
-    console.log(sales);
-  }, [sales]);
-
-
-  // listaVentas.sort((venta1, venta2) => {
-  //   return venta2.fecha - venta1.fecha;
-  // });
-  
   if (sales.length > 0) {
     return (
       <div className="main-content">
         <Navbar />
-        <Searcher/>
+        <Searcher />
         <table id="tableSales" className="table">
           <thead>
             <tr>
@@ -58,20 +54,26 @@ export const Summary = () => {
               <th>Mes</th>
               <th>Cantidad de ventas</th>
               <th>Monto Mensual</th>
-
             </tr>
           </thead>
           <tbody className="table-group-divider">
-            
             {sales &&
               sales.map((value, index) => (
-              
                 <tr key={index}>
                   <td>{value._id.year}</td>
-                  <td>{Diccionary.Months.values[value._id.month-1]}</td>
+                  <td>{Diccionary.Months.values[value._id.month - 1]}</td>
                   <td>{value.count}</td>
                   <td>{value.total}</td>
-                  <td><button id="btn">Ver ventas</button></td>
+                  <td>
+                    <button
+                      id="btn"
+                      onClick={() =>
+                        navigate("detailsSummary/", { state: { year:value._id.year, month:value._id.month} })
+                      }
+                    >
+                      Ver ventas
+                    </button>
+                  </td>
                 </tr>
               ))}
           </tbody>

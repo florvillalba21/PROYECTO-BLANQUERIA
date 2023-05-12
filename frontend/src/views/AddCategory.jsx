@@ -13,7 +13,6 @@ export const AddCategory = () => {
   const { token } = useContext(ContextAuth);
   const inpName = useRef();
   const inpDescription = useRef();
-  const inpSubcategories = useRef();
   const [showAlert, setShowAlert] = useState(false);
   const [res, setRes] = useState({});
 
@@ -35,7 +34,6 @@ export const AddCategory = () => {
 
     formData.append("name", inpName.current.value); //append the values with key, value pair
     formData.append("description", inpDescription.current.value);
-    formData.append("subCategories", inpSubcategories.current.value);
     if (image.length > 0) {
       formData.append("image", image[0]);
     }
@@ -79,16 +77,6 @@ export const AddCategory = () => {
               className="form-control"
               type="text"
               placeholder="Aqui puede describir la categoria..."
-            />
-          </div>
-
-          <div id="divForm">
-            <input
-              ref={inpSubcategories}
-              className="form-control"
-              type="text"
-              id="nameProduct"
-              placeholder="Ej:De baño, etc..."
             />
           </div>
 
