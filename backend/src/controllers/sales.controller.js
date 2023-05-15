@@ -6,7 +6,7 @@ ctrlSales = {};
 
 //metodo para agregar una nueva venta
 ctrlSales.newSale = async (req, res) => {
-  const { products, details, date, paymentMethod, totalAmount } = req.body;
+  const { products, date, paymentMethod, totalAmount } = req.body;
 
   if (products.length > 0) {
     const updateQuantity = async (productId, quant) => {
@@ -37,7 +37,6 @@ ctrlSales.newSale = async (req, res) => {
     const newSale = new Sale({
       serialNumber,
       products,
-      details,
       date,
       paymentMethod,
       totalAmount,

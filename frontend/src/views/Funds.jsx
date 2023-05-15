@@ -65,7 +65,7 @@ export const Funds = () => {
               return (
                 <tr key={index}>
                   <td> {formatedDate}</td>
-                  <td> {value.amount}</td>
+                  <td> 💲{value.amount}</td>
                 </tr>
               );
             })}

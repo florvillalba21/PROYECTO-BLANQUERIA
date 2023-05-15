@@ -49,6 +49,7 @@ export const ModalDelete = ({id}) => {
       .then((res) => {
         setRes(res.data.ok);
         setShowAlert(true);
+        setTimeout(()=>{window.location.reload()}, 1000)
       })
       .catch((err) => console.log(err));
   };
@@ -143,7 +144,7 @@ export const ModalDelete = ({id}) => {
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
-                Cancelar
+                Cerrar
               </button>
               <button type="button" id="btn" onClick={savedChanges}>
                 Eliminar

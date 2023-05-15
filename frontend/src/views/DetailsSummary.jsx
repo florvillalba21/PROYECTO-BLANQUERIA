@@ -5,6 +5,8 @@ import { Navbar } from "../components/layout/Navbar";
 import { Searcher } from "../components/layout/Searcher";
 import { Footer } from "../components/layout/Footer";
 import { useLocation } from "react-router-dom";
+import { format } from "date-fns";
+import esLocale from "date-fns/locale/es";
 
 export const DetailsSummary = () => {
   const { state } = useLocation();
@@ -26,9 +28,7 @@ export const DetailsSummary = () => {
     axios
       .get("http://localhost:3000/salesForDate", config)
       .then((res) => {
-        res.data.filterSales.length > 0 && (
-            setFilterSales(res.data.filterSales))
-            console.log(res.data.filterSales);
+        res.data.filterSales.length > 0 && setFilterSales( res.data.filterSales.toReversed());
       })
       .catch((err) => console.log(err));
   }, []);
@@ -42,31 +42,41 @@ export const DetailsSummary = () => {
           <thead>
             <tr>
               <th>Numero serial</th>
+              <th>Fecha</th>
               <th>Productos</th>
-              <th>Detalles</th>
               <th>Metodo de pago</th>
               <th>Monto</th>
-              <th>Fecha</th>
+              
             </tr>
           </thead>
           <tbody className="table-group-divider">
             {filterSales &&
               filterSales.map((value, index) => {
+                const date = new Date(value.date);
+                const formatedDate = format(
+                  date,
+                  "EEEE, dd 'de' MMMM 'de' yyyy",
+                  { locale: esLocale }
+                );
                 return (
                   <tr key={index}>
                     <td>{value.serialNumber}</td>
+                    <td>{formatedDate}</td>
                     <td>
                       {value.products.map((value, key) => (
-                        <tr key={key} style={{margin: '0'}}>
-                          <td>{value.name}</td>
-                          <td>{value.quantity}</td>
-                        </tr>
+                        <ul key={key}>
+                          <li className="list-group-item d-flex justify-content-between align-items-start">
+                            {value.name}{" "}
+                            <span className="badge bg-secondary rounded-pill">
+                              {value.quantity}
+                            </span>
+                          </li>
+                        </ul>
                       ))}
                     </td>
-                    <td>{value.details}</td>
                     <td>{value.paymentMethod}</td>
-                    <td>{value.totalAmount}</td>
-                    <td>{value.date}</td>
+                    <td>${value.totalAmount}</td>
+                    
                   </tr>
                 );
               })}

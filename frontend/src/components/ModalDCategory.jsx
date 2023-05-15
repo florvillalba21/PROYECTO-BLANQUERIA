@@ -21,6 +21,8 @@ export const ModalDCategory = ({ id }) => {
       .then((res) => {
         setRes(res.data.ok);
         setShowAlert(true);
+        setTimeout(()=>{window.location.reload()}, 1000)
+        ;
       })
       .catch((err) => console.log(err));
   };

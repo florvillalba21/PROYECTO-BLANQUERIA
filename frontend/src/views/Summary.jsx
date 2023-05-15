@@ -14,8 +14,7 @@ export const Summary = () => {
   const { token } = useContext(ContextAuth);
   const navigate = useNavigate();
   const [sales, setSales] = useState([]);
-  const [year, setYear] = useState("");
-  const [month, setMonth] = useState("");
+
 
   const config = {
     headers: {
@@ -29,13 +28,8 @@ export const Summary = () => {
       .get("http://localhost:3000/salesOrderDate", config)
       .then((res) => {
         if (res.data.result) {
-          let result = res.data.result;
-          setSales(
-            result.sort((venta1, venta2) => {
-              return venta2.date - venta1.date;
-            })
-          );
-          console.log(result);
+          let result = res.data.result.toReversed();
+          setSales(result);
           // setTotal(res.data.salesAmount);
         }
       })
@@ -49,26 +43,32 @@ export const Summary = () => {
         <Searcher />
         <table id="tableSales" className="table">
           <thead>
-            <tr>
-              <th>Año</th>
-              <th>Mes</th>
-              <th>Cantidad de ventas</th>
-              <th>Monto Mensual</th>
+            <tr className="row">
+              <th className="col">Año</th>
+              <th className="col">Mes</th>
+              <th className="col">Cantidad de ventas</th>
+              <th className="col">Monto Mensual</th>
+              <th className="col">Detalle del resumen</th>
             </tr>
           </thead>
           <tbody className="table-group-divider">
             {sales &&
               sales.map((value, index) => (
-                <tr key={index}>
-                  <td>{value._id.year}</td>
-                  <td>{Diccionary.Months.values[value._id.month - 1]}</td>
-                  <td>{value.count}</td>
-                  <td>{value.total}</td>
-                  <td>
+                <tr key={index} className="row">
+                  <td  className="col">{value._id.year}</td>
+                  <td className="col">{Diccionary.Months.values[value._id.month - 1]}</td>
+                  <td className="col">{value.count}</td>
+                  <td className="col">${value.total}</td>
+                  <td className="col">
                     <button
                       id="btn"
                       onClick={() =>
-                        navigate("detailsSummary/", { state: { year:value._id.year, month:value._id.month} })
+                        navigate("detailsSummary/", {
+                          state: {
+                            year: value._id.year,
+                            month: value._id.month,
+                          },
+                        })
                       }
                     >
                       Ver ventas

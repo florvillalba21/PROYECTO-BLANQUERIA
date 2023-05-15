@@ -13,6 +13,7 @@ export const FormFact = () => {
   const [detCart, setDet] = useState([]);
   const { token } = useContext(ContextAuth);
   let [amount, setAmount] = useState(0);
+  let [adv, setAdv] = useState("primary");
 
   const inpDetails = useRef();
   const selectMethod = useRef();
@@ -78,10 +79,10 @@ export const FormFact = () => {
         "x-access-token": token,
       },
     };
+    console.log(detCart);
 
     const data = {
       products: detCart,
-      details: inpDetails.current.value,
       date: new Date(),
       paymentMethod: selectMethod.current.value,
       totalAmount: amount,
@@ -111,13 +112,14 @@ export const FormFact = () => {
             setFilter(e.target.value);
           }}
         >
-          {categories.length >0 &&categories.map((value, index) => {
-            return (
-              <option key={index} value={value.name}>
-                {value.name}
-              </option>
-            );
-          })}
+          {categories.length > 0 &&
+            categories.map((value, index) => {
+              return (
+                <option key={index} value={value.name}>
+                  {value.name}
+                </option>
+              );
+            })}
         </select>
         <br />
         <div className="list-group">
@@ -128,12 +130,19 @@ export const FormFact = () => {
                   return (
                     <li
                       key={index}
-                      className="list-group-item list-group-item-action"
+                      className="list-group-item d-flex justify-content-between align-items-start"
                       onClick={() => {
                         addToCart(value);
                       }}
                     >
-                      {value.name} {value.stock}
+                      {value.name}
+                      <span
+                        className={`badge rounded-pill ${
+                          value.stock === 1 ? "bg-danger" : "bg-secondary"
+                        }`}
+                      >
+                        {value.stock}
+                      </span>
                     </li>
                   );
                 }
@@ -141,7 +150,7 @@ export const FormFact = () => {
             : ""}
         </div>
         <br />
-
+{/* 
         <div>
           <b>Detalla la venta:</b>
           <textarea
@@ -151,7 +160,7 @@ export const FormFact = () => {
           />
         </div>
 
-        <br />
+        <br /> */}
         <div className="row">
           <div className="col">
             <b>Monto total:</b>

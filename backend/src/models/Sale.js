@@ -10,10 +10,6 @@ const SalesSchema = Schema({
         type: Array,
         required: true
     },
-    details: {
-        type: String,
-        required: false
-    },
     date:{
         type: Date,
     },

@@ -22,7 +22,7 @@ export const Searcher = () => {
         <div className="row justify-content-md-center">
           <Link
             style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
-            to="funds/"
+            to="/home/summary/funds"
             className="col-md-auto"
           >
             <b>Ver retiros realizados</b>

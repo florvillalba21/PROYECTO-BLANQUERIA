@@ -52,6 +52,7 @@ export const ModalEdit = ({ id }) => {
       .then((res) => {
         setRes(res.data.ok);
         setShowAlert(true);
+        setTimeout(()=>{window.location.reload()}, 1000)
 
       })
       .catch((err) => console.log(err));
@@ -144,10 +145,10 @@ export const ModalEdit = ({ id }) => {
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
-                Close
+                Cerrar
               </button>
               <button type="button" id="btn" onClick={savedChanges}>
-                Save changes
+                Guardar cambios
               </button>
             </div>
             <br />

@@ -33,6 +33,7 @@ export const CardInventory = () => {
                   <img src={value.imgURL} className="card-img-top" />
                   <div className="card-body">
                     <h5 className="card-title">{"Ver " + value.name}</h5>
+                    <p className="card-text">{value.description}</p>
                   </div>
                   <div className="icons-container">
                     <Link

@@ -17,10 +17,10 @@ router.get("/Products", getProducts);
 
 router.get("/ProductsF/:filter", getProductByFilter);
 
-router.get("/getProduct/:id",verifyToken,isAdmin, getProductById);
+router.get("/getProduct/:id",verifyToken, getProductById);
 
 
-router.post("/Products",verifyToken,isAdmin, createProduct);
+router.post("/Products",verifyToken, createProduct);
 
 
 router.put("/updateProduct/:productId",verifyToken,isAdmin, updateProductById);
