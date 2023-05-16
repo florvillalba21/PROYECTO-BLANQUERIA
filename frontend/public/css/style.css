@@ -186,3 +186,7 @@ div#cardInventory {
   width: 60%;
   margin-left: -26px;
 }
+
+.card-container-image{
+  height: 12rem;
+}

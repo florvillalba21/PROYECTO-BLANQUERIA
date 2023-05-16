@@ -8,6 +8,7 @@ export const CardHome = ({ tittle, description, action, url, img }) => {
         to={url}
         style={{ textDecoration: "none", margin: 15}}
         className="shadow col-3"
+        title={`Ir a ${tittle}`}
       >
         <div className="container" id="cardHome">
           <div className="card-body row justify-content-md-center">

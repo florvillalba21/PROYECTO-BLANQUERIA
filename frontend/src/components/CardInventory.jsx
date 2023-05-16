@@ -21,6 +21,7 @@ export const CardInventory = () => {
           data.map((value, index) => {
             return (
               <Link
+                title={`Ir a la sección de ${value.name}`}
                 className="shadow col-md-auto"
                 style={{ textDecoration: "none", margin: 10, padding: 20 }}
                 to={"Products/" + value.name}
@@ -30,26 +31,31 @@ export const CardInventory = () => {
                   id="cardInventory"
                   style={{ width: "14rem", textAlign: "center" }}
                 >
-                  <img src={value.imgURL} className="card-img-top" />
+                  <div className="card-container-image">
+                    <img src={value.imgURL} className="card-img-top" />
+                  </div>
+
                   <div className="card-body">
                     <h5 className="card-title">{"Ver " + value.name}</h5>
                     <p className="card-text">{value.description}</p>
                   </div>
-                  <div className="icons-container">
+                  <div className="icons-container float-end">
                     <Link
                       onClick={() => setIdEdit(value._id)}
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal1"
+                      title="Editar categoría"
                     >
-                      <img src={editIcon} width={"20px"} />
+                      <img src={editIcon} width={"30px"} />
                     </Link>
 
                     <Link
                       onClick={() => setIdDelete(value._id)}
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal2"
+                      title="Eliminar categoría"
                     >
-                      <img src={deleteIcon} width={"20px"} />
+                      <img src={deleteIcon} width={"30px"} />
                     </Link>
                   </div>
                 </div>
