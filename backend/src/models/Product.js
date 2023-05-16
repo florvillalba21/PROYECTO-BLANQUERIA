@@ -27,7 +27,7 @@ const ProductSchema = Schema({
         type: String,
         required:true
     },
-    userVenta:{
+    productOwner:{
         type:Schema.Types.ObjectId,
         ref:"User"
     }

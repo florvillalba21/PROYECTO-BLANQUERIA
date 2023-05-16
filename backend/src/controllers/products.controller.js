@@ -18,6 +18,8 @@ const fs = require("fs-extra");
 ctrlProducts.createProduct = async (req, res) => {
   const { name, category, costPrice, sellPrice, stock } = req.body;
 
+  const productOwner = req.user._id;
+
   if ((name, category, costPrice, sellPrice, stock)) {
     const result = await cloudinary.v2.uploader.upload(req.file.path);
 
@@ -30,6 +32,7 @@ ctrlProducts.createProduct = async (req, res) => {
       sellPrice,
       stock,
       imgURL,
+      productOwner
     });
 
     try {

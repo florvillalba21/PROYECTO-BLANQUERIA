@@ -89,15 +89,75 @@ ctrlSales.getSalesOrderDate = async (req, res) => {
   }
 };
 
-ctrlSales.getSalesForUserId = async (req, res) => {
-  const userVenta = req.user._id; //toma el id del usuario ingresado
+ctrlSales.getAmountForUser = async (req, res) => {
+  try {
+    const userId = req.user._id; // Toma el ID del usuario ingresado
 
-  const filterSales = await Sale.find({ userVenta });
+    const ventas = await Sale.find().lean(); // Obtenemos las ventas del usuario
 
-  return res.json({
-    message: `Ventas del usuario ${req.user.username}`,
-    filterSales,
-  });
+    const sumaTotal = ventas.reduce((total, venta) => {
+      const productosUsuario = venta.products.filter(
+        (producto) => producto.productOwner.toString() === userId.toString()
+      );
+      const sumaVenta = productosUsuario.reduce(
+        (suma, producto) => suma + producto.sellPrice,
+        0
+      );
+      return total + sumaVenta;
+    }, 0);
+
+    res.json({
+      ok: true,
+      msg: `Suma de productos del usuario ${req.user.username}`,
+      productsUserAmount: sumaTotal,
+    });
+  } catch (error) {
+    res.json({
+      ok: false,
+      msg: error,
+    });
+  }
+};
+
+ctrlSales.getAmountForUserAndDate = async (req, res) => {
+  try {
+    const userId = req.user._id.toString(); // Toma el ID del usuario ingresado
+    console.log(userId);
+
+    Sale.aggregate([
+      {
+        $unwind: "$products", // Desenrollar el array de productos
+      },
+      {
+        $match: { "products.productOwner": userId }, // Filtrar los productos del usuario
+      },
+      {
+        $group: {
+          _id: { year: { $year: "$date" }, month: { $month: "$date" } },
+          productUserAmount: { $sum: "$products.sellPrice" }, // Sumar el sellPrice de los productos del usuario
+        },
+      },
+      { $sort: { "_id.year": 1, "_id.month": 1 } },
+    ]).then((result) => {
+      console.log(result);
+      if (result.length > 0) {
+        res.json({
+          ok: true,
+          result: result,
+        });
+      } else {
+        res.json({
+          ok: false,
+          msg: "No existen ventas registradas",
+        });
+      }
+    });
+  } catch (error) {
+    res.json({
+      ok: false,
+      msg: error,
+    });
+  }
 };
 
 ctrlSales.getSalesForDate = async (req, res) => {
