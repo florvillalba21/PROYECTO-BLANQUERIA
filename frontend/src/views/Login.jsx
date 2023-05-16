@@ -1,16 +1,18 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Alert from "../components/Alert";
+import { ContextAuth } from "../context/AuthContext";
 
 export const Login = () => {
   const navigate = useNavigate();
   const inpUsername = useRef();
   const [showAlert, setShowAlert] = useState(false);
+  const { login } = useContext(ContextAuth);
 
   //Funcion para loguear
   const loguear = async (e) => {
-    e.preventDefault;
+    e.preventDefault();
 
     //instanciamos los datos que utilizaremos en la peticion con axios
     const url = "http://localhost:3000/signin";
@@ -24,11 +26,8 @@ export const Login = () => {
       const token = res.data.token;
 
       if (token) {
-        localStorage.setItem("token", token);
-
-        if (localStorage.getItem("token")) {
-          navigate("/home");
-        }
+        login(token, inpUsername.current.value);
+        navigate("/home");
       }
     } catch (error) {
       setShowAlert(true);

@@ -36,9 +36,9 @@ div.login {
   border-radius: 5px;
   border: 0;
   margin: 30px;
-  margin-left: 70px;
+
   text-decoration-color: #55889e;
-  width: 75%;
+  width: 90%;
 }
 
 #btnLogin {
@@ -93,18 +93,13 @@ div#cardHome.card-body {
   height: 2.4em;
   border-radius: 5px;
 }
-#body {
-  margin: 0;
-}
+
 
 /* estilos para las card de inventario */
 div#cardInventory {
   color: #2f3559;
 }
 
-/* .card-body {
-  height: 5rem;
-} */
 
 #cardFormProduct {
   width: 40%;
@@ -130,18 +125,15 @@ div#cardInventory {
   padding: 10px;
 }
 
-table {
-  margin: 10px;
-}
+
 
 #tableSales {
+  margin-left: 10px;
   color: #2f3559;
-  margin: 20px;
-  width: 90%;
   border-color: #c6e5d9;
 }
 #tableSales td {
-  padding: 1.5em;
+  padding-top: 1em;
 }
 
 #monto {
@@ -179,3 +171,18 @@ table {
 
 }
 
+.card-title{
+  margin-top: 5px;
+}
+
+.message{
+  margin: 20px;
+  text-align: center;
+  color: #2f3559;
+}
+
+
+.table-group-divider tr td ul{
+  width: 60%;
+  margin-left: -26px;
+}

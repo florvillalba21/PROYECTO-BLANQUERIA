@@ -17,19 +17,19 @@ export const AddProducts = () => {
   const inpStock = useRef();
   const [showAlert, setShowAlert] = useState(false);
   const [res, setRes] = useState({});
+  const config = {
+    headers: {
+      "content-type": "multipart/form-data",
+      "x-access-token": token,
+    },
+  };
 
   const upload = async (e) => {
     e.preventDefault();
 
     //configuracion para la peticion
     const url = "http://localhost:3000/Products";
-    const config = {
-      headers: {
-        "content-type": "multipart/form-data",
-        "x-access-token": token,
-      },
-    };
-
+    
     //se define los campos y su valores q se enviarán en la peticion con el FormData
     let formData = new FormData(); //formdata object
 
@@ -57,7 +57,7 @@ export const AddProducts = () => {
   //realizamos una peticion solicitando todas las catregorias para el select
   useEffect(() => {
     axios
-      .get("http://localhost:3000/Categories")
+      .get("http://localhost:3000/Categories", config)
       .then((result) => {
         setData(result.data);
       })
@@ -68,11 +68,14 @@ export const AddProducts = () => {
   return (
     <div className="main-content">
       <Navbar />
-      <Description text="En esta sección dispones de un formulario para cargar un nuevo producto."/>
+      <Description text="En esta sección dispones de un formulario para cargar un nuevo producto." />
       <br />
       <div id="cardFormProduct" className=" shadow">
         <div id="tittleFormProduct">
-          <h2>Detalla tu nuevo producto <img src="../../public/icons/tag.svg" width="40px" /></h2>
+          <h2>
+            Detalla tu nuevo producto{" "}
+            <img src="../../public/icons/tag.svg" width="40px" />
+          </h2>
         </div>
 
         <form action="">
@@ -91,13 +94,14 @@ export const AddProducts = () => {
               className="form-select"
               aria-label="Default select example"
             >
-              {data.map((value, index) => {
-                return (
-                  <option key={index} value={value.name}>
-                    {value.name}
-                  </option>
-                );
-              })}
+              {data.length > 0 &&
+                data.map((value, index) => {
+                  return (
+                    <option key={index} value={value.name}>
+                      {value.name}
+                    </option>
+                  );
+                })}
             </select>
           </div>
           <div id="divForm">

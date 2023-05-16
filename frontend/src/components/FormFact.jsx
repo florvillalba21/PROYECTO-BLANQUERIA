@@ -13,16 +13,25 @@ export const FormFact = () => {
   const [detCart, setDet] = useState([]);
   const { token } = useContext(ContextAuth);
   let [amount, setAmount] = useState(0);
+  let [adv, setAdv] = useState("primary");
 
   const inpDetails = useRef();
   const selectMethod = useRef();
+  const config = {
+    headers: {
+      "content-type": "multipart/form-data",
+      "x-access-token": token,
+    },
+  };
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/Categories")
+      .get("http://localhost:3000/Categories", config)
       .then((res) => {
-        setCategories(res.data);
-        setFilter(res.data[0].name);
+        if (res.data[0]) {
+          setCategories(res.data);
+          setFilter(res.data[0].name);
+        }
       })
       .catch((err) => console.log(err));
   }, []);
@@ -30,7 +39,7 @@ export const FormFact = () => {
   useEffect(() => {
     if (filter != "") {
       axios
-        .get(`http://localhost:3000/ProductsF/${filter}`)
+        .get(`http://localhost:3000/ProductsF/${filter}`, config)
         .then((res) => setProducts(res.data));
     }
   }, [filter]);
@@ -38,7 +47,6 @@ export const FormFact = () => {
   const addToCart = (product) => {
     setCart((items) => [...items, product]);
   };
-  
 
   useEffect(() => {
     let aux = 0;
@@ -71,10 +79,10 @@ export const FormFact = () => {
         "x-access-token": token,
       },
     };
+    console.log(detCart);
 
     const data = {
       products: detCart,
-      details: inpDetails.current.value,
       date: new Date(),
       paymentMethod: selectMethod.current.value,
       totalAmount: amount,
@@ -104,13 +112,14 @@ export const FormFact = () => {
             setFilter(e.target.value);
           }}
         >
-          {categories.map((value, index) => {
-            return (
-              <option key={index} value={value.name}>
-                {value.name}
-              </option>
-            );
-          })}
+          {categories.length > 0 &&
+            categories.map((value, index) => {
+              return (
+                <option key={index} value={value.name}>
+                  {value.name}
+                </option>
+              );
+            })}
         </select>
         <br />
         <div className="list-group">
@@ -121,12 +130,19 @@ export const FormFact = () => {
                   return (
                     <li
                       key={index}
-                      className="list-group-item list-group-item-action"
+                      className="list-group-item d-flex justify-content-between align-items-start"
                       onClick={() => {
                         addToCart(value);
                       }}
                     >
-                      {value.name}                     {value.stock}
+                      {value.name}
+                      <span
+                        className={`badge rounded-pill ${
+                          value.stock === 1 ? "bg-danger" : "bg-secondary"
+                        }`}
+                      >
+                        {value.stock}
+                      </span>
                     </li>
                   );
                 }
@@ -134,7 +150,7 @@ export const FormFact = () => {
             : ""}
         </div>
         <br />
-
+{/* 
         <div>
           <b>Detalla la venta:</b>
           <textarea
@@ -144,7 +160,7 @@ export const FormFact = () => {
           />
         </div>
 
-        <br />
+        <br /> */}
         <div className="row">
           <div className="col">
             <b>Monto total:</b>
@@ -171,7 +187,11 @@ export const FormFact = () => {
               onClick={addSell}
               className="btn btn-primary"
               type="button"
-              style={{ backgroundColor: "#c6e5d9", border: "0", color: '#2f3559' }}
+              style={{
+                backgroundColor: "#c6e5d9",
+                border: "0",
+                color: "#2f3559",
+              }}
             >
               Registrar la venta
             </button>
@@ -198,7 +218,10 @@ export const FormFact = () => {
       <div className="col border" id="fact">
         <div className="row">
           <i className="d-flex flex-row" style={{ margin: "10px" }}>
-            <img src="../../public/icons/shopping-cart (1).svg" width={'30px'}/>
+            <img
+              src="../../public/icons/shopping-cart (1).svg"
+              width={"30px"}
+            />
           </i>
 
           <table>
