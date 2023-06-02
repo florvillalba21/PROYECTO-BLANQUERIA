@@ -59,12 +59,14 @@ export const FormFact = () => {
   useEffect(() => {
     setDet(
       cart.reduce((products, product) => {
-        const { _id, name, sellPrice } = product;
+        const { _id, name, sellPrice,costPrice, 
+          productOwner
+           } = product;
         const existingProduct = products.find((p) => p._id === _id);
         if (existingProduct) {
           existingProduct.quantity++;
         } else {
-          products.push({ _id, name, quantity: 1, sellPrice });
+          products.push({ _id, name, quantity: 1, sellPrice,costPrice, productOwner });
         }
         return products;
       }, [])

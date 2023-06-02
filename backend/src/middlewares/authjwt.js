@@ -11,7 +11,7 @@ try {
 
     const token = req.headers["x-access-token"]
 
-    console.log(token)
+    // console.log(token)
     //si el token no existe
     if(!token) return res.json({msg:"No token provided"})
 

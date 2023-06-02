@@ -10,6 +10,7 @@ import { Summary } from "../views/Summary";
 import { Withdrawals } from "../views/Withdrawals";
 import { Funds } from "../views/Funds";
 import { DetailsSummary } from "../views/DetailsSummary";
+import { DetailsMySales } from "../views/DetailsMySales";
 
 
 export const Dashboard = () => {
@@ -21,6 +22,7 @@ export const Dashboard = () => {
         <Route path="home/sell" element={<Sell />} />
         <Route path="home/summary" element={<Summary />} />
         <Route path="home/summary/detailsSummary" element={<DetailsSummary/>} />
+        <Route path="home/summary/detailsMySales" element={<DetailsMySales/>} />
         <Route path="home/summary/funds" element={<Funds />} />
         <Route path="home/withdrawals" element={<Withdrawals/>} />
         <Route path="home/addProduct" element={<AddProducts />} />

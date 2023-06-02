@@ -87,11 +87,10 @@ ctrlSales.getSalesOrderDate = async (req, res) => {
     console.log(error);
   }
 };
-
 ctrlSales.getAmountForUser = async (req, res) => {
   try {
-    const userId = req.user._id; // Toma el ID del usuario ingresado
-
+    const userId = req.user._id; 
+   
     const ventas = await Sale.find().lean(); // Obtenemos las ventas del usuario
 
     const sumaTotal = ventas.reduce((total, venta) => {
@@ -105,6 +104,7 @@ ctrlSales.getAmountForUser = async (req, res) => {
       return total + sumaVenta;
     }, 0);
 
+    console.log(sumaTotal)
     res.json({
       ok: true,
       msg: `Suma de productos del usuario ${req.user.username}`,
@@ -118,22 +118,57 @@ ctrlSales.getAmountForUser = async (req, res) => {
   }
 };
 
+
 ctrlSales.getAmountForUserAndDate = async (req, res) => {
   try {
-    const userId = req.user._id.toString(); // Toma el ID del usuario ingresado
-    console.log(userId);
+    const userId = req.user._id.toString();
+    const { month, year } = req.query;
+
+    const regex = new RegExp(`\\b${month}\\b.*\\b${year}\\b`, "i");
+    const startDate = new Date(year, month - 1, 1);
+    const endDate = new Date(year, month, 0);
 
     Sale.aggregate([
       {
-        $unwind: "$products", // Desenrollar el array de productos
+        $match: {
+          "products.productOwner": userId,
+          date: {
+            $gte: startDate,
+            $lte: endDate,
+          },
+        },
       },
       {
-        $match: { "products.productOwner": userId }, // Filtrar los productos del usuario
+        $unwind: "$products",
       },
       {
         $group: {
-          _id: { year: { $year: "$date" }, month: { $month: "$date" } },
-          productUserAmount: { $sum: "$products.sellPrice" }, // Sumar el sellPrice de los productos del usuario
+          _id: {
+            year: { $year: "$date" },
+            month: { $month: "$date" },
+            product: "$products.name",
+          },
+          totalSellPrice: { $sum: { $multiply: ["$products.sellPrice", "$products.quantity"] } },
+          totalCostPrice: { $sum: { $multiply: ["$products.costPrice", "$products.quantity"] } },
+          totalQuantity: { $sum: "$products.quantity" },
+        },
+      },
+      {
+        $group: {
+          _id: {
+            year: "$_id.year",
+            month: "$_id.month",
+          },
+          products: {
+            $push: {
+              product: "$_id.product",
+              totalSellPrice: "$totalSellPrice",
+              totalCostPrice: "$totalCostPrice",
+              totalQuantity: "$totalQuantity",
+              difference: { $subtract: ["$totalSellPrice", "$totalCostPrice"] },
+            },
+          },
+          totalAmount: { $sum: "$totalSellPrice" },
         },
       },
       { $sort: { "_id.year": 1, "_id.month": 1 } },
@@ -158,6 +193,10 @@ ctrlSales.getAmountForUserAndDate = async (req, res) => {
     });
   }
 };
+
+
+
+
 
 ctrlSales.getSalesForDate = async (req, res) => {
   const { month, year } = req.query;

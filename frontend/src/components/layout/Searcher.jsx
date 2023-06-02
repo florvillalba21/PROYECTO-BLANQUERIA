@@ -25,7 +25,7 @@ export const Searcher = () => {
             to="/home/summary/funds"
             className="col-md-auto"
           >
-            <b>Ver retiros realizados</b>
+            {/* <b>Ver retiros realizados</b> */}
           </Link>
         </div>
         </div>

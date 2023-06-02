@@ -16,8 +16,7 @@ const verifyToken = require("../middlewares/authjwt");
 
 
 //Rutas de los productos
-router.get("/sales",verifyToken, getAmountForUser);
-router.get("/salesAmountAndDate",verifyToken, getAmountForUserAndDate);
+router.get("/salesForUser",verifyToken, getAmountForUserAndDate);
 
 router.get("/allSales",verifyToken, getSales);
 
