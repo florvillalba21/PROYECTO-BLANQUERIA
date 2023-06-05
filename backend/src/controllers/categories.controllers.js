@@ -16,9 +16,11 @@ ctrlCategories.createCategory = async (req, res) => {
   const { name, description} = req.body;
 
   if(name){
+    
     const result = await cloudinary.v2.uploader.upload(req.file.path);
 
     imgURL = result.url;
+    
     const newCategory = new Category({
       name,
       description,

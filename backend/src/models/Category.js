@@ -12,7 +12,8 @@ const CategoriesSchema = new Schema
       required: false
     },
     imgURL:{
-      type: String
+      type: String,
+      required:false
     }
   },
   { versionKey: false });
