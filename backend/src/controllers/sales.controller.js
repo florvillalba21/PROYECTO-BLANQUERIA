@@ -142,6 +142,22 @@ ctrlSales.getAmountForUserAndDate = async (req, res) => {
         $unwind: "$products",
       },
       {
+        $lookup: {
+          from: "products",
+          localField: "products._id",
+          foreignField: "_id",
+          as: "productDetails",
+        },
+      },
+      {
+        $unwind: "$productDetails",
+      },
+      {
+        $match: {
+          "productDetails.productOwner": userId,
+        },
+      },
+      {
         $group: {
           _id: {
             year: { $year: "$date" },
@@ -175,9 +191,15 @@ ctrlSales.getAmountForUserAndDate = async (req, res) => {
     ]).then((result) => {
       console.log(result);
       if (result.length > 0) {
+        // Filtrar los productos vendidos del usuario conectado
+        const filteredResult = result.map((item) => {
+          const filteredProducts = item.products.filter((product) => product.productOwner === userId);
+          return { ...item, products: filteredProducts };
+        });
+
         res.json({
           ok: true,
-          result: result,
+          result: filteredResult,
         });
       } else {
         res.json({
@@ -193,6 +215,8 @@ ctrlSales.getAmountForUserAndDate = async (req, res) => {
     });
   }
 };
+
+
 
 
 

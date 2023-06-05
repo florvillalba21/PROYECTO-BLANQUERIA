@@ -27,8 +27,8 @@ export const DetailsMySales = () => {
     axios
       .get("http://localhost:3000/salesForUser", config)
       .then((res) => {
-        res.data.result[0].products.length > 0 && setMyProducts(res.data.result[0].products)
-        console.log(res.data.result[0].products)
+        // res.data.result[0].products.length > 0 && setMyProducts(res.data.result[0].products)
+        console.log(res.data)
       })
       .catch((err) => console.log(err));
   }, []);
@@ -52,7 +52,7 @@ export const DetailsMySales = () => {
             </tr>
           </thead>
           <tbody className="table-group-divider">
-            {
+            {/* {
               myProducts.map((value, index) => {
 
                 return (
@@ -64,7 +64,7 @@ export const DetailsMySales = () => {
                     <td>${value.difference}</td>
                   </tr>
                 );
-              })}
+              })} */}
           </tbody>
         </table>
         <div id="monto">{/* <h4>Monto de ventas: {total}</h4> */}</div>

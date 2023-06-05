@@ -48,6 +48,7 @@ export const FormFact = () => {
     setCart((items) => [...items, product]);
   };
 
+
   useEffect(() => {
     let aux = 0;
     detCart.map((value, index) => {
@@ -66,6 +67,7 @@ export const FormFact = () => {
         if (existingProduct) {
           existingProduct.quantity++;
         } else {
+       
           products.push({ _id, name, quantity: 1, sellPrice,costPrice, productOwner });
         }
         return products;
