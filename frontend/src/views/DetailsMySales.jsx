@@ -6,7 +6,6 @@ import { Searcher } from "../components/layout/Searcher";
 import { Footer } from "../components/layout/Footer";
 import { useLocation } from "react-router-dom";
 
-
 export const DetailsMySales = () => {
   const { state } = useLocation();
   const { year, month } = state;
@@ -18,9 +17,9 @@ export const DetailsMySales = () => {
       "x-access-token": token,
     },
     params: {
-        year: year,
-        month: month,
-      },
+      year: year,
+      month: month,
+    },
   };
 
   useEffect(() => {
@@ -28,12 +27,11 @@ export const DetailsMySales = () => {
       .get("http://localhost:3000/salesForUser", config)
       .then((res) => {
         // res.data.result[0].products.length > 0 && setMyProducts(res.data.result[0].products)
-        console.log(res.data)
+        console.log(res.data.result[0].products);
+        res.data.result.length > 0 && setMyProducts(res.data.result[0].products);
       })
       .catch((err) => console.log(err));
   }, []);
-
-
 
   return (
     <>
@@ -48,28 +46,26 @@ export const DetailsMySales = () => {
               <th>Total de inversión</th>
               <th>Total de recaudación</th>
               <th>Ganancia</th>
-              
             </tr>
           </thead>
           <tbody className="table-group-divider">
-            {/* {
+            {
               myProducts.map((value, index) => {
 
                 return (
                   <tr key={index}>
-                    <td>{value.product}</td>
+                    <td>{value.product.name}</td>
                     <td>{value.totalQuantity}</td>
-                    <td>${value.totalCostPrice}</td>
-                    <td>${value.totalSellPrice}</td>
+                    <td>${value.costPriceAmount}</td>
+                    <td>${value.productUserAmount}</td>
                     <td>${value.difference}</td>
                   </tr>
                 );
-              })} */}
+              })}
           </tbody>
         </table>
         <div id="monto">{/* <h4>Monto de ventas: {total}</h4> */}</div>
 
-        <Footer />
       </div>
     </>
   );

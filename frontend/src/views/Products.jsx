@@ -39,7 +39,6 @@ export const Products = () => {
         <Message />
       )}
 
-      <Footer />
     </div>
   );
 };

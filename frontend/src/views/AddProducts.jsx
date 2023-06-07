@@ -161,9 +161,7 @@ export const AddProducts = () => {
           )}
         </div>
       </div>
-      <div>
-        <Footer />
-      </div>
+  
     </div>
   );
 };

@@ -40,7 +40,7 @@ export const Inventory = () => {
       <InventoryContext.Provider value={{data, setData}}>
           <CardInventory/>
       </InventoryContext.Provider>
-      <Footer/>
+     
     </div>
   );
 };

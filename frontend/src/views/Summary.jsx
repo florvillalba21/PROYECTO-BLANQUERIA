@@ -153,7 +153,7 @@ export const Summary = () => {
         </table>
         <div id="monto">{/* <h4>Monto de ventas: {total}</h4> */}</div>
 
-        <Footer />
+  
       </div>
     );
   }

@@ -9,7 +9,7 @@ export const Sell = () => {
     <div className="main-content">
       <Navbar />
       <FormFact />
-      <Footer />
+
     </div>
   );
 };

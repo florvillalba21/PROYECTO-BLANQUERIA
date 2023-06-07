@@ -114,9 +114,6 @@ export const AddCategory = () => {
           )}
         </div>
       </div>
-      <div>
-        <Footer />
-      </div>
     </div>
   );
 };

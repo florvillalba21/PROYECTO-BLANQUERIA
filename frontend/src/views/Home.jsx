@@ -63,7 +63,7 @@ export const Home = () => {
           img="../../public/icons/dollar-sign (1).svg"
         />
       </div>
-      <Footer />
+  
     </div>
   );
 };
