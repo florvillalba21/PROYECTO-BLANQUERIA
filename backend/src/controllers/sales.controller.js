@@ -220,8 +220,8 @@ ctrlSales.getAmountForUserAndDate = async (req, res) => {
     const userId = req.user._id.toString(); // Toma el ID del usuario ingresado
     console.log(userId);
 
-    const { mes, año } = req.body;
-    console.log(mes, año);
+    const { month, year } = req.query;
+    console.log(month, year);
 
     Sale.aggregate([
       {
@@ -241,7 +241,7 @@ ctrlSales.getAmountForUserAndDate = async (req, res) => {
         },
       },
       {
-        $match: { saleDate: `${año}-${mes}` },
+        $match: { saleDate: `${year}-${month}` },
       },
       {
         $group: {

@@ -22,14 +22,14 @@ export const Summary = () => {
       navigate("detailsMySales/", {
         state: {
           year: value._id.year,
-          month: value._id.month,
+          month: Diccionary.Months.indexs[value._id.month -1]
         },
       });
     } else if (selectedOption === "allSales") {
       navigate("detailsSummary/", {
         state: {
           year: value._id.year,
-          month: value._id.month,
+          month: Diccionary.Months.indexs[value._id.month -1]
         },
       });
     }
@@ -124,6 +124,7 @@ export const Summary = () => {
                   <td className="col">{value._id.year}</td>
                   <td className="col">
                     {Diccionary.Months.values[value._id.month - 1]}
+                    
                   </td>
                   <td className="col">{value.count}</td>
                   <td className="col">${value.total}</td>
