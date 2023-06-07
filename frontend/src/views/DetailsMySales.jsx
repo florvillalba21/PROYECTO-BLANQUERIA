@@ -28,7 +28,8 @@ export const DetailsMySales = () => {
       .then((res) => {
         // res.data.result[0].products.length > 0 && setMyProducts(res.data.result[0].products)
         console.log(res.data.result[0].products);
-        res.data.result.length > 0 && setMyProducts(res.data.result[0].products);
+        res.data.result.length > 0 &&
+          setMyProducts(res.data.result[0].products);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -38,20 +39,19 @@ export const DetailsMySales = () => {
       <div className="main-content">
         <Navbar />
         <Searcher />
-        <table id="tableSales" className="table">
-          <thead>
-            <tr>
-              <th>Nombre del producto</th>
-              <th>Cantidad vendidas</th>
-              <th>Total de inversión</th>
-              <th>Total de recaudación</th>
-              <th>Ganancia</th>
-            </tr>
-          </thead>
-          <tbody className="table-group-divider">
-            {
-              myProducts.map((value, index) => {
-
+        <div id="container-table">
+          <table id="tableSales" className="table shadow">
+            <thead>
+              <tr>
+                <th>Nombre del producto</th>
+                <th>Cantidad vendidas</th>
+                <th>Total de inversión</th>
+                <th>Total de recaudación</th>
+                <th>Ganancia</th>
+              </tr>
+            </thead>
+            <tbody>
+              {myProducts.map((value, index) => {
                 return (
                   <tr key={index}>
                     <td>{value.product.name}</td>
@@ -62,10 +62,11 @@ export const DetailsMySales = () => {
                   </tr>
                 );
               })}
-          </tbody>
-        </table>
-        <div id="monto">{/* <h4>Monto de ventas: {total}</h4> */}</div>
+            </tbody>
+          </table>
+        </div>
 
+        <div id="monto">{/* <h4>Monto de ventas: {total}</h4> */}</div>
       </div>
     </>
   );

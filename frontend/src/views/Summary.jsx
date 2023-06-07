@@ -22,14 +22,14 @@ export const Summary = () => {
       navigate("detailsMySales/", {
         state: {
           year: value._id.year,
-          month: Diccionary.Months.indexs[value._id.month -1]
+          month: Diccionary.Months.indexs[value._id.month - 1],
         },
       });
     } else if (selectedOption === "allSales") {
       navigate("detailsSummary/", {
         state: {
           year: value._id.year,
-          month: Diccionary.Months.indexs[value._id.month -1]
+          month: Diccionary.Months.indexs[value._id.month - 1],
         },
       });
     }
@@ -66,94 +66,92 @@ export const Summary = () => {
 
   if (sales.length > 0) {
     return (
-      <div className="main-content">
+      <div className="main-content justify-content-md-center">
         <Navbar />
         {/* <Searcher /> */}
-        <Description
-          text={
-            'En esta sección podrá ver su resumen mensual(a que año pertenece, mes, cantidad de ventas realizadas, y el monto mensual). Tambien, podrá ver las ventas realizadas en dicho mes y año ingresando al boton "Ver ventas"'
-          }
-        />
+        
         <br />
-        <table id="tableSales" className="table">
-          <thead>
-            <tr className="row">
-              <th className="col" title="Año del resumen">
-                Año
-              </th>
-              <th className="col" title="Mes del resumen">
-                Mes
-              </th>
-              <th
-                className="col"
-                title="Cantidad de ventas realizadas en este mes y año."
-              >
-                Cantidad de ventas
-              </th>
-              <th
-                className="col"
-                title="El monto recaudado en este mes y su respectivo año"
-              >
-                Recaudado
-              </th>
-              <th
-                className="col"
-                title="El monto de retiros realizados en este mes."
-              >
-                Total de retiros
-              </th>
-              <th
-                className="col"
-                title="Puedes ver las ventas y sus detalles ingresando al boton."
-              >
-                Detalle del resumen
-              </th>
-            </tr>
-          </thead>
-          <tbody className="table-group-divider">
-            {sales.map((value, index) => {
-              // Filtrar los retiros correspondientes al mismo mes y año
-              const withdrawal = withdrawals.find(
-                (withdrawal) =>
-                  withdrawal._id.month === value._id.month &&
-                  withdrawal._id.year === value._id.year
-              );
+        <div id="container-table">
+        
+          <table id="tableSales" className="table shadow">
+            
+            <thead>
+              <tr className="row">
+                <th className="col" title="Año del resumen">
+                  Año
+                </th>
+                <th className="col" title="Mes del resumen">
+                  Mes
+                </th>
+                <th
+                  className="col"
+                  title="Cantidad de ventas realizadas en este mes y año."
+                >
+                  Cantidad de ventas
+                </th>
+                <th
+                  className="col"
+                  title="El monto recaudado en este mes y su respectivo año"
+                >
+                  Ventas brutas
+                </th>
+                <th
+                  className="col"
+                  title="El monto de retiros realizados en este mes."
+                >
+                  Total de retiros
+                </th>
+                <th
+                  className="col"
+                  title="Puedes ver las ventas y sus detalles ingresando al boton."
+                >
+                  Detalle del resumen
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {sales.map((value, index) => {
+                // Filtrar los retiros correspondientes al mismo mes y año
+                const withdrawal = withdrawals.find(
+                  (withdrawal) =>
+                    withdrawal._id.month === value._id.month &&
+                    withdrawal._id.year === value._id.year
+                );
 
-              return (
-                <tr key={index} className="row">
-                  <td className="col">{value._id.year}</td>
-                  <td className="col">
-                    {Diccionary.Months.values[value._id.month - 1]}
-                    
-                  </td>
-                  <td className="col">{value.count}</td>
-                  <td className="col">${value.total}</td>
-                  <td className="col">
-                    ${withdrawal ? withdrawal.total : 0}
-                  </td>
-                  <td className="col">
-                    <select
-                      style={{ width: "70%" }}
-                      className="form-select"
-                      onChange={(e) =>
-                        handleOptionChange(e.target.value, value)
-                      }
-                    >
-                      <option value="default">Ver</option>
-                      <option value="sales">
-                        Ver mis productos vendidos
-                      </option>
-                      <option value="allSales">Ver todos</option>
-                    </select>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                return (
+                  <tr key={index} className="row">
+                    <td className="col">{value._id.year}</td>
+                    <td className="col">
+                      {Diccionary.Months.values[value._id.month - 1]}
+                    </td>
+                    <td className="col">{value.count}</td>
+                    <td className="col">{value.total}</td>
+                    <td className="col">
+                      {withdrawal ? withdrawal.total : 0}
+                    </td>
+                    <td className="col">
+                      <select
+                        style={{ width: "70%" }}
+                        className="form-select"
+                        onChange={(e) =>
+                          handleOptionChange(e.target.value, value)
+                        }
+                      >
+                        <option value="default">Ver</option>
+                        <option value="sales">
+                          Ver mis productos vendidos
+                        </option>
+                        <option value="allSales">Ver todos</option>
+                      </select>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
         <div id="monto">{/* <h4>Monto de ventas: {total}</h4> */}</div>
-
-  
       </div>
     );
   }

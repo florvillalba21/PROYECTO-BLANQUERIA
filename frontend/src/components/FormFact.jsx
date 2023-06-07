@@ -13,7 +13,7 @@ export const FormFact = () => {
   const [detCart, setDet] = useState([]);
   const { token } = useContext(ContextAuth);
   let [amount, setAmount] = useState(0);
-  let [adv, setAdv] = useState("primary");
+
 
   const inpDetails = useRef();
   const selectMethod = useRef();
@@ -23,6 +23,12 @@ export const FormFact = () => {
       "x-access-token": token,
     },
   };
+
+  const clearForm = () =>{
+    setCart([])
+    setDet([])
+    setShowAlert(false)
+  }
 
   useEffect(() => {
     axios
@@ -200,6 +206,22 @@ export const FormFact = () => {
               Registrar la venta
             </button>
           </div>
+
+          <div className="d-grid gap-2" style={{marginTop: "10px"}}>
+
+            <button
+              onClick={clearForm}
+              className="btn btn-primary" hidden={showAlert && res == true ? false : true}
+              type="button"
+              style={{
+                backgroundColor: "#c6e5d9",
+                border: "0",
+                color: "#2f3559",
+              }}
+            >
+              Limpiar
+            </button>
+          </div>
         </div>
         <br />
         <div>
@@ -228,7 +250,7 @@ export const FormFact = () => {
             />
           </i>
 
-          <table>
+          <table id="fact">
             <thead>
               <tr>
                 <th className="col">Productos</th>

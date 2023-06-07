@@ -6,6 +6,10 @@
 
 .main-content {
   flex: 1;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+
 }
 .footer {
   bottom: 0;
@@ -127,15 +131,36 @@ div#cardInventory {
 
 
 
-#tableSales {
-  margin-left: 10px;
+table#tableSales {
   color: #2f3559;
   border-color: #c6e5d9;
+  padding: 10px;
+
 }
 #tableSales td {
   padding-top: 1em;
+  padding: 20px;
 }
 
+#tableSales th {
+  padding-top: 1em;
+  padding: 20px;
+}
+
+table#fact td{
+  padding: 10px;
+}
+
+table#fact th {
+  padding-top: 1em;
+  padding: 10px;
+}
+
+
+div#container-table{
+  width: 95%; /* Puedes ajustar el ancho según tus necesidades */
+  margin: 0 auto; /* Aplica márgenes automáticos para centrar el contenedor */
+}
 #monto {
   position: absolute;
   color: #2f3559;
@@ -188,5 +213,5 @@ div#cardInventory {
 }
 
 .card-container-image{
-  height: 12rem;
+  height: 15rem;
 }
