@@ -37,10 +37,27 @@ ctrlFunds.getFundsOrderDate = async (req, res) => {
   try {
     Fund.aggregate([
       {
+        $lookup: {
+          from: "users", // Reemplaza "users" con el nombre de tu colección de usuarios
+          localField: "user",
+          foreignField: "_id",
+          as: "user",
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          date: 1,
+          amount: 1,
+          user: { $arrayElemAt: ["$user.username", 0] }, // Obtener el nombre de usuario directamente
+        },
+      },
+      {
         $group: {
           _id: { year: { $year: "$date" }, month: { $month: "$date" } },
           total: { $sum: "$amount" },
           count: { $sum: 1 },
+          funds: { $push: "$$ROOT" },
         },
       },
       { $sort: { "_id.year": 1, "_id.month": 1 } },
@@ -77,7 +94,7 @@ ctrlFunds.getFundsForDate = async (req, res) => {
       $gte: startDate,
       $lte: endDate,
     },
-  })
+  }).populate("user")
 
     .then((resultados) => {
       if (resultados.length > 0) {
@@ -94,7 +111,7 @@ ctrlFunds.getFundsForDate = async (req, res) => {
       } else {
         res.json({
           ok: false,
-          msg: "No hay archivos con esa fecha",
+          msg: "No hay retiros en esa fecha",
         });
       }
     })

@@ -1,4 +1,4 @@
-const { model, Schema } = require('mongoose');
+const { model, Schema, SchemaType } = require('mongoose');
 
 
 const SalesSchema = Schema({ 
@@ -23,7 +23,8 @@ const SalesSchema = Schema({
     }
     ,
     userVenta:{
-        type: String
+        ref:"User",
+        type: Schema.Types.ObjectId
     }
 }, {
  timestamps: true,

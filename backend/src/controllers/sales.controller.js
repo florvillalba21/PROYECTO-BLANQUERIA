@@ -87,133 +87,6 @@ ctrlSales.getSalesOrderDate = async (req, res) => {
     console.log(error);
   }
 };
-ctrlSales.getAmountForUser = async (req, res) => {
-  try {
-    const userId = req.user._id;
-
-    const ventas = await Sale.find().lean(); // Obtenemos las ventas del usuario
-
-    const sumaTotal = ventas.reduce((total, venta) => {
-      const productosUsuario = venta.products.filter(
-        (producto) => producto.productOwner.toString() === userId.toString()
-      );
-      const sumaVenta = productosUsuario.reduce(
-        (suma, producto) => suma + producto.sellPrice,
-        0
-      );
-      return total + sumaVenta;
-    }, 0);
-
-    console.log(sumaTotal);
-    res.json({
-      ok: true,
-      msg: `Suma de productos del usuario ${req.user.username}`,
-      productsUserAmount: sumaTotal,
-    });
-  } catch (error) {
-    res.json({
-      ok: false,
-      msg: error,
-    });
-  }
-};
-
-// ctrlSales.getAmountForUserAndDate = async (req, res) => {
-//   try {
-//     const userId = req.user._id.toString();
-//     const { month, year } = req.query;
-
-//     const regex = new RegExp(`\\b${month}\\b.*\\b${year}\\b`, "i");
-//     const startDate = new Date(year, month - 1, 1);
-//     const endDate = new Date(year, month, 0);
-
-//     Sale.aggregate([
-//       {
-//         $match: {
-//           "products.productOwner": userId,
-//           date: {
-//             $gte: startDate,
-//             $lte: endDate,
-//           },
-//         },
-//       },
-//       {
-//         $unwind: "$products",
-//       },
-//       {
-//         $lookup: {
-//           from: "products",
-//           localField: "products._id",
-//           foreignField: "_id",
-//           as: "productDetails",
-//         },
-//       },
-//       {
-//         $unwind: "$productDetails",
-//       },
-//       {
-//         $match: {
-//           "productDetails.productOwner": userId,
-//         },
-//       },
-//       {
-//         $group: {
-//           _id: {
-//             year: { $year: "$date" },
-//             month: { $month: "$date" },
-//             product: "$products.name",
-//           },
-//           totalSellPrice: { $sum: { $multiply: ["$products.sellPrice", "$products.quantity"] } },
-//           totalCostPrice: { $sum: { $multiply: ["$products.costPrice", "$products.quantity"] } },
-//           totalQuantity: { $sum: "$products.quantity" },
-//         },
-//       },
-//       {
-//         $group: {
-//           _id: {
-//             year: "$_id.year",
-//             month: "$_id.month",
-//           },
-//           products: {
-//             $push: {
-//               product: "$_id.product",
-//               totalSellPrice: "$totalSellPrice",
-//               totalCostPrice: "$totalCostPrice",
-//               totalQuantity: "$totalQuantity",
-//               difference: { $subtract: ["$totalSellPrice", "$totalCostPrice"] },
-//             },
-//           },
-//           totalAmount: { $sum: "$totalSellPrice" },
-//         },
-//       },
-//       { $sort: { "_id.year": 1, "_id.month": 1 } },
-//     ]).then((result) => {
-//       console.log(result);
-//       if (result.length > 0) {
-//         // Filtrar los productos vendidos del usuario conectado
-//         const filteredResult = result.map((item) => {
-//           const filteredProducts = item.products.filter((product) => product.productOwner === userId);
-//           return { ...item, products: filteredProducts };
-//         });
-
-//         res.json({
-//           ok: true,
-//           result: filteredResult,
-//         });
-//       } else {
-//         res.json({
-//           ok: false,
-//           msg: "No existen ventas registradas",
-//         });
-//       }
-//     });
-//   } catch (error) {
-//     res.json({
-//       ok: false,
-//       msg: error,
-//     });
-//   }
-// };
 
 ctrlSales.getAmountForUserAndDate = async (req, res) => {
   try {
@@ -254,8 +127,16 @@ ctrlSales.getAmountForUserAndDate = async (req, res) => {
               product: "$products",
               difference: {
                 $subtract: [
-                  { $toInt:  {$multiply:["$products.sellPrice","$products.quantity"]}},
-                  { $toInt:  {$multiply:["$products.costPrice","$products.quantity"]} },
+                  {
+                    $toInt: {
+                      $multiply: ["$products.sellPrice", "$products.quantity"],
+                    },
+                  },
+                  {
+                    $toInt: {
+                      $multiply: ["$products.costPrice", "$products.quantity"],
+                    },
+                  },
                 ],
               },
               productUserAmount: {
@@ -303,46 +184,50 @@ ctrlSales.getAmountForUserAndDate = async (req, res) => {
   }
 };
 
-
 ctrlSales.getSalesForDate = async (req, res) => {
-  const { month, year } = req.query;
+  const { month, year } = req.body;
 
-  const regex = new RegExp(`\\b${month}\\b.*\\b${year}\\b`, "i");
   const startDate = new Date(year, month - 1, 1);
   const endDate = new Date(year, month, 0);
 
-  // Hacer la consulta con Mongoose
+  try {
+    const sales = await Sale.find({
+      date: {
+        $gte: startDate,
+        $lte: endDate,
+      },
+    }).populate("userVenta"); // Agregar la opción populate para incluir la información del usuario
 
-  // Hacer la consulta con Mongoose
-  Sale.find({
-    date: {
-      $gte: startDate,
-      $lte: endDate,
-    },
-  })
+    if (sales.length > 0) {
+      const totalAmount = sales.reduce(
+        (total, sale) => total + sale.totalAmount,
+        0
+      );
 
-    .then((resultados) => {
-      if (resultados.length > 0) {
-        const totalAmount = resultados.reduce(
-          (total, sale) => total + sale.totalAmount,
-          0
-        );
+      const filteredSales = sales.map((sale) => {
+        return {
+          sale,
+        };
+      });
 
-        res.json({
-          ok: true,
-          filterSales: resultados,
-          amount: totalAmount,
-        });
-      } else {
-        res.json({
-          ok: false,
-          msg: "No hay archivos con esa fecha",
-        });
-      }
-    })
-    .catch((error) => {
-      console.log(error);
+      res.json({
+        ok: true,
+        filterSales: filteredSales,
+        amount: totalAmount,
+      });
+    } else {
+      res.json({
+        ok: false,
+        msg: "No hay archivos con esa fecha",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: "Ocurrió un error en el servidor",
     });
+  }
 };
 
 // //Funcion para obtener la lista de todos los productos guardados
@@ -374,4 +259,34 @@ ctrlSales.getSales = async (req, res) => {
     });
 };
 
+ctrlSales.getAmountForUser = async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    const ventas = await Sale.find().lean(); // Obtenemos las ventas del usuario
+
+    const sumaTotal = ventas.reduce((total, venta) => {
+      const productosUsuario = venta.products.filter(
+        (producto) => producto.productOwner.toString() === userId.toString()
+      );
+      const sumaVenta = productosUsuario.reduce(
+        (suma, producto) => suma + producto.sellPrice,
+        0
+      );
+      return total + sumaVenta;
+    }, 0);
+
+    console.log(sumaTotal);
+    res.json({
+      ok: true,
+      msg: `Suma de productos del usuario ${req.user.username}`,
+      productsUserAmount: sumaTotal,
+    });
+  } catch (error) {
+    res.json({
+      ok: false,
+      msg: error,
+    });
+  }
+};
 module.exports = ctrlSales;
