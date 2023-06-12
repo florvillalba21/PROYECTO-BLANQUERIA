@@ -5,6 +5,7 @@ import { Navbar } from "../components/layout/Navbar";
 import { Searcher } from "../components/layout/Searcher";
 import { Footer } from "../components/layout/Footer";
 import { useLocation } from "react-router-dom";
+import { Message } from "../components/Message";
 
 export const DetailsMySales = () => {
   const { state } = useLocation();
@@ -34,6 +35,8 @@ export const DetailsMySales = () => {
       .catch((err) => console.log(err));
   }, []);
 
+
+
   return (
     <>
       <div className="main-content">
@@ -51,7 +54,8 @@ export const DetailsMySales = () => {
               </tr>
             </thead>
             <tbody>
-              {myProducts.map((value, index) => {
+              {myProducts.length >0 
+              ?myProducts.map((value, index) => {
                 return (
                   <tr key={index}>
                     <td>{value.product.name}</td>
@@ -61,7 +65,8 @@ export const DetailsMySales = () => {
                     <td>${value.difference}</td>
                   </tr>
                 );
-              })}
+              })
+            : <Message/>}
             </tbody>
           </table>
         </div>
