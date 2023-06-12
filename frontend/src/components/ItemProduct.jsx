@@ -27,7 +27,7 @@ export const ItemProduct = () => {
             <th>Acciones</th>
           </tr>
         </thead>
-        <tbody className="table-group-divider">
+        <tbody>
           {products ? (
             products.map((value, index) => {
               return (
