@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { ContextAuth } from "../context/AuthContext";
 import { SearchContext } from "../context/SearchContext";
 import { Navbar } from "../components/layout/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Searcher } from "../components/layout/Searcher";
 import { Message } from "../components/Message";
 import { format } from "date-fns";
@@ -13,6 +13,8 @@ export const Funds = () => {
   const { token } = useContext(ContextAuth);
   const [search, setSearch] = useState("");
   const [res, setRes] = useState({});
+  const { state } = useLocation();
+  const { year, month } = state;
   const [funds, setFunds] = useState([]);
   const [amountFund, setAmountFund] = useState(0);
 
@@ -21,14 +23,19 @@ export const Funds = () => {
       "content-type": "application/json",
       "x-access-token": token,
     },
+    params: {
+      year: year,
+      month: month,
+    },
   };
   useEffect(() => {
     axios
-      .get("http://localhost:3000/getTotalFund", config)
+      .get("http://localhost:3000/getFundDate", config)
       .then((res) => {
-        setFunds(res.data.totalFunds);
-        setAmountFund(res.data.totalAmountFunds);
-        console.log(res.data.totalAmountFunds);
+        setFunds(res.data.filterFunds);
+        setAmountFund(res.data.totalAmount);
+        // console.log(res.data.totalAmountFunds);
+        console.log(res.data)
       })
       .catch((err) => console.log(err));
   }, []);
@@ -49,8 +56,10 @@ export const Funds = () => {
         <table id="tableSales" className="table">
           <thead>
             <tr>
+            <th>Usuario</th>
               <th>Fecha</th>
               <th>Monto</th>
+              
             </tr>
           </thead>
           <tbody className="table-group-divider">
@@ -64,8 +73,9 @@ export const Funds = () => {
 
               return (
                 <tr key={index}>
+                  <td>{value.user.username}</td>
                   <td> {formatedDate}</td>
-                  <td> 💲{value.amount}</td>
+                  <td> {value.amount}</td>
                 </tr>
               );
             })}

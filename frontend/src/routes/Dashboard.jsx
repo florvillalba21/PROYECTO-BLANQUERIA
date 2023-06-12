@@ -23,7 +23,7 @@ export const Dashboard = () => {
         <Route path="home/summary" element={<Summary />} />
         <Route path="home/summary/detailsSummary" element={<DetailsSummary/>} />
         <Route path="home/summary/detailsMySales" element={<DetailsMySales/>} />
-        <Route path="home/summary/funds" element={<Funds />} />
+        <Route path="home/summary/detailsFunds" element={<Funds />} />
         <Route path="home/withdrawals" element={<Withdrawals/>} />
         <Route path="home/addProduct" element={<AddProducts />} />
         <Route path="home/addCategory" element={<AddCategory/>} />

@@ -38,8 +38,8 @@ export const FormCard = () => {
   };
 
   return (
-    <div className="row justify-content-md-center">
-      <div className="card col-md-auto" id="card-fund">
+    <div style={{width:"50%", margin: "0 auto"}}>
+      <div className="col-md-auto shadow" id="card-fund">
         <div className="" style={{textAlign: 'center'}}>
             <h4>Retiro de fondos</h4>
         </div>
@@ -59,7 +59,7 @@ export const FormCard = () => {
                   aria-label="Amount (to the nearest dollar)"
                   onChange={handleInput}
                 />
-                <span className="input-group-text" style={{backgroundColor: '#ebe7e0'}}>.00</span>
+               
               </div>
 
             </form>

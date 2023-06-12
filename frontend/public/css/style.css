@@ -11,11 +11,7 @@
   align-items: center;
 
 }
-.footer {
-  bottom: 0;
-  width: 100%;
-  margin-top: 50px;
-}
+
 
 div.login {
   background-color: #dceff0;
@@ -169,8 +165,9 @@ div#container-table{
 }
 
 #card-fund {
-  margin: 80px;
+  margin: 70px;
   color: #2f3559;
+  padding: 29px;
 }
 
 #description {

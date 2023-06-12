@@ -80,7 +80,7 @@ ctrlFunds.getFundsOrderDate = async (req, res) => {
 };
 
 ctrlFunds.getFundsForDate = async (req, res) => {
-  const { month, year } = req.body;
+  const { month, year } = req.query;
 
   // regex = new RegExp(`\\b${month}\\b.*\\b${year}\\b`, "i");
 

@@ -9,7 +9,7 @@ export const Home = () => {
       <Navbar />
       <div
         className="card-group row justify-content-center"
-        style={{ margin: "50px" }}
+        style={{ margin: "30px" }}
       >
         <CardHome
           tittle={"Realizar una venta"}

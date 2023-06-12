@@ -32,6 +32,13 @@ export const Summary = () => {
           month: Diccionary.Months.indexs[value._id.month - 1],
         },
       });
+    }else if (selectedOption === "allFunds") {
+      navigate("detailsFunds/", {
+        state: {
+          year: value._id.year,
+          month: Diccionary.Months.indexs[value._id.month - 1],
+        },
+      });
     }
   };
 
@@ -142,6 +149,7 @@ export const Summary = () => {
                           Ver mis productos vendidos
                         </option>
                         <option value="allSales">Ver todos</option>
+                        <option value="allFunds">Ver retiros</option>
                       </select>
                     </td>
                   </tr>
