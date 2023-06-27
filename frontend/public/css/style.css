@@ -232,6 +232,7 @@ div#container-table{
   background-color: #c6e5d9;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border-radius: 5px;
 
 }
 
@@ -259,4 +260,5 @@ div#container-table{
 .active {
   background-color: #2f3559;
   color: #fff;
+  height: 10px;
 }
