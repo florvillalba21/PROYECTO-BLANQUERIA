@@ -17,39 +17,40 @@ const fs = require("fs-extra");
 
 ctrlProducts.createProduct = async (req, res) => {
   const { name, category, costPrice, sellPrice, stock } = req.body;
-  console.log(sellPrice);
+
 
   const productOwner = req.user._id;
 
-  if ((name, category, costPrice, sellPrice, stock)) {
-    const result = await cloudinary.v2.uploader.upload(req.file.path);
-
-    imgURL = result.url;
-
-    const newProduct = new Product({
-      name,
-      category,
-      costPrice,
-      sellPrice,
-      stock,
-      imgURL,
-      productOwner
-    });
-
+  if (name && category && costPrice && sellPrice && stock) {
     try {
+      const result = await cloudinary.v2.uploader.upload(req.file.path);
+      const imgURL = result.url;
+
+      const newProduct = new Product({
+        name,
+        category,
+        costPrice,
+        sellPrice,
+        stock,
+        imgURL,
+        productOwner
+      });
+
       const productSaved = await newProduct.save();
 
-      //borra el archivo ya que ha sido subido a la nube
+      // Borra el archivo ya que ha sido subido a la nube
       await fs.unlink(req.file.path);
 
-      res.status(201).json({ ok: true, productSaved });
+      return res.status(201).json({ ok: true, productSaved });
     } catch (error) {
       console.log(error);
+      return res.status(500).json({ ok: false, error: 'Error al guardar el producto' });
     }
   } else {
-    return res.json({ ok: false });
+    return res.status(400).json({ ok: false, error: 'Faltan datos requeridos para crear el producto' });
   }
 };
+
 
 //Funcion para obtener la lista de todos los productos guardados
 ctrlProducts.getProducts = async (req, res) => {

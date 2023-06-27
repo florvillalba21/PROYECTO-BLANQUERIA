@@ -1,16 +1,18 @@
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
-import { ContextAuth } from "../context/AuthContext";
-import { Navbar } from "../components/layout/Navbar";
-import { Searcher } from "../components/layout/Searcher";
-import { Footer } from "../components/layout/Footer";
 import { useLocation } from "react-router-dom";
 import { format } from "date-fns";
 import esLocale from "date-fns/locale/es";
+import { ContextAuth } from "../context/AuthContext";
+import { Navbar } from "../components/layout/Navbar";
+import { Searcher } from "../components/layout/Searcher";
 import { Message } from "../components/Message";
+import Pagination from "../components/Pagination";
+
 
 export const DetailsSummary = () => {
   const { state } = useLocation();
+  const [currentPage, setCurrentPage] = useState(1);
   const [filterSales, setFilterSales] = useState([]);
   const { year, month } = state;
   const { token } = useContext(ContextAuth);
@@ -25,23 +27,34 @@ export const DetailsSummary = () => {
     },
   };
 
+  const pageSize = 10; // Cantidad de elementos por página
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   useEffect(() => {
     axios
       .get("http://localhost:3000/salesForDate", config)
       .then((res) => {
-    
         if (res.data.filterSales.length > 0) {
-          setFilterSales(res.data.filterSales);
+          setFilterSales(res.data.filterSales.toReversed());
         }
       })
       .catch((err) => console.log(err));
   }, []);
 
-  if (filterSales.length > 0) {
-    return (
-      <div className="main-content">
-        <Navbar />
-        <Searcher />
+  // Calcula los índices de inicio y fin de los elementos en la página actual
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  // Obtiene los elementos correspondientes a la página actual
+  const currentPageData = filterSales?.slice(startIndex, endIndex);
+
+  return (
+    <>
+      <Navbar />
+      <Searcher />
+      {currentPageData.length > 0 ? (
         <table id="tableSales" className="table">
           <thead>
             <tr>
@@ -53,7 +66,7 @@ export const DetailsSummary = () => {
             </tr>
           </thead>
           <tbody className="table-group-divider">
-            {filterSales.map((value, index) => {
+            {currentPageData.map((value, index) => {
               const date = new Date(value.sale.date);
               const formatedDate = format(
                 date,
@@ -83,15 +96,15 @@ export const DetailsSummary = () => {
             })}
           </tbody>
         </table>
-        <div id="monto">{/* <h4>Monto de ventas: {total}</h4> */}</div>
-      </div>
-    );
-  } else {
-    return (
-      <>
-        <Navbar />
+      ) : (
         <Message />
-      </>
-    );
-  }
+      )}
+      {filterSales.length > pageSize && (
+        <Pagination
+          pageCount={Math.ceil(filterSales.length / pageSize)}
+          onPageChange={handlePageChange}
+        />
+      )}
+    </>
+  );
 };

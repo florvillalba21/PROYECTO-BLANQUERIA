@@ -8,6 +8,7 @@ import { Searcher } from "../components/layout/Searcher";
 import { Message } from "../components/Message";
 import { format } from "date-fns";
 import esLocale from "date-fns/locale/es";
+import Pagination from "../components/Pagination";
 
 export const Funds = () => {
   const { token } = useContext(ContextAuth);
@@ -17,6 +18,16 @@ export const Funds = () => {
   const { year, month } = state;
   const [funds, setFunds] = useState([]);
   const [amountFund, setAmountFund] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 10; // Cantidad de elementos por página
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+
 
   const config = {
     headers: {
@@ -39,6 +50,8 @@ export const Funds = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const currentPageData = funds?.slice(startIndex, endIndex);
 
   if (funds) {
     return (
@@ -63,7 +76,7 @@ export const Funds = () => {
             </tr>
           </thead>
           <tbody className="table-group-divider">
-            {funds.map((value, index) => {
+            {currentPageData.map((value, index) => {
               const date = new Date(value.date);
               const formatedDate = format(
                 date,
@@ -81,6 +94,11 @@ export const Funds = () => {
             })}
           </tbody>
         </table>
+        <Pagination
+          pageCount={Math.ceil(funds.length / pageSize)}
+          onPageChange={handlePageChange}
+        />
+
         <div id="monto">
           <h5>Monto total que se ha retirado: {amountFund}</h5>
         </div>

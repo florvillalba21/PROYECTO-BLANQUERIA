@@ -212,3 +212,51 @@ div#container-table{
 .card-container-image{
   height: 15rem;
 }
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  list-style:none;
+}
+
+.pagination-page {
+  margin: 0 5px;
+}
+
+.pagination-link {
+  text-decoration: none;
+  display: inline-block;
+  padding: 5px 10px;
+  color: #2f3559;
+  background-color: #c6e5d9;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+}
+
+.pagination-link:hover {
+  background-color: #c6e5d9;
+
+}
+
+.pagination-previous,
+.pagination-next {
+  display: inline-block;
+  padding: 5px 10px;
+  color: #2f3559;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-previous:hover,
+.pagination-next:hover {
+  background-color: #eee;
+  list-style:none;
+}
+
+.active {
+  background-color: #2f3559;
+  color: #fff;
+}
