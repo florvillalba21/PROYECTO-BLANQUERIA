@@ -212,12 +212,11 @@ div#container-table{
 .card-container-image{
   height: 15rem;
 }
-
 .pagination-container {
   display: flex;
   justify-content: center;
   margin-top: 20px;
-  list-style:none;
+  list-style: none;
 }
 
 .pagination-page {
@@ -233,12 +232,10 @@ div#container-table{
   cursor: pointer;
   transition: background-color 0.3s ease;
   border-radius: 5px;
-
 }
 
 .pagination-link:hover {
   background-color: #c6e5d9;
-
 }
 
 .pagination-previous,
@@ -254,11 +251,15 @@ div#container-table{
 .pagination-previous:hover,
 .pagination-next:hover {
   background-color: #eee;
-  list-style:none;
+  list-style: none;
 }
 
 .active {
   background-color: #2f3559;
-  color: #fff;
-  height: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  height: 40px;
 }
+
