@@ -58,7 +58,7 @@ export const Navbar = () => {
           <div className="offcanvas-body">
             <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" to="#">
+                <Link className="nav-link" aria-current="page" to="#">
                   Inicio
                 </Link>
               </li>
