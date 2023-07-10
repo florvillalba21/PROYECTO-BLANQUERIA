@@ -43,7 +43,7 @@ export const Funds = () => {
     axios
       .get("http://localhost:3000/getFundDate", config)
       .then((res) => {
-        setFunds(res.data.filterFunds);
+        setFunds(res.data.filterFunds.toReversed());
         setAmountFund(res.data.totalAmount);
         // console.log(res.data.totalAmountFunds);
         console.log(res.data)
