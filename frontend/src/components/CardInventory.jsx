@@ -21,13 +21,14 @@ export const CardInventory = () => {
           data.map((value, index) => {
             return (
               <Link
+              key={index}
                 title={`Ir a la sección de ${value.name}`}
                 className="shadow col-md-auto"
                 style={{ textDecoration: "none", margin: 10, padding: 20 }}
                 to={"Products/" + value.name}
               >
                 <div
-                  key={index}
+                  
                   id="cardInventory"
                   style={{ width: "14rem", textAlign: "center" }}
                 >
