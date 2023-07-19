@@ -14,7 +14,6 @@ export const FormFact = () => {
   const { token } = useContext(ContextAuth);
   let [amount, setAmount] = useState(0);
 
-
   const inpDetails = useRef();
   const selectMethod = useRef();
   const config = {
@@ -24,11 +23,12 @@ export const FormFact = () => {
     },
   };
 
-  const clearForm = () =>{
-    setCart([])
-    setDet([])
-    setShowAlert(false)
-  }
+  const clearForm = () => {
+    setCart([]);
+    setDet([]);
+    setShowAlert(false);
+    setAmount(0)
+  };
 
   useEffect(() => {
     axios
@@ -54,7 +54,6 @@ export const FormFact = () => {
     setCart((items) => [...items, product]);
   };
 
-
   useEffect(() => {
     let aux = 0;
     detCart.map((value, index) => {
@@ -66,15 +65,19 @@ export const FormFact = () => {
   useEffect(() => {
     setDet(
       cart.reduce((products, product) => {
-        const { _id, name, sellPrice,costPrice, 
-          productOwner
-           } = product;
+        const { _id, name, sellPrice, costPrice, productOwner } = product;
         const existingProduct = products.find((p) => p._id === _id);
         if (existingProduct) {
           existingProduct.quantity++;
         } else {
-       
-          products.push({ _id, name, quantity: 1, sellPrice,costPrice, productOwner });
+          products.push({
+            _id,
+            name,
+            quantity: 1,
+            sellPrice,
+            costPrice,
+            productOwner,
+          });
         }
         return products;
       }, [])
@@ -160,7 +163,7 @@ export const FormFact = () => {
             : ""}
         </div>
         <br />
-{/* 
+        {/* 
         <div>
           <b>Detalla la venta:</b>
           <textarea
@@ -207,11 +210,11 @@ export const FormFact = () => {
             </button>
           </div>
 
-          <div className="d-grid gap-2" style={{marginTop: "10px"}}>
-
+          <div className="d-grid gap-2" style={{ marginTop: "10px" }}>
             <button
               onClick={clearForm}
-              className="btn btn-primary" hidden={showAlert && res == true ? false : true}
+              className="btn btn-primary"
+              hidden={showAlert && res == true ? false : true}
               type="button"
               style={{
                 backgroundColor: "#c6e5d9",

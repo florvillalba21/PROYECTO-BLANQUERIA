@@ -1,10 +1,8 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { ContextAuth } from "../context/AuthContext";
-import { SearchContext } from "../context/SearchContext";
 import { Navbar } from "../components/layout/Navbar";
 import { Link, useLocation } from "react-router-dom";
-import { Searcher } from "../components/layout/Searcher";
 import { Message } from "../components/Message";
 import { format } from "date-fns";
 import esLocale from "date-fns/locale/es";
@@ -12,8 +10,6 @@ import Pagination from "../components/Pagination";
 
 export const Funds = () => {
   const { token } = useContext(ContextAuth);
-  const [search, setSearch] = useState("");
-  const [res, setRes] = useState({});
   const { state } = useLocation();
   const { year, month } = state;
   const [funds, setFunds] = useState([]);
@@ -26,8 +22,6 @@ export const Funds = () => {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
-
 
   const config = {
     headers: {
@@ -46,7 +40,7 @@ export const Funds = () => {
         setFunds(res.data.filterFunds.toReversed());
         setAmountFund(res.data.totalAmount);
         // console.log(res.data.totalAmountFunds);
-        console.log(res.data)
+        console.log(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -66,42 +60,45 @@ export const Funds = () => {
             Volver atras
           </Link>
         </div>
-        <table id="tableSales" className="table">
-          <thead>
-            <tr>
-            <th>Usuario</th>
-              <th>Fecha</th>
-              <th>Monto</th>
-              
-            </tr>
-          </thead>
-          <tbody className="table-group-divider">
-            {currentPageData.map((value, index) => {
-              const date = new Date(value.date);
-              const formatedDate = format(
-                date,
-                "EEEE, dd 'de' MMMM 'de' yyyy",
-                { locale: esLocale }
-              );
-
-              return (
-                <tr key={index}>
-                  <td>{value.user.username}</td>
-                  <td> {formatedDate}</td>
-                  <td> {value.amount}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        <Pagination
-          pageCount={Math.ceil(funds.length / pageSize)}
-          onPageChange={handlePageChange}
-        />
 
         <div id="monto">
           <h5>Monto total que se ha retirado: {amountFund}</h5>
         </div>
+
+        <div id="container-table">
+          <table id="tableSales" className="table shadow">
+            <thead>
+              <tr>
+                <th>Usuario</th>
+                <th>Fecha</th>
+                <th>Monto</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentPageData.map((value, index) => {
+                const date = new Date(value.date);
+                const formatedDate = format(
+                  date,
+                  "EEEE, dd 'de' MMMM 'de' yyyy",
+                  { locale: esLocale }
+                );
+
+                return (
+                  <tr key={index}>
+                    <td>{value.user.username}</td>
+                    <td> {formatedDate}</td>
+                    <td> {value.amount}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
+        <Pagination
+          pageCount={Math.ceil(funds.length / pageSize)}
+          onPageChange={handlePageChange}
+        />
       </div>
     );
   }
