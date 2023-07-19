@@ -15,6 +15,7 @@ export const AddProducts = () => {
   const inpCostPrice = useRef();
   const inpSellPrice = useRef();
   const inpStock = useRef();
+  const inpImage = useRef();
   const [showAlert, setShowAlert] = useState(false);
   const [res, setRes] = useState({});
   const config = {
@@ -22,6 +23,18 @@ export const AddProducts = () => {
       "content-type": "multipart/form-data",
       "x-access-token": token,
     },
+  };
+
+  const clearForm = () => {
+    inpName.current.value = "";
+    selectCategory.current.value = "";
+    inpCostPrice.current.value ="";
+    inpSellPrice.current.value = "";
+    inpStock.current.value = "";
+    inpImage.current.value ="";
+    setImage([]);
+    setShowAlert(false);
+    setRes({});
   };
 
   const upload = async (e) => {
@@ -122,6 +135,7 @@ export const AddProducts = () => {
           </div>
           <div id="divForm">
             <input
+            ref={inpImage}
               type="file"
               className="form-control"
               name="image"
@@ -138,12 +152,23 @@ export const AddProducts = () => {
               placeholder="Ingresa las cantidades que han ingresado"
             />
           </div>
-          <div id="divbtn">
-            <button id="btn" type="submit" onClick={upload}>
+          <div  className="d-grid gap-2">
+            <button id="btn" type="button" onClick={upload}>
               Cargar
             </button>
           </div>
         </form>
+        <div className="d-grid gap-2">
+          <button
+            onClick={clearForm}
+            id="btn"
+            hidden={showAlert && res == true ? false : true}
+            type="button"
+            
+          >
+            Limpiar
+          </button>
+        </div>
         <br />
         <div>
           {showAlert && res === true ? (

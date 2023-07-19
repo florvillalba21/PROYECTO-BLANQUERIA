@@ -7,6 +7,7 @@ import { Message } from "../components/Message";
 import { format } from "date-fns";
 import esLocale from "date-fns/locale/es";
 import Pagination from "../components/Pagination";
+import backIcon from "../../public/icons/arrow-left.svg";
 
 export const Funds = () => {
   const { token } = useContext(ContextAuth);
@@ -55,14 +56,34 @@ export const Funds = () => {
         <div>
           <Link
             to={"/home/summary"}
-            style={{ textDecoration: "none", color: "#2f3559", margin: 15 }}
+            style={{ textDecoration: "none", color: "#2f3559", marginTop: 70 }}
           >
-            Volver atras
+            <img src={backIcon} width={30} />
           </Link>
         </div>
 
-        <div id="monto">
-          <h5>Monto total que se ha retirado: {amountFund}</h5>
+        <div className="row justify-content-center">
+         
+
+          <div className="card shadow cards-funds col-md-auto" >
+            <h6>AÑO</h6>
+            <h5>{year}</h5>
+          </div>
+
+          <div className="card shadow cards-funds col-md-auto">
+            <h6>MES</h6>
+            <h5>{month}</h5>
+          </div>
+
+          <div className="card shadow cards-funds col-md-auto">
+            <h6>CANTIDAD</h6>
+            <h5>{funds.length}</h5>
+          </div>
+
+          <div className="card shadow cards-funds col-md-auto" >
+            <h6>MONTO TOTAL</h6>
+            <h5>${amountFund}</h5>
+          </div>
         </div>
 
         <div id="container-table">

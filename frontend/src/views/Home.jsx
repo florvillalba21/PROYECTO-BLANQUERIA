@@ -36,14 +36,6 @@ export const Home = () => {
         />
 
         <CardHome
-          tittle={"Cargar nuevos productos"}
-          description={"Puedes agregar nuevos productos"}
-          action={"Ir"}
-          url={"addProduct/"}
-          img="../../public/icons/tag.svg"
-        />
-
-        <CardHome
           tittle={"Cargar nuevas categorias"}
           description={
             "Las categorias definen el ambiente o tipo de producto que estás vendiendo"
@@ -51,6 +43,14 @@ export const Home = () => {
           action={"Ir"}
           url={"addCategory/"}
           img="../../public/icons/filter.svg"
+        />
+
+        <CardHome
+          tittle={"Cargar nuevos productos"}
+          description={"Puedes agregar nuevos productos"}
+          action={"Ir"}
+          url={"addProduct/"}
+          img="../../public/icons/tag.svg"
         />
 
         <CardHome
@@ -63,7 +63,6 @@ export const Home = () => {
           img="../../public/icons/dollar-sign (1).svg"
         />
       </div>
-  
     </div>
   );
 };

@@ -27,7 +27,7 @@ export const FormFact = () => {
     setCart([]);
     setDet([]);
     setShowAlert(false);
-    setAmount(0)
+    setAmount(0);
   };
 
   useEffect(() => {
@@ -125,55 +125,48 @@ export const FormFact = () => {
             setFilter(e.target.value);
           }}
         >
-          {categories.length > 0 &&
-            categories.map((value, index) => {
-              return (
-                <option key={index} value={value.name}>
-                  {value.name}
-                </option>
-              );
-            })}
+          {categories.length === 0 ? (
+            <p>no</p>
+          ) : (
+            categories.map((value, index) => (
+              <option key={index} value={value.name}>
+                {value.name}
+              </option>
+            ))
+          )}
         </select>
         <br />
         <div className="list-group">
           <b>Elige el producto a vender:</b>
-          {products
-            ? products.map((value, index) => {
-                if (value.stock > 0) {
-                  return (
-                    <li
-                      key={index}
-                      className="list-group-item d-flex justify-content-between align-items-start"
-                      onClick={() => {
-                        addToCart(value);
-                      }}
+          {products.length === 0 ? (
+            <p>No hay productos registrados.</p>
+          ) : (
+            products.map((value, index) => {
+              if (value.stock > 0) {
+                return (
+                  <li
+                    key={index}
+                    className="list-group-item d-flex justify-content-between align-items-start"
+                    onClick={() => {
+                      addToCart(value);
+                    }}
+                  >
+                    {value.name}
+                    <span
+                      className={`badge rounded-pill ${
+                        value.stock === 1 ? "bg-danger" : "bg-secondary"
+                      }`}
                     >
-                      {value.name}
-                      <span
-                        className={`badge rounded-pill ${
-                          value.stock === 1 ? "bg-danger" : "bg-secondary"
-                        }`}
-                      >
-                        {value.stock}
-                      </span>
-                    </li>
-                  );
-                }
-              })
-            : ""}
+                      {value.stock}
+                    </span>
+                  </li>
+                );
+              }
+            })
+          )}
         </div>
         <br />
-        {/* 
-        <div>
-          <b>Detalla la venta:</b>
-          <textarea
-            ref={inpDetails}
-            className="form-control"
-            placeholder="Si desea, puede escribir detalles puntuales de la venta para tenerlo registrado"
-          />
-        </div>
 
-        <br /> */}
         <div className="row">
           <div className="col">
             <b>Monto total:</b>

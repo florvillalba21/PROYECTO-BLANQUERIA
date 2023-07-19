@@ -63,7 +63,7 @@ export const FormCard = () => {
               </div>
 
             </form>
-            <div id="divbtn">
+            <div className="d-grid gap-2">
               <button id="btn" onClick={sendForm}>
                 Registrar retiro
               </button>

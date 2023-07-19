@@ -74,25 +74,17 @@ div#cardHome.card-body {
   height: 7rem;
 }
 
-#divbtn {
+#btn {
   background-color: #c6e5d9;
   border: 0;
   border-radius: 3px;
   color: #2f3559;
   padding: 10px;
   text-align: center;
-  margin-top: 40px;
+  margin-top: 10px;
 }
 
-#btn {
-  font-style: initial;
-  color: #2f3559;
-  text-decoration: none;
-  background-color: #c6e5d9;
-  border: 0;
-  height: 2.4em;
-  border-radius: 5px;
-}
+
 
 
 /* estilos para las card de inventario */
@@ -263,3 +255,13 @@ div#container-table{
   height: 40px;
 }
 
+
+div.cards-funds {
+  justify-content: center;
+  text-align: center;
+  width: 110px;
+  height: 100px;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: #2f3559;
+}

@@ -13,8 +13,18 @@ export const AddCategory = () => {
   const { token } = useContext(ContextAuth);
   const inpName = useRef();
   const inpDescription = useRef();
+  const inpImage = useRef();
   const [showAlert, setShowAlert] = useState(false);
   const [res, setRes] = useState({});
+
+  const clearForm = () => {
+    inpName.current.value = "";
+    inpDescription.current.value = "";
+    inpImage.current.value = "";
+    setImage([]);
+    setShowAlert(false);
+    setRes({});
+  };
 
   //funcion para subir una nueva categoria
   const upload = async (e) => {
@@ -53,11 +63,18 @@ export const AddCategory = () => {
   return (
     <div className="main-content">
       <Navbar />
-      <Description text={"En esta sección dispones de un formulario para crear una nueva categoría. Las categorías te permiten organizar tu inventario."}/>
+      <Description
+        text={
+          "En esta sección dispones de un formulario para crear una nueva categoría. Las categorías te permiten organizar tu inventario."
+        }
+      />
       <br />
       <div id="cardFormProduct" className="shadow">
         <div id="tittleFormProduct">
-          <h2>Detalla la nueva categoria <img src="../../public/icons/filter.svg" width="40px" /></h2>
+          <h2>
+            Detalla la nueva categoria{" "}
+            <img src="../../public/icons/filter.svg" width="40px" />
+          </h2>
         </div>
 
         <form action="">
@@ -82,6 +99,7 @@ export const AddCategory = () => {
 
           <div id="divForm">
             <input
+            ref={inpImage}
               type="file"
               className="form-control"
               name="image"
@@ -91,12 +109,22 @@ export const AddCategory = () => {
             />
           </div>
 
-          <div id="divbtn">
+          <div className="d-grid gap-2">
             <button id="btn" type="submit" onClick={upload}>
               Cargar
             </button>
           </div>
         </form>
+        <div className="d-grid gap-2">
+          <button
+          id="btn"
+            onClick={clearForm}
+            hidden={showAlert && res == true ? false : true}
+            type="button"
+          >
+            Limpiar
+          </button>
+        </div>
         <br />
         <div>
           {showAlert && res === true ? (
@@ -113,6 +141,7 @@ export const AddCategory = () => {
             />
           )}
         </div>
+        
       </div>
     </div>
   );
