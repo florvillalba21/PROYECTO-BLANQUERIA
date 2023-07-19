@@ -1,4 +1,5 @@
 const Category = require("../models/Category");
+const Products = require("../models/Product");
 const path = require("path");
 const cloudinary = require("cloudinary");
 
@@ -90,6 +91,10 @@ ctrlCategories.updateCategoryById = async (req, res) => {
 ctrlCategories.deleteCategoryById = async (req, res) => {
 
   try {
+    const category = await Category.findById(req.params.categoryId);
+    const categoryName = category.name;
+
+    await Products.deleteMany({ category: categoryName });
     const deleteCategory = await Category.findByIdAndDelete(
       req.params.categoryId
     );
