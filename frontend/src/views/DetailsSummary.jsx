@@ -54,30 +54,29 @@ export const DetailsSummary = () => {
     <>
       <Navbar />
       <div>
-          <Link
-            to={"/home/summary"}
-            style={{ textDecoration: "none", color: "#2f3559", marginTop: 70 }}
-          >
-            <img src={backIcon} width={30} />
-          </Link>
-        </div>
+        <Link
+          to={"/home/summary"}
+          style={{ textDecoration: "none", color: "#2f3559", marginTop: 70 }}
+        >
+          <img src={backIcon} width={30} />
+        </Link>
+      </div>
       <div className="row justify-content-center">
-
-          <div className="card shadow cards-funds col-md-auto" >
-            <h6>AÑO</h6>
-            <h5>{year}</h5>
-          </div>
-
-          <div className="card shadow cards-funds col-md-auto">
-            <h6>MES</h6>
-            <h5>{month}</h5>
-          </div>
-
-          <div className="card shadow cards-funds col-md-auto">
-            <h6>CANTIDAD</h6>
-            <h5>{filterSales.length}</h5>
-          </div>
+        <div className="card shadow cards-funds col-md-auto">
+          <h6>AÑO</h6>
+          <h5>{year}</h5>
         </div>
+
+        <div className="card shadow cards-funds col-md-auto">
+          <h6>MES</h6>
+          <h5>{month}</h5>
+        </div>
+
+        <div className="card shadow cards-funds col-md-auto">
+          <h6>CANTIDAD</h6>
+          <h5>{filterSales.length}</h5>
+        </div>
+      </div>
 
       {currentPageData.length > 0 ? (
         <div id="container-table">
